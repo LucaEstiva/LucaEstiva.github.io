@@ -41,3 +41,15 @@ h2{
 	background-color: rgba(224,255,255, 0.5);
 	font-size: 20px;
 }
+
+@media (min-width: 768px) {
+    .carousel-multi-item-2 .col-md-3 {
+        float: left;
+        width: 25%;
+        max-width: 100%;
+    }
+}
+
+.carousel-multi-item-2 .card img {
+    border-radius: 2px;
+}

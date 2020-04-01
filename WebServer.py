@@ -35,6 +35,9 @@ class HTTP_Handler(BaseHTTPRequestHandler):
 			if self.path.endswith(".jpg"):
 				mimetype='image/jpg'
 				sendReply = True
+			if self.path.endswith(".png"):
+				mimetype='image/png'
+				sendReply = True
 			if self.path.endswith(".gif"):
 				mimetype='image/gif'
 				sendReply = True
@@ -46,7 +49,7 @@ class HTTP_Handler(BaseHTTPRequestHandler):
 				sendReply = True
 
 			#
-			if sendReply == True and mimetype != 'image/jpg':
+			if sendReply == True and mimetype != 'image/jpg' and mimetype != 'image/png':
 				# Apre il file richiesto per la lettura dal diso locale in modalità lettura
 				f = open(curdir + sep + self.path, mode="r", encoding="utf8")
 				# 
@@ -68,7 +71,6 @@ class HTTP_Handler(BaseHTTPRequestHandler):
 				f.close()
 				
 			return
-
 
 		except IOError:
         #304: Not modified

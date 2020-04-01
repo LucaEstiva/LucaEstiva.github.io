@@ -1,11 +1,33 @@
-body {
-    background-color: powderblue;
+#parallax-image{
+	background-image: url("/images/code.jpg");
+	height: 300px;
+	margin-bottom: 50px;
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
-h1 {
-    color: blue;
+#parallax-image1{
+	background-image: url("/images/HUB_PC.jpg");
+	height: 500px;
+	margin-bottom: 20px;
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
-p {
-    color: red;
+h1{
+	font-family: 'Lato', sans-serif;
+	color: gray;
+	background-color: rgba(224,255,255, 0.9);
+	font-size: 50px;
+}
+
+h2{
+	font-family: 'Lato', sans-serif;
+	color: darkslategray;
+	background-color: rgba(224,255,255, 0.5);
+	font-size: 20px;
 }

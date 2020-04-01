@@ -1,14 +1,117 @@
-<!DOCTYPE html>
-<html>
-<head>
+﻿<!doctype html>
+<html lang="it">
+  <head>
+	<!-- python -m http.server --directory /tmp/ -->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap" rel="stylesheet">
 
-	<title>Home Assistant HUB</title>
-	<link rel="stylesheet" href="/css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<!-- NO CACHE -->
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
 
-</head>
-<body>
-	<h1>Home Assistant HUB</h1>
-	<p>Creare un HUB Home Assistant</p>
-	<a href="HA_Hub.html">HA_Hub</a>
-</body>
+	<!-- STYLE -->
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	
+	
+    <title>Domotica</title>
+
+  </head>
+  <body>
+      <!---->
+      <div id="parallax-image1">
+          <div class="row h-100">
+              <div class="col-md-12 align-self-center">
+                  <h1 class="text-center">Home Assistant HUB</h1>
+                  <h2 class="text-center">HUB totalmente indipendente per la casa SMART</h2>
+              </div>
+          </div>
+      </div>
+      <div class="container">
+
+          <p>
+              Consente di creare una rete lan DOMOTICA in grado di fornire indirizzi IP a tutti i dispostivi domotici ad esso connessi
+              e di evitare il routing dei pacchetti ( passaggio dei pacchetti ) attraverso il router che può non essere disponibile.
+              Inoltre libera il nostro router da flussi di dati ( anche pesanti come gli streaming ) lasciandolo disponibile per i nostri usi.
+
+              Dotato di accesso WiFi ( Access Point AP ).
+              Può dialogare con una rete MESH.
+              Necessita di una connessione WAN ( Wide Area Network - Internet ) solo se i dispositivi da controllare sono di tipo CLOUD.
+          </p>
+          <a class="btn btn-outline-success" href="\" role="Link">HOME</a>
+          <hr style="color: black">
+      </div>
+
+      <div class="container">
+          <h3>Configurare le interfacce di rete - Network Manager</h3>
+          <!-- CODE -->
+          <pre style="background-color: gainsboro">
+sudo nano /etc/network/interfaces
+
+# ifupdown has been replaced by netplan(5) on this system.
+# See /etc/netplan for current configuration.
+# To re-enable ifupdown on this system, you can run:
+# sudo apt install ifupdown
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+L'interfaccia enp1s0 viene utilizzata per connettere l'HUB a internet attraverso il modem-router:
+
+allow-hotplug enp1s0
+iface enp1s0 inet static
+address 192.168.1.2 # Assegnare un IP statico all'interfaccia che dipende dalla vostra rete
+netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )
+broadcast 192.168.1.255 # Modificare utilizzando come riferimento l'IP del vostro modem-router ( gateway ) ovvero 192.168.1.1 potrebbe essere 192.168.0.1. Deve essere 255 finale !
+gateway 192.168.1.1 /# Usare l'indirizzo IP del vostro modem-router ( gateway )
+# Only relevant if you make use of RESOLVCONF(8) or similar...
+dns-nameservers 8.8.8.8 8.8.4.4 # Specificare i server DNS ( google o altri )
+
+Definizione dell'interfaccia di rete lan enp2s0 ( opzionale ):
+Abilta l'interfaccia di rete enp2s0
+allow-hotplug enp2s0
+Utilizza il server DHCP per assegnare gli inidirizzi IP ai dispositvi connessi
+iface enp2s0 inet dhcp
+
+auto wlp3s0
+iface wlp3s0 inet manual
+wireless-mode master
+wireless-essid Home_Assistant # Assegnare un nome alla vostra rete WiFi
+
+# Definizione del BRIDGE - br0 setup with static wan IPv4 with ISP router as gateway
+auto br0
+iface br0 inet static
+address 192.168.2.1 # Assegnare un indirizzo IP ( gateway ) alla vostra nuova rete: Es 192.168.3.1, 192.168.4.1
+network 192.168.2.0 # Assegnare un indirizzo IP uguale all'indirizzo gateway ma con 0 finale
+netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )
+broadcast 192.168.2.255 # Assegnare un indirizzo IP uguale all'indirizzo gateway ma con 255 finale
+bridge_ports enp2s0 wlp3s0 # Specificare le interfaccie assegnate al bridge
+bridge_stp off
+bridge_fd 0
+bridge_maxwait 0
+        </pre>
+          <hr style="color: black">
+      </div>
+
+      <div class="container">
+          <h3>Hostapd</h3>
+          <!-- CODE -->
+          <pre style="background-color: gainsboro">
+                
+            </pre>
+          <hr style="color: black">
+      </div>
+
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>

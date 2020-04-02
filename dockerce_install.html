@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <!-- python -m http.server --directory /tmp/ -->
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- NO CACHE -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <!-- STYLE -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+    <title>Domotica</title>
+
+</head>
+<body>
+
+    <!---->
+    <div id="parallax-image">
+        <div class="row h-100">
+            <div class="col-md-12 align-self-center">
+                <h1 class="text-center">Automazioni</h1>
+                <h2 class="text-center">La tua casa SMART con Home Assistant</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h3>Supporto ai progetti GitHub</h3>
+        <!-- CODE -->
+        <pre style="background-color: gainsboro">
+Se README.MD non basta
+		</pre>
+
+        <hr style="color: black">
+    </div>
+
+    <!---->
+    <div id="parallax-image1">
+        <div class="row h-100">
+            <div class="col-md-12 align-self-center">
+                <h1 class="text-center">Home Assistant HUB</h1>
+                <h2 class="text-center">HUB totalmente indipendente per la casa SMART</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Installare Docker CE</h2>
+        <p>
+            Aggiornare il database dei pacchetti:<br />
+            sudo apt update<br />
+            <br /><br />
+            Per accedere al repository di Docker CE attraverso una connnessione HTTPS è necessatio installare i seguenti pacchetti:<br />
+            sudo apt-get install apt-transport-https ca-certificates curl software-properties-common<br />
+            <br />
+            Cosa verrà installato:<br />
+            apt-transport-https: Abilita il package manager al traferimento di files utilizzando il protocollo https<br />
+            ca-certificates: Abilita la averifica dei certificati di sicurezza<br />
+            curl: E' il tool per il trasferimento dei dati<br />
+            software-properties-common: Aggiunge script per la gestione dei software ( https://packages.debian.org/it/sid/software-properties-common )<br />
+            <br />
+            Aggiungere una chiave Docker’s GPG<br />
+            La chiave GPG è una funzionalità per la sicurezza per la verifica dell'autenticità del sofware che<br />
+            verrà installato.<br />
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add<br />
+            <br />
+            Aggiungere il repository per Docker CE alla lista dei repository già presente nel sistema.<br />
+            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"<br />
+            <br />
+            Aggiornare nuovamente il database dei pacchetti:<br />
+            sudo apt update<br />
+            <br />
+            Installare l'ultima vesrione di Docker CE:<br />
+            sudo apt-get install docker-ce<br />
+        </p>
+        <h3>FINE</h3>
+        <hr style="color: black">
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

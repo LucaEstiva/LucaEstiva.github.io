@@ -203,12 +203,16 @@
               # Definizione dell'interfaccia di rete lan enp2s0 ( opzionale ). L'interfaccia può essere utilizzata, ad esempio per il collegamento
               # di videocamere IP. Se necessario usare uno switch:<br />
               <br />
+              # Scegliere una sottorete ed utilizzarla per configurare le interfacce, attualemente la sottorete potrebbe essere
+              # 192.168.2.0, 192.168.3.0, 192.168.4.0 altrimenti sarà necessario modificare la maschera di sottorete subnet mask
+              # Utilizzeremo la sottorete 192.168.2.0
+              <br/>
               # Abilta l'interfaccia di rete enp2s0<br />
               allow-hotplug enp2s0<br />
               iface enp2s0 inet static<br />
-              address 192.168.2.2<br />
-              netmask 255.255.255.0<br />
-              network 192.168.2.0<br />
+              address 192.168.2.2 # IP statico assegnato all'interfaccia di rete<br />
+              netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete<br />
+              network 192.168.2.0 # Moficare utilizzando come riferimento l'IP assegnato all'interfaccia con 0 finale<br />
               # broadcast 192.168.2.255<br />
               # gateway 192.168.2.1<br />
               # dns-nameservers 192.168.2.1<br />
@@ -217,8 +221,8 @@
               <br />
               auto wlp3s0<br />
               iface wlp3s0 inet static<br />
-              address 192.168.2.192<br />
-              netmask 255.255.255.0<br />
+              address 192.168.2.192 # IP statico assegnato all'interfaccia WiFi<br />
+              netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete<br />
               <br />
               # Definizione del BRIDGE - br0 setup with static wan IPv4 with ISP router as gateway<br />
               auto br0<br />

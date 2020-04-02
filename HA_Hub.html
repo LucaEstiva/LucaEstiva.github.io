@@ -36,7 +36,7 @@
           <h3>Scegliere/Verificare l'hardware</h3>
           <!-- CODE -->
           <p style="background-color: gainsboro">
-              Per realizzare l'HUB è necessario un PC con una o due interfacce di rete LAN ed una WiFi.<br/>
+              Per realizzare l'HUB è necessario un PC con una o due interfacce di rete LAN ed una WiFi.<br />
               Avere due interfacce di rete LAN potrebbe essere utile nel caso in cui, ad esempio, si decidesse<br />
               di installare videocamere di sorveglianza via cavo ( utilizzando uno switch se necessario ).<br />
               Di seguito verrà descritta la procedura per la creazione di un HUB con due porte LAN ed una interfaccia WiFi.<br />
@@ -132,7 +132,7 @@
           <h2>Disabilitare la gestione delle interfacce di rete da parte di Network Manager</h2>
           <p>
               Le interfacce di rete saranno gestite manualmente...<br />
-              <br/>
+              <br />
               Verificare se il servizio Network Manager è in funzione<br />
               sudo systemctl status NetworkManager.service<br />
               <br />
@@ -160,12 +160,12 @@
               <br />
               sudo apt purge network-manager
           </p>
-            <hr style="color: black">
+          <hr style="color: black">
       </div>
       <div class="container">
           <h2>Configurare le interfacce di rete</h2>
           <p>
-              Manuale Ubuntu:<br/>
+              Manuale Ubuntu:<br />
               http://manpages.ubuntu.com/manpages/bionic/man5/interfaces.5.html<br />
           </p>
           <!-- CODE -->
@@ -229,14 +229,146 @@
       </div>
 
       <div class="container">
-          <h3>Hostapd</h3>
+          <h2>Hostapd</h2>
+          <p>
+              Hostapd creera' il nuovo Access Point AP<br />
+              <br />
+              Modificare il file /etc/hostapd/hostapd.conf<br />
+              <br />
+              sudo nano /etc/hostapd/hostapd.conf<br />
+              <br />
+              Specificare il nome del nuovo Access Point:
+              ssid=Home_Assistant<br />
+              Specificare la password:<br />
+              wpa_passphrase=PASSWORD<br />
+          </p>
           <!-- CODE -->
-          <pre style="background-color: gainsboro">
-                
-            </pre>
+          <p style="background-color: gainsboro">
+            # Wireless interface<br />
+            # the interface used by the AP<br />
+            interface=wlp3s0<br />
+            #<br />
+            driver=nl80211<br />
+            #<br />
+            bridge=br0<br />
+            # the country code ( BO = Bolivia, IT = Italy )<br />
+            country_code=BO<br />
+            # Wireless environment<br />
+            ssid=Home_Assistant<br />
+            # "g" simply means 2.4GHz band<br />
+            hw_mode=g<br />
+            # the channel to use<br />
+            channel=10<br />
+            #<br />
+            logger_syslog=-1<br />
+            # QoS support<br />
+            wmm_enabled=1<br />
+            # limit the frequencies used to those allowed in the country<br />
+            # ieee80211d=1<br />
+            # 802.11n<br />
+            ieee80211n=1<br />
+            # 802.11ac<br />
+            ieee80211ac=0<br />
+            <br />
+            #ht_capab=[HT40+][RX-STBC1][SMPS-STATIC][SHORT-GI-20][SHORT-GI-40][DSSS_CCK-40]<br />
+            # Authentication and encryption<br />
+            macaddr_acl=0<br />
+            # 1=wpa, 2=wep, 3=both<br />
+            auth_algs=1<br />
+            #<br />
+            # ignore_broadcast_ssid=1<br />
+            <br />
+            # WPA2 only<br />
+            wpa=2<br />
+            wpa_passphrase=PASSWORD<br />
+            # WPA-PSK WPA-EAP WPA-PSK-SHA256 WPA-EAP-SHA256<br />
+            wpa_key_mgmt=WPA-PSK<br />
+            wpa_pairwise=TKIP<br />
+            rsn_pairwise=CCMP<br />
+            </p>
           <hr style="color: black">
       </div>
 
+      <div class="container">
+          <h2>Server DHCP - isc-dhcp-server</h2>
+          <p>
+              Modificare il file /etc/default/isc-dhcp-server:<br />
+              sudo nano /etc/default/isc-dhcp-server
+          </p>
+          <p style="background-color: gainsboro">
+              # Defaults for isc-dhcp-server (sourced by /etc/init.d/isc-dhcp-server)<br />
+              <br />
+              # Path to dhcpd's config file (default: /etc/dhcp/dhcpd.conf).<br />
+              #DHCPDv4_CONF=/etc/dhcp/dhcpd.conf<br />
+              #DHCPDv6_CONF=/etc/dhcp/dhcpd6.conf<br />
+              <br />
+              # Path to dhcpd's PID file (default: /var/run/dhcpd.pid).<br />
+              #DHCPDv4_PID=/var/run/dhcpd.pid<br />
+              #DHCPDv6_PID=/var/run/dhcpd6.pid<br />
+              <br />
+              # Additional options to start dhcpd with.<br />
+              #       Don't use options -cf or -pf here; use DHCPD_CONF/ DHCPD_PID instead<br />
+              #OPTIONS=""<br />
+
+              # On what interfaces should the DHCP server (dhcpd) serve DHCP requests?<br />
+              #       Separate multiple interfaces with spaces, e.g. "eth0 eth1".<br />
+              INTERFACESv4="enp2s0"<br />
+              INTERFACESv6=""<br />
+          </p>
+          <p>
+              Modificare il file /etc/dhcp/dhcpd.conf:<br />
+              E' possibile cancellarne completamente il contenuto e sostituirlo con la configurazione<br />
+              riportata di seguito, oppure modificare solo le righe seguenti:<br />
+              <br />
+              sudo nano /etc/dhcp/dhcpd.conf
+          </p>
+          <p style="background-color: gainsboro">
+              # option definitions common to all supported networks...<br />
+              option domain-name "domotica.org";<br />
+              option domain-name-servers 8.8.8.8, 8.8.4.4;<br />
+              <br />
+              # The ddns-updates-style parameter controls whether or not the server will<br />
+              # attempt to do a DNS update when a lease is confirmed. We default to the<br />
+              # behavior of the version 2 packages ('none', since DHCP v2 didn't<br />
+              # have support for DDNS.)<br />
+              ddns-update-style none;<br />
+
+              # If this DHCP server is the official DHCP server for the local<br />
+              # network, the authoritative directive should be uncommented.<br />
+              authoritative;<br />
+
+              # A slightly different configuration for an internal subnet.<br />
+              subnet 192.168.2.0 netmask 255.255.255.0 {<br />
+                  range 192.168.2.2 192.168.2.250;<br />
+                  option domain-name-servers 8.8.8.8;<br />
+                  option domain-name "domotica.org";<br />
+                  option subnet-mask 255.255.255.0;<br />
+                  option routers 192.168.2.1;<br />
+                  option broadcast-address 192.168.2.255;<br />
+                  # option domain-name-servers 192.168.1.1;<br />
+                  # option ntp-servers 10.152.187.1;<br />
+                  option netbios-name-servers 192.168.2.1;<br />
+                  option netbios-node-type 2;<br />
+                  default-lease-time -1;<br />
+                  max-lease-time -1;<br />
+
+                  # Assegnare un indirizzo IP statico ai disposiviti utilizzando il MAC Address.<br />
+                  # Nella nostra rete abbiamo a disposizione gli # indirizzi IP da 192.168.2.2 a 192.168.2.254<br />
+
+                  # Assegnare un IP statico alla lampada Yeelight cucina<br />
+                  host Yeelight_ceiling_cucina {<br />
+                  hardware ethernet 00:00:00:00:00:00;<br />
+                  fixed-address 192.168.2.130;<br />
+                  }<br />
+
+                  # Assegnare un IP statico alla lampada Yeelight camera<br />
+                  host Yeelight_ceiling_camera {<br />
+                  hardware ethernet 00:00:00:00:00:00;<br />
+                  fixed-address 192.168.2.131;<br />
+              }<br />
+          </p>
+          <hr style="color: black">
+      </div>
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

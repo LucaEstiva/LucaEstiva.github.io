@@ -1,4 +1,4 @@
-<!doctype html>
+ï»¿<!doctype html>
 <html lang="it">
 <head>
     <!-- python -m http.server --directory /tmp/ -->
@@ -58,12 +58,12 @@ Se README.MD non basta
             <br />
             hcitool dev<br />
             <br />
-            Se la risposta è simile a:<br />
+            Se la risposta ï¿½ simile a:<br />
             <br />
-            Devices:
+            Devices:<br />
             hci0    55:44:33:22:11:00<br />
             <br />
-            allora l'interfaccia Bluetooth è perfettamente funzionante e il valore<br />
+            allora l'interfaccia Bluetooth ï¿½ perfettamente funzionante e il valore<br />
             dopo hci0 corrisponde all'indirizzo MAC della periferica.<br />
             <br />
             Scansione periferiche Bluetooth per il pairing:<br />
@@ -71,6 +71,21 @@ Se README.MD non basta
             <br />
             Maggiori dettagli qui:<br />
             <a class="btn btn-outline-success" target="_blank" href="https://wiki.ubuntu-it.org/Hardware/DispositiviSenzaFili/Bluetooth" role="Link">Wiki Ubuntu</a>
+        </p>
+        <h2>BlueZ</h2>
+        <p>
+            Verificare che l'interfaccia Bluetooth sia presente ed operativa:<br />
+            <br />
+            apt list --installed bluez<br />
+            <br />
+            Per avviare l'utility bluetooth:<br/>
+            <br />
+            sudo bluetoothctl
+            <br />
+            Per uscire dall'utility digitare quit
+            <br />
+            Maggiori dettagli qui:<br />
+                                  <a class="btn btn-outline-success" target="_blank" href="https://docs.ubuntu.com/core/en/stacks/bluetooth/bluez/docs/reference/pairing/outbound" role="Link">Bluetooth documentation</a>
         </p>
         <hr style="color: black">
     </div>

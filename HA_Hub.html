@@ -136,13 +136,13 @@
               Verificare se il servizio Network Manager è in funzione<br />
               sudo systemctl status NetworkManager.service<br />
               <br />
-              Rimuovere il servizio Network Manager<br />
+              Arrestare il servizio Network Manager<br />
               sudo systemctl stop NetworkManager.service<br />
               <br />
               Disabilitare il servizio Network Manager<br />
               sudo systemctl disable NetworkManager.service<br />
               <br />
-              Verificare se il pacchetto network-manager è installato:<br />
+              UTILITA': Verificare se il pacchetto network-manager è installato:<br />
               <br />
               apt list network-manager<br />
               <br />
@@ -167,11 +167,17 @@
           <p>
               Manuale Ubuntu:<br />
               http://manpages.ubuntu.com/manpages/bionic/man5/interfaces.5.html<br />
+              <br />
+              Modificare il file /etc/network/interfaces<br />
+              <br />
+              NB: Le righe che iniziano con il carattere # sono commenti e non vengono
+              considerate come istruzioni dal software<br />
+              <br/>
+              sudo nano /etc/network/interfaces<br />
+              <br />
           </p>
           <!-- CODE -->
           <p style="background-color: gainsboro">
-              sudo nano /etc/network/interfaces<br />
-              <br />
               # ifupdown has been replaced by netplan(5) on this system.<br />
               # See /etc/netplan for current configuration.<br />
               # To re-enable ifupdown on this system, you can run:<br />
@@ -236,6 +242,7 @@
               Se tutto funziona correttamente il nuovo Access Point verrà creato e<br />
               per terminarlo, almeno tempoarenamente dovrete premere CRTL+C<br />
           </p>
+          <hr style="color: black">
       </div>
 
       <div class="container">
@@ -245,12 +252,22 @@
               <br />
               Modificare il file /etc/hostapd/hostapd.conf<br />
               <br />
+              NB: Le righe che iniziano con il carattere # sono commenti e non vengono
+              considerate come istruzioni dal software<br />
+              <br />
               sudo nano /etc/hostapd/hostapd.conf<br />
               <br />
               Specificare il nome del nuovo Access Point:
               ssid=Home_Assistant<br />
               Specificare la password:<br />
               wpa_passphrase=PASSWORD<br />
+              <br />
+              La potenza del segnale radio ed i canali disponibili sono gestiti dalle<br />
+              diverse nazioni. Impostate la vostra nazione utilizzando i codici riportati<br />
+              in questa lista:<br />
+              https://www.cisco.com/c/en/us/td/docs/wireless/wcs/3-2/configuration/guide/wcscfg32/wcscod.html
+              <br />
+              country_code=IT
           </p>
           <!-- CODE -->
           <p style="background-color: gainsboro">
@@ -261,7 +278,7 @@
               driver=nl80211<br />
               #<br />
               bridge=br0<br />
-              # the country code ( BO = Bolivia, IT = Italy )<br />
+              # the country code ( BO = Bolivia, IT = Italy, US = United States of America )<br />
               country_code=BO<br />
               # Wireless environment<br />
               ssid=Home_Assistant<br />
@@ -273,14 +290,11 @@
               logger_syslog=-1<br />
               # QoS support<br />
               wmm_enabled=1<br />
-              # limit the frequencies used to those allowed in the country<br />
-              # ieee80211d=1<br />
-              # 802.11n<br />
+              #
               ieee80211n=1<br />
-              # 802.11ac<br />
+              #
               ieee80211ac=0<br />
               <br />
-              #ht_capab=[HT40+][RX-STBC1][SMPS-STATIC][SHORT-GI-20][SHORT-GI-40][DSSS_CCK-40]<br />
               # Authentication and encryption<br />
               macaddr_acl=0<br />
               # 1=wpa, 2=wep, 3=both<br />
@@ -296,11 +310,23 @@
               wpa_pairwise=TKIP<br />
               rsn_pairwise=CCMP<br />
           </p>
-          <h2>Hostapd</h2>
+          <hr style="color: black">
           <p>
-              Test Hostapd:<br />
+              Salvate il file CTRL+O:<br />
+              Confermate di voler salvare il file INVIO:<br />
+              Chiudete l'editor nano CTRL+X:<br />
               <br />
               sudo hostapd /etc/hostapd/hostapd.conf<br />
+              <br />
+              Se tutto funziona correttamente il nuovo Access Point verrà creato e<br />
+              per terminarlo, almeno tempoarenamente dovrete premere CRTL+C<br />
+          </p>
+          <h2>Test Hostapd</h2>
+          <p>
+              A questo punto potrebbe esser utile eseguire un test di Hostapd:<br />
+              https://manpages.debian.org/testing/hostapd/hostapd.8.en.html<br />
+              <br />
+              sudo hostapd -d /etc/hostapd/hostapd.conf<br />
               <br />
               Se tutto funziona correttamente il nuovo Access Point verrà creato e<br />
               per terminarlo, almeno tempoarenamente dovrete premere CRTL+C<br />

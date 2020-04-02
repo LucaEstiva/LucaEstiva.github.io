@@ -206,12 +206,12 @@
               # Scegliere una sottorete ed utilizzarla per configurare le interfacce, attualemente la sottorete potrebbe essere
               # 192.168.2.0, 192.168.3.0, 192.168.4.0 altrimenti sarà necessario modificare la maschera di sottorete subnet mask
               # Utilizzeremo la sottorete 192.168.2.0
-              <br/>
+              <br />
               # Abilta l'interfaccia di rete enp2s0<br />
               allow-hotplug enp2s0<br />
               iface enp2s0 inet static<br />
-              address 192.168.2.2 # IP statico assegnato all'interfaccia di rete<br />
-              netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete<br />
+              address 192.168.2.2 #  Assegnare un indirizzo statico IP all'interfaccia vedi Scegliere una sottorete<br />
+              netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )<br />
               network 192.168.2.0 # Moficare utilizzando come riferimento l'IP assegnato all'interfaccia con 0 finale<br />
               # broadcast 192.168.2.255<br />
               # gateway 192.168.2.1<br />
@@ -221,16 +221,16 @@
               <br />
               auto wlp3s0<br />
               iface wlp3s0 inet static<br />
-              address 192.168.2.192 # IP statico assegnato all'interfaccia WiFi<br />
-              netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete<br />
+              address 192.168.2.192 # Assegnare un indirizzo statico IP all'interfaccia vedi Scegliere una sottorete<br />
+              netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )<br />
               <br />
               # Definizione del BRIDGE - br0 setup with static wan IPv4 with ISP router as gateway<br />
               auto br0<br />
               iface br0 inet static<br />
-              address 192.168.2.1 # Assegnare un indirizzo IP ( gateway ) alla vostra nuova rete: Es 192.168.3.1, 192.168.4.1<br />
-              network 192.168.2.0 # Assegnare un indirizzo IP uguale all'indirizzo gateway ma con 0 finale<br />
+              address 192.168.2.1 # Assegnare un indirizzo statico IP all'interfaccia vedi Scegliere una sottorete<br />
+              network 192.168.2.0 # Moficare utilizzando come riferimento l'IP assegnato all'interfaccia con 0 finale<br />
               netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )<br />
-              broadcast 192.168.2.255 # Assegnare un indirizzo IP uguale all'indirizzo gateway ma con 255 finale<br />
+              broadcast 192.168.2.255 # Moficare utilizzando come riferimento l'IP assegnato all'interfaccia con 255 finale<br />
               bridge_ports enp2s0 wlp3s0 # Specificare le interfacce assegnate al bridge<br />
               bridge_stp off<br />
               bridge_fd 0<br />
@@ -249,8 +249,6 @@
           </p>
           <hr style="color: black">
       </div>
-
-
 
       <div class="container">
           <h2>Abilitare IP FORWARDING - IPV4</h2>
@@ -289,14 +287,6 @@
           </p>
           <hr style="color: black">
       </div>
-
-
-
-
-
-
-
-
 
       <div class="container">
           <h2>Hostapd</h2>
@@ -418,7 +408,7 @@
 
               # On what interfaces should the DHCP server (dhcpd) serve DHCP requests?<br />
               #       Separate multiple interfaces with spaces, e.g. "eth0 eth1".<br />
-              INTERFACESv4="enp2s0"<br />
+              INTERFACESv4="br0"<br />
               INTERFACESv6=""<br />
           </p>
           <p>

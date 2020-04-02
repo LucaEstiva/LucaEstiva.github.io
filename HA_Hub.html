@@ -389,6 +389,10 @@
           <h2>Server DHCP - isc-dhcp-server</h2>
           <p>
               Modificare il file /etc/default/isc-dhcp-server:<br />
+              <br />
+              NB: Le righe che iniziano con il carattere # sono commenti e non vengono
+              considerate come istruzioni dal software<br />
+              <br />
               sudo nano /etc/default/isc-dhcp-server
           </p>
           <p style="background-color: gainsboro">
@@ -413,6 +417,10 @@
           </p>
           <p>
               Modificare il file /etc/dhcp/dhcpd.conf:<br />
+              <br />
+              NB: Le righe che iniziano con il carattere # sono commenti e non vengono
+              considerate come istruzioni dal software<br />
+              <br/>
               E' possibile cancellarne completamente il contenuto e sostituirlo con la configurazione<br />
               riportata di seguito, oppure modificare solo le righe seguenti:<br />
               <br />
@@ -454,10 +462,10 @@
               option broadcast-address 192.168.2.255; # Utilizzare l'indirizzo assegnato alla subnet ma con 255 finale<br />
               # option domain-name-servers 192.168.1.1;<br />
               # option ntp-servers 10.152.187.1;<br />
-              option netbios-name-servers 192.168.2.1;<br />
+              option netbios-name-servers 192.168.2.1 # Utilizzare l'indirizzo assegnato alla subnet ma con 255 finale;<br />
               option netbios-node-type 2;<br />
-              default-lease-time -1;<br />
-              max-lease-time -1;<br />
+              default-lease-time -1; # Nessun tempo di lease l'indirizzo IP assegnato non ha un tempo di scadenza<br />
+              max-lease-time -1; # Nessun tempo di lease l'indirizzo IP assegnato non ha un tempo di scadenza<br />
 
               # Assegnare un indirizzo IP statico ai disposiviti utilizzando il MAC Address.<br />
               # Nella nostra rete abbiamo a disposizione gli # indirizzi IP da 192.168.2.2 a 192.168.2.254<br />

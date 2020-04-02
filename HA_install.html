@@ -51,15 +51,26 @@ Se README.MD non basta
               </div>
           </div>
       </div>
-      <div class="container">
+	  <div class="container">
 
-          <p>
-              Seguire la guida originale ma non installare Network Manager !
-          </p>
-          <a class="btn btn-outline-success" target="_blank" href="https://github.com/home-assistant/supervised-installer" role="Link">Guida originale</a>
+	  	<p>
+	  		Installare i pacchetti:<br />
+	  		<br />
+	  		sudo apt install jq<br />
+	  		sudo apt install avahi-daemon<br />
+	  		sudo apt install apparmor-utils<br />
+	  		<br />
+	  		Eseguire come utente root:<br />
+	  		Digitare sudo su:<br />
+	  		curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s<br />
+	  	</p>
+	  	<p>
+	  		Vedere comunque la guida originale per l'installazione su diverse architetture di sistema.
+	  	</p>
+	  	<a class="btn btn-outline-success" target="_blank" href="https://github.com/home-assistant/supervised-installer#command-line-arguments" role="Link">Guida originale</a>
 
-          <hr style="color: black">
-      </div>
+	  	<hr style="color: black">
+	  </div>
 
 
       <!-- Optional JavaScript -->

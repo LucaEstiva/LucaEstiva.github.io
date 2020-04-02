@@ -52,35 +52,26 @@ Se README.MD non basta
         </div>
     </div>
     <div class="container">
-        <h2>Installare Docker CE dal repositry ufficiale</h2>
+        <h2>Verificare/Abilitare il Bluethooth</h2>
         <p>
-            Aggiornare il database dei pacchetti:<br />
-            sudo apt update<br />
-            <br /><br />
-            Per accedere al repository di Docker CE attraverso una connnessione HTTPS è necessatio installare i seguenti pacchetti:<br />
-            sudo apt-get install apt-transport-https ca-certificates curl software-properties-common<br />
+            Verificare che l'interfaccia Bluethoot sia presente ed operativa:<br />
             <br />
-            Cosa verrà installato:<br />
-            apt-transport-https: Abilita il package manager al traferimento di files utilizzando il protocollo https<br />
-            ca-certificates: Abilita la averifica dei certificati di sicurezza<br />
-            curl: E' il tool per il trasferimento dei dati<br />
-            software-properties-common: Aggiunge script per la gestione dei software ( https://packages.debian.org/it/sid/software-properties-common )<br />
+            hcitool dev<br />
             <br />
-            Aggiungere una chiave Docker’s GPG<br />
-            La chiave GPG è una funzionalità per la sicurezza per la verifica dell'autenticità del sofware che<br />
-            verrà installato.<br />
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add<br />
+            Se la risposta è simile a:<br />
             <br />
-            Aggiungere il repository per Docker CE alla lista dei repository già presente nel sistema.<br />
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"<br />
+            Devices:
+            hci0    55:44:33:22:11:00<br />
             <br />
-            Aggiornare nuovamente il database dei pacchetti:<br />
-            sudo apt update<br />
+            allora l'interfaccia Bluethoot è perfettamente funzionante e il valore<br />
+            dopo hci0 corrisponde all'indirizzo MAC della periferica.<br />
             <br />
-            Installare l'ultima vesrione di Docker CE:<br />
-            sudo apt-get install docker-ce<br />
+            Scansione periferiche Bluethoot per il pairing:<br />
+            hcitool scan<br />
+            <br />
+            Maggiori dettagli qui:<br />
+            <a class="btn btn-outline-success" target="_blank" href="https://wiki.ubuntu-it.org/Hardware/DispositiviSenzaFili/Bluetooth" role="Link">Wiki Ubuntu</a>
         </p>
-        <h3>FINE</h3>
         <hr style="color: black">
     </div>
 

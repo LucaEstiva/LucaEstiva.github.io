@@ -433,14 +433,25 @@
               # network, the authoritative directive should be uncommented.<br />
               authoritative;<br />
 
+              # Utilizzare come riferimento quanto specificato nella definizione delle interfacce di rete. Il server DHCP
+              # rispondera alle richieste nella sottorete definita in precedenza e sarà in grado di assegnare un determinato
+              # range di IP solo in questa sottorete.
+              # SPECIFICATO IN CONFIGURARE LE INTERFACCE DI RETE
+              # Scegliere una sottorete ed utilizzarla per configurare le interfacce, attualemente la sottorete potrebbe essere
+              # 192.168.2.0, 192.168.3.0, 192.168.4.0 altrimenti sarà necessario modificare la maschera di sottorete subnet mask
+              # Utilizzeremo la sottorete 192.168.2.0
+
+              # subnet utilizzare la sottorete 192.168.2.0
+              # range il range di IP che verrà assegnato ai dispositivi da 192.168.2.2 a 192.168.2.250
+
               # A slightly different configuration for an internal subnet.<br />
               subnet 192.168.2.0 netmask 255.255.255.0 {<br />
-              range 192.168.2.2 192.168.2.250;<br />
-              option domain-name-servers 8.8.8.8;<br />
-              option domain-name "domotica.org";<br />
+              range 192.168.2.2 192.168.2.250; # Il range di IP che verrà assegnato ai dispositivi da 192.168.2.2 a 192.168.2.250<br />
+              option domain-name-servers 8.8.8.8; # L'indirizzo del server DNS ( google in questo caso )<br />
+              option domain-name "domotica.org" # Il nome del dominio;<br />
               option subnet-mask 255.255.255.0;<br />
-              option routers 192.168.2.1;<br />
-              option broadcast-address 192.168.2.255;<br />
+              option routers 192.168.2.1; # Utilizzare l'indirizzo assegnato alla subnet ma con 1 finale<br />
+              option broadcast-address 192.168.2.255; # Utilizzare l'indirizzo assegnato alla subnet ma con 255 finale<br />
               # option domain-name-servers 192.168.1.1;<br />
               # option ntp-servers 10.152.187.1;<br />
               option netbios-name-servers 192.168.2.1;<br />

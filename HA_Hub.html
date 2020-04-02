@@ -101,6 +101,7 @@
               sudo apt install wireless-tools<br />
               sudo apt install isc-dhcp-server<br />
               sudo apt install hostapd<br />
+              sudo apt install iptables-persistent<br />
           </p>
           <hr style="color: black">
       </div>
@@ -172,7 +173,7 @@
               <br />
               NB: Le righe che iniziano con il carattere # sono commenti e non vengono
               considerate come istruzioni dal software<br />
-              <br/>
+              <br />
               sudo nano /etc/network/interfaces<br />
               <br />
           </p>
@@ -245,6 +246,54 @@
           <hr style="color: black">
       </div>
 
+
+
+      <div class="container">
+          <h2>Abilitare IP FORWARDING - IPV4</h2>
+          <p>
+              Modificare il file sudo nano /etc/sysctl.conf:<br />
+              <br />
+              NB: Le righe che iniziano con il carattere # sono commenti e non vengono
+              considerate come istruzioni dal software<br />
+              <br />
+              sudo nano sudo nano /etc/sysctl.conf
+              <br />
+              Cercare e togliere il commento alla riga come mostrato di seguito e verificare che il valore<br />
+              dopo il simbolo = sia 1<br />
+          </p>
+          <p style="background-color: gainsboro">
+              net.ipv4.ip_forward=1
+          </p>
+          <hr style="color: black">
+          <p>
+              Salvate il file CTRL+O:<br />
+              Confermate di voler salvare il file INVIO:<br />
+              Chiudete l'editor nano CTRL+X:<br />
+              <br />
+          </p>
+          <h2>Test IP FORWARDING</h2>
+          <p>
+              Per verificare che l'IP FORWADING sia abilitato sarà necessario riavviare il PC:<br />
+              <br />
+              sudo reboot<br />
+              <br />
+              sysctl net.ipv4.ip_forward<br />
+              <br />
+              La risposta dovrà essere:<br />
+              <br />
+              net.ipv4.ip_forward = 1
+          </p>
+          <hr style="color: black">
+      </div>
+
+
+
+
+
+
+
+
+
       <div class="container">
           <h2>Hostapd</h2>
           <p>
@@ -315,21 +364,29 @@
               Salvate il file CTRL+O:<br />
               Confermate di voler salvare il file INVIO:<br />
               Chiudete l'editor nano CTRL+X:<br />
-              <br />
-              sudo hostapd /etc/hostapd/hostapd.conf<br />
-              <br />
-              Se tutto funziona correttamente il nuovo Access Point verrà creato e<br />
-              per terminarlo, almeno tempoarenamente dovrete premere CRTL+C<br />
           </p>
           <h2>Test Hostapd</h2>
           <p>
-              A questo punto potrebbe esser utile eseguire un test di Hostapd:<br />
+              A questo punto potrebbe essera utile eseguire un test di Hostapd:<br />
               https://manpages.debian.org/testing/hostapd/hostapd.8.en.html<br />
               <br />
               sudo hostapd -d /etc/hostapd/hostapd.conf<br />
               <br />
-              Se tutto funziona correttamente il nuovo Access Point verrà creato e<br />
-              per terminarlo, almeno tempoarenamente dovrete premere CRTL+C<br />
+              Se tutto funziona correttamente il nuovo Access Point verrà creato, verificate
+              che esista la nuova rete WiFi. Se tenterete di connettervi alla nuova rete vedrete
+              apparire, sullo schermo, alcune inforamzioni ma non vi sarà possibile connettervi alla nuova rete
+              per ora.<br />
+              Terminate Hostapd premendo CRTL+C<br />
+          </p>
+          <hr style="color: black">
+          <h2>Abilitare definitivamente Hostapd</h2>
+          <p>
+              Per fare in modo che l'Access Point venga creato automaticamente all'avvio dell'HUB<br />
+              dare i comandi:<br />
+              sudo systemctl unmask hostapd<br />
+              sudo systemctl enable hostapd<br />
+              <br />
+              Da questo momento in poi il nuovo AP verrà creato automaticamente all'avvio dell'HUB.
           </p>
           <hr style="color: black">
       </div>
@@ -384,36 +441,143 @@
 
               # A slightly different configuration for an internal subnet.<br />
               subnet 192.168.2.0 netmask 255.255.255.0 {<br />
-                  range 192.168.2.2 192.168.2.250;<br />
-                  option domain-name-servers 8.8.8.8;<br />
-                  option domain-name "domotica.org";<br />
-                  option subnet-mask 255.255.255.0;<br />
-                  option routers 192.168.2.1;<br />
-                  option broadcast-address 192.168.2.255;<br />
-                  # option domain-name-servers 192.168.1.1;<br />
-                  # option ntp-servers 10.152.187.1;<br />
-                  option netbios-name-servers 192.168.2.1;<br />
-                  option netbios-node-type 2;<br />
-                  default-lease-time -1;<br />
-                  max-lease-time -1;<br />
+              range 192.168.2.2 192.168.2.250;<br />
+              option domain-name-servers 8.8.8.8;<br />
+              option domain-name "domotica.org";<br />
+              option subnet-mask 255.255.255.0;<br />
+              option routers 192.168.2.1;<br />
+              option broadcast-address 192.168.2.255;<br />
+              # option domain-name-servers 192.168.1.1;<br />
+              # option ntp-servers 10.152.187.1;<br />
+              option netbios-name-servers 192.168.2.1;<br />
+              option netbios-node-type 2;<br />
+              default-lease-time -1;<br />
+              max-lease-time -1;<br />
 
-                  # Assegnare un indirizzo IP statico ai disposiviti utilizzando il MAC Address.<br />
-                  # Nella nostra rete abbiamo a disposizione gli # indirizzi IP da 192.168.2.2 a 192.168.2.254<br />
+              # Assegnare un indirizzo IP statico ai disposiviti utilizzando il MAC Address.<br />
+              # Nella nostra rete abbiamo a disposizione gli # indirizzi IP da 192.168.2.2 a 192.168.2.254<br />
 
-                  # Assegnare un IP statico alla lampada Yeelight cucina<br />
-                  host Yeelight_ceiling_cucina {<br />
-                  hardware ethernet 00:00:00:00:00:00;<br />
-                  fixed-address 192.168.2.130;<br />
-                  }<br />
+              # Assegnare un IP statico alla lampada Yeelight cucina<br />
+              host Yeelight_ceiling_cucina {<br />
+              hardware ethernet 00:00:00:00:00:00;<br />
+              fixed-address 192.168.2.130;<br />
+              }<br />
 
-                  # Assegnare un IP statico alla lampada Yeelight camera<br />
-                  host Yeelight_ceiling_camera {<br />
-                  hardware ethernet 00:00:00:00:00:00;<br />
-                  fixed-address 192.168.2.131;<br />
+              # Assegnare un IP statico alla lampada Yeelight camera<br />
+              host Yeelight_ceiling_camera {<br />
+              hardware ethernet 00:00:00:00:00:00;<br />
+              fixed-address 192.168.2.131;<br />
               }<br />
           </p>
           <hr style="color: black">
+          <p>
+              Salvate il file CTRL+O:<br />
+              Confermate di voler salvare il file INVIO:<br />
+              Chiudete l'editor nano CTRL+X:<br />
+          </p>
+          <h2>Test server DHCP</h2>
+          <p>
+              A questo punto potrebbe essera utile eseguire un test di Hostapd:<br />
+              https://manpages.debian.org/testing/hostapd/hostapd.8.en.html<br />
+              <br />
+              Avviare il server DHCP:<br />
+              sudo systemctl start isc-dhcp-server<br />
+              <br />
+              Se non viene visualizzato nessun messaggio di errore è possibile installare il servizio<br />
+              DHCP server, questo fa si che al prossimo avvio del PC il server venga avviato automaticamente:<br />
+              <br />
+              sudo systemctl enable isc-dhcp-server<br />
+              <br />
+              Controllare lo stato del server:<br />
+              sudo systemctl status isc-dhcp-server<br />
+              Vedere il log degli errori:<br />
+              journalctl -xe<br />
+              Riavviare il server se vengono apportate modifiche al file di configurazione:<br />
+              sudo systemctl restart isc-dhcp-server<br />
+              <br />
+              Se tutto è andato bene il server DHCP è in funzione ed assegenera un nuovo IP ad<br />
+              ogni dispositivo che si collegherà all'HUB, a meno che, non sia impostato un IP<br />
+              statico nel dispositivo.<br />
+          </p>
+          <hr style="color: black">
       </div>
+      <div class="container">
+          <h2>PRIMO TEST FUNZIONALITA' RETE</h2>
+          <p>
+              Riavviate l'HUB<br />
+              <br />
+              sudo reboot<br />
+              Verificate che il servizio Hostapd sia in funzione:<br />
+              <br />
+              sudo systemctl status hostapd.service<br />
+              <br />
+              Se il servizio è attivo vedrete:<br />
+              <br />
+              ● hostapd.service - Advanced IEEE 802.11 AP and IEEE 802.1X/WPA/WPA2/EAP Authenticator<br />
+              Loaded: loaded (/lib/systemd/system/hostapd.service; enabled; vendor preset: enabled)<br />
+              Active: active (running) since Thu 2020-04-02 07:37:07 UTC; 5h 23min ago<br />
+              Process: 1287 ExecStart=/usr/sbin/hostapd -P /run/hostapd.pid -B $DAEMON_OPTS ${DAEMON_CONF} (code=exited, status=0/SUCCESS)<br />
+              Main PID: 1375 (hostapd)<br />
+              Tasks: 1 (limit: 4915)<br />
+              CGroup: /system.slice/hostapd.service<br />
+              └─1375 /usr/sbin/hostapd -P /run/hostapd.pid -B /etc/hostapd/hostapd.conf<br />
+              <br />
+              Premete CTRL+C per uscire dal log di stato.<br />
+              <br />
+              Verificate che il servizio isc-dhcp-server ( server DHCP ) sia in funzione:<br />
+              <br />
+              sudo systemctl status isc-dhcp-server<br />
+              <br />
+              Se il servizio è attivo vedrete:<br />
+              ● isc-dhcp-server.service - ISC DHCP IPv4 server<br />
+              Loaded: loaded (/lib/systemd/system/isc-dhcp-server.service; enabled; vendor preset: enabled)<br />
+              Active: active (running) since Thu 2020-04-02 07:37:07 UTC; 5h 28min ago<br />
+              Docs: man:dhcpd(8)<br />
+              Main PID: 1266 (dhcpd)<br />
+              Tasks: 1 (limit: 4915)<br />
+              CGroup: /system.slice/isc-dhcp-server.service<br />
+              └─1266 dhcpd -user dhcpd -group dhcpd -f -4 -pf /run/dhcp-server/dhcpd.pid -cf /etc/dhcp/dhcpd.conf<br />
+              <br />
+              Premete CTRL+C per uscire dal log di stato.<br />
+              <br />
+              Se entrambe i servizi sono attivi potrete proseguire, altrimenti verificate i file di configurazione
+              controllate i log, riavviate i servizi fino a quando essi non saranno eseguiti senza errori.
+          </p>
+          <hr style="color: black">
+      </div>
+      <div class="container">
+          <h2>ROUTING STATICO</h2>
+          <p>
+              I pacchetti destinati alla rete WAN ( internet ) non possono ancora essere instradati<br />
+              verso di essa.<br />
+              Per poter essere instradati sarà necessario specificare una nuoca ROUTE con NAT.<br />
+          </p>
+          <p style="background-color: gainsboro">
+              sudo iptables -t nat -A POSTROUTING -o enp1s0 -j MASQUERADE
+          </p>
+          <hr style="color: black">
+          <p>
+            Ora se vi collegherete all'HUB ( Access Point dell'HUB ) potrete accedere ad Internet.
+          </p>
+          <h2>IP TABLES</h2>
+          <p>
+              La nuova route però deve essere salvata altrimenti ad ogni riavvio dovrà essere reinserita:<br />
+              <br />
+              sudo /etc/init.d/iptables-persistent save<br />
+              <br />
+              sudo /etc/init.d/iptables-persistent reload<br />
+              <br />
+              Vedere le regole iptables in uso:
+              <br />
+              sudo iptables -S
+              <br />
+              e/o<br />
+              <br />
+              sudo iptables -L
+          </p>
+          <hr style="color: black">
+      </div>
+
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

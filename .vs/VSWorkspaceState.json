@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\css"
+    "\\css",
+    "\\images",
+    "\\images\\HUNSN",
+    "\\images\\myHome"
   ],
-  "SelectedNode": "\\index.html",
+  "SelectedNode": "\\pc_industriale.html",
   "PreviewInSolutionExplorer": false
 }

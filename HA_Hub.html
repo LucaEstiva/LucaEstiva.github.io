@@ -36,8 +36,8 @@
           <h3>Scegliere/Verificare l'hardware</h3>
           <!-- CODE -->
           <p style="background-color: gainsboro">
-              Per realizzare l'HUB è necessario un PC con una o due interfaccie di rete LAN ed una WiFi.<br/>
-              Avere due interfaccie di rete LAN potrebbe essere utile nel caso in cui, ad esempio, si decidesse<br />
+              Per realizzare l'HUB è necessario un PC con una o due interfacce di rete LAN ed una WiFi.<br/>
+              Avere due interfacce di rete LAN potrebbe essere utile nel caso in cui, ad esempio, si decidesse<br />
               di installare videocamere di sorveglianza via cavo ( utilizzando uno switch se necessario ).<br />
               Di seguito verrà descritta la procedura per la creazione di un HUB con due porte LAN ed una interfaccia WiFi.<br />
               Sarà necessario verificare che la scheda di rete WiFi che intendete utilizzare supporti la modalità MASTER o AP-Mode.<br />
@@ -119,7 +119,7 @@
       <div class="container">
           <h2>RIMUOVERE NETPLAN</h2>
           <p>
-              Netplan è il nuovo servizio per la gestione delle interfaccie di rete e sostituisce il servizio
+              Netplan è il nuovo servizio per la gestione delle interfacce di rete e sostituisce il servizio
               Network Manager.<br />
               Rimuovere il servizio Netplan:<br />
               <br />
@@ -129,60 +129,45 @@
           <hr style="color: black">
       </div>
       <div class="container">
-          <h2>Opzionale - Disabilitare la gestione dell'interfaccia di rete WiFi</h2>
+          <h2>Disabilitare la gestione delle interfacce di rete da parte di Network Manager</h2>
           <p>
-              Ottenere il MAC address dell'interfaccia di rete WiFi utilizzare il comando:<br />
+              Le interfacce di rete saranno gestite manualmente...<br />
+              <br/>
+              Verificare se il servizio Network Manager è in funzione<br />
+              sudo systemctl status NetworkManager.service<br />
               <br />
-              ifconfig -a<br />
+              Rimuovere il servizio Network Manager<br />
+              sudo systemctl stop NetworkManager.service<br />
               <br />
-              Modificare il file /etc/NetworkManager/NetworkManager.conf:<br />
+              Disabilitare il servizio Network Manager<br />
+              sudo systemctl disable NetworkManager.service<br />
               <br />
-              sudo nano /etc/NetworkManager/NetworkManager.conf<br />
-          </p>
-          <p style="background-color: gainsboro">
-              Ottenere il MAC address dell'interfaccia di rete WiFi utilizzare il comando:<br />
+              Verificare se il pacchetto network-manager è installato:<br />
               <br />
-              ifconfig -a<br />
+              apt list network-manager<br />
               <br />
-              Modificare il file /etc/NetworkManager/NetworkManager.conf:<br />
+              Installato:<br />
+              Listing... Done<br />
+              network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64    [installed]<br />
+              N: There are 2 additional versions. Please use the '-a' switch to see them.<br />
               <br />
-              sudo nano /etc/NetworkManager/NetworkManager.conf<br />
+              Non installato:<br />
+              Listing... Done<br />
+              network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64<br />
+              N: There are 2 additional versions. Please use the '-a' switch to see them.<br />
               <br />
+              Rimuovere il pacchetto Network Manager e i relativi file di configurazione:<br />
               <br />
-              [main]<br />
-              plugins=ifupdown,keyfile<br />
-              <br />
-              [ifupdown]<br />
-              managed=false<br />
-              <br />
-              [device]<br />
-              wifi.scan-rand-mac-address=no<br />
-              <br />
-              [keyfile]<br />
-              # Sostituire le coppie di 0 con i valori riportati da IFCONFING per l'interfaccia WiFi<br />
-              unmanaged-devices=mac:00:00:00:00:00:00<br />
+              sudo apt purge network-manager
           </p>
             <hr style="color: black">
       </div>
       <div class="container">
-          <h2>Abilitare le schede di rete</h2>
+          <h2>Configurare le interfacce di rete</h2>
           <p>
-              Hostapd potrebbe inoltre non essere in grado di creare correttamente il nuovo access point a causa dell'utilizzo
-              della scheda WiFi da parte di un'altro software oppure a causa di restrizioni applicate al driver della scheda.<br />
-              Maggiori dettagli in seguito...<br />
-              <br />
-              sudo nano /var/lib/NetworkManager/NetworkManager.state<br />
+              Manuale Ubuntu:<br/>
+              http://manpages.ubuntu.com/manpages/bionic/man5/interfaces.5.html<br />
           </p>
-          <p style="background-color: gainsboro">
-              [main]<br />
-              NetworkingEnabled=true<br />
-              WirelessEnabled=true<br />
-              WWANEnabled=true<br />
-          </p>
-        <hr style="color: black">
-      </div>
-      <div class="container">
-          <h2>Configurare le interfacce di rete - Network Manager</h2>
           <!-- CODE -->
           <p style="background-color: gainsboro">
               sudo nano /etc/network/interfaces<br />
@@ -202,8 +187,9 @@
               iface enp1s0 inet static<br />
               address 192.168.1.2 # Assegnare un IP statico all'interfaccia che dipende dalla vostra rete<br />
               netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )<br />
-              broadcast 192.168.1.255 # Modificare utilizzando come riferimento l'IP del vostro modem-router ( gateway ) ovvero 192.168.1.1 potrebbe essere 192.168.0.1. Deve essere 255 finale !<br />
-              gateway 192.168.1.1 /# Usare l'indirizzo IP del vostro modem-router ( gateway )<br />
+              network 192.168.1.0
+              # broadcast 192.168.1.255 # Modificare utilizzando come riferimento l'IP del vostro modem-router ( gateway ) ovvero 192.168.1.1 potrebbe essere 192.168.0.1. Deve essere 255 finale !<br />
+              gateway 192.168.1.1 # Usare l'indirizzo IP del vostro modem-router ( gateway )<br />
               # Only relevant if you make use of RESOLVCONF(8) or similar...<br />
               dns-nameservers 8.8.8.8 8.8.4.4 # Specificare i server DNS ( google o altri )<br />
               <br />
@@ -212,15 +198,20 @@
               <br />
               # Abilta l'interfaccia di rete enp2s0<br />
               allow-hotplug enp2s0<br />
-              # Utilizza il server DHCP per assegnare gli inidirizzi IP ai dispositvi connessi<br />
-              iface enp2s0 inet dhcp<br />
+              iface enp2s0 inet static<br />
+              address 192.168.2.2<br />
+              netmask 255.255.255.0<br />
+              network 192.168.2.0<br />
+              # broadcast 192.168.2.255<br />
+              # gateway 192.168.2.1<br />
+              # dns-nameservers 192.168.2.1<br />
               <br />
               # L'interfaccia di rete WiFi wlp3s0 servirà a realizzare l'Access Point WiFi
               <br />
               auto wlp3s0<br />
-              iface wlp3s0 inet manual<br />
-              wireless-mode master<br />
-              wireless-essid Home_Assistant # Assegnare un nome alla vostra rete WiFi<br />
+              iface wlp3s0 inet static<br />
+              address 192.168.2.192<br />
+              netmask 255.255.255.0<br />
               <br />
               # Definizione del BRIDGE - br0 setup with static wan IPv4 with ISP router as gateway<br />
               auto br0<br />
@@ -229,7 +220,7 @@
               network 192.168.2.0 # Assegnare un indirizzo IP uguale all'indirizzo gateway ma con 0 finale<br />
               netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )<br />
               broadcast 192.168.2.255 # Assegnare un indirizzo IP uguale all'indirizzo gateway ma con 255 finale<br />
-              bridge_ports enp2s0 wlp3s0 # Specificare le interfaccie assegnate al bridge<br />
+              bridge_ports enp2s0 wlp3s0 # Specificare le interfacce assegnate al bridge<br />
               bridge_stp off<br />
               bridge_fd 0<br />
               bridge_maxwait 0<br />

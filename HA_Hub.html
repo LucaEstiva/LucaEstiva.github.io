@@ -309,17 +309,17 @@
               sudo apt --assume-yes purge nplan netplan.io<br />
           <p>
               <hr style="color: black">
-              <h2>Rimuovere Netplan</h2>
+              <h2>Abilitare ifupdown</h2>
           <p>
-              Riavvio del servizio networking;
+              Riavvio del servizio networking;<br />
               <br />
-              sudo systemctl unmask networking
+              sudo systemctl unmask networking<br />
               <br />
-              sudo systemctl enable networking
+              sudo systemctl enable networking<br />
               <br />
-              sudo systemctl restart networking
+              sudo systemctl restart networking<br />
               <br />
-              Riavviare l'HUB:
+              Riavviare l'HUB:<br />
               <br />
               sudo reboot
           </p>
@@ -376,7 +376,7 @@
           <h2>Risoluzione dei nomi di domnio ( DNS )</h2>
           <p>
               Ubuntu Bionic Beaver (18.04) utilizza un proprio client resolver SYSTEMD-RESOLVED.SERVICE(8)
-              è necessario aggiungere l'indirizzo del server DNS al file /etc/systemd/resolved.conf
+              è necessario aggiungere l'indirizzo del server DNS al file /etc/systemd/resolved.conf<br />
               <br />
               sudo nano /etc/systemd/resolved.conf
             </p>
@@ -398,28 +398,6 @@
               Test risoluzione dei nomi:
               <br />
               nslookup www.google.com<br />
-              <br />
-              Installare il pacchetto resolvconf:<br />
-              <br />
-              sudo apt install resolvconf
-              <br />
-              Aggiungere alla coda della lista dei sever DNS l'indirizzo del nuovo server:<br />
-              <br />
-              sudo nano /etc/resolvconf/resolv.conf.d/tail<br />
-              <br />
-              Aggiungere:<br />
-              <br />
-              nameserver 8.8.8.8<br />
-          </p>
-          <p>
-              Salvare il file CTRL+O:<br />
-              Confermare di voler salvare il file INVIO:<br />
-              Chiudere l'editor nano CTRL+X:<br />
-          </p>
-          <p>
-              Abilitare il nuovo server:
-              <br />
-              sudo resolvconf -u<br />
           </p>
           <p>
               Salvare il file CTRL+O:<br />

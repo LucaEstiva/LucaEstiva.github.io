@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="it">
   <head>
 	<!-- python -m http.server --directory /tmp/ -->
@@ -18,7 +18,7 @@
 	<!-- STYLE -->
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 	
-    <title>Domotica</title>
+    <title>HomeAssistant</title>
 
   </head>
   <body>
@@ -53,17 +53,23 @@ Se README.MD non basta
       </div>
 	  <div class="container">
 
-	  	<p>
-	  		Installare i pacchetti:<br />
-	  		<br />
-	  		sudo apt install jq<br />
-	  		sudo apt install avahi-daemon<br />
-	  		sudo apt install apparmor-utils<br />
-	  		<br />
-	  		Eseguire come utente root:<br />
-	  		Digitare sudo su:<br />
-	  		curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s<br />
-	  	</p>
+          <p>
+              Installare i pacchetti:<br />
+              <br />
+              sudo apt install jq<br />
+              <br />
+              sudo apt install avahi-daemon<br />
+              <br />
+              sudo apt install apparmor-utils<br />
+              <br />
+              Eseguire come utente root:<br />
+              <br />
+
+              <span style="color:chocolate">Digitare sudo su:</span><br />
+              <br />
+
+              curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s<br />
+          </p>
 	  	<p>
 	  		Vedere comunque la guida originale per l'installazione su diverse architetture di sistema.
 	  	</p>

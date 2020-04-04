@@ -348,6 +348,10 @@
               Chiudere l'editor nano CTRL+X:<br />
           </p>
           <p>
+              Test risoluzione dei nomi:
+              <br />
+              nslookup www.google.com<br />
+              <br />
               Installare il pacchetto resolvconf:<br />
               <br />
               sudo apt install resolvconf
@@ -388,7 +392,7 @@
               <br />
               sudo nano sudo nano /etc/sysctl.conf
               <br />
-              Cercare e togliere il commento alla riga come mostrato di seguito e verificare che il valore<br />
+              Elimiare il carattere # commento alla riga come mostrato di seguito e verificare che il valore<br />
               dopo il simbolo = sia 1<br />
           </p>
           <p style="background-color: gainsboro">
@@ -421,6 +425,11 @@
           <p>
               Hostapd creera' il nuovo Access Point AP<br />
               https://help.ubuntu.com/community/WifiDocs/WirelessAccessPoint<br />
+              Installare i pacchetti:<br />
+              <br />
+              sudo apt install wireless-tools<br />
+              <br />
+              sudo apt install hostapd<br />
               <br />
               Modificare il file /etc/hostapd/hostapd.conf<br />
               <br />
@@ -536,6 +545,10 @@
       <div class="container">
           <h2>Server DHCP - isc-dhcp-server</h2>
           <p>
+              Installare il server DHCP isc-dhcp-server:<br />
+              <br />
+              sudo apt install isc-dhcp-server
+              <br />
               Modificare il file /etc/default/isc-dhcp-server:<br />
               <br />
               NB: Le righe che iniziano con il carattere # sono commenti e non vengono
@@ -562,6 +575,11 @@
               #       Separate multiple interfaces with spaces, e.g. "eth0 eth1".<br />
               INTERFACESv4="br0"<br />
               INTERFACESv6=""<br />
+          </p>
+          <p>
+              Salvare il file CTRL+O:<br />
+              Confermare di voler salvare il file INVIO:<br />
+              Chiudere l'editor nano CTRL+X:<br />
           </p>
           <p>
               Modificare il file /etc/dhcp/dhcpd.conf:<br />
@@ -725,11 +743,15 @@
           </p>
           <h2>IP TABLES</h2>
           <p>
+              Installare il pacchetto iptables-persistent<br />
+              <br />
+              sudo apt install iptables-persistent<br />
+              <br />
               La nuova route però deve essere salvata altrimenti ad ogni riavvio dovrà essere reinserita:<br />
               <br />
               sudo netfilter-persistent save<br />
               <br />
-              Vedere le regole iptables in uso:
+              Vedere le regole iptables in uso:<br />
               <br />
               sudo iptables -S
               <br />

@@ -282,18 +282,6 @@
               Confermate di voler salvare il file INVIO:<br />
               Chiudete l'editor nano CTRL+X:<br />
           </p>
-          <p>
-              Riavvio del servizio networking;<br />
-              <br />
-              sudo /etc/init.d/networking restart
-              <br />
-              sudo systemctl unmask networking
-              <br />
-              sudo systemctl enable networking
-              <br />
-              sudo systemctl restart networking
-          </p>
-          <hr style="color: black">
       </div>
 
 
@@ -312,6 +300,21 @@
               sudo systemctl mask systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online<br />
               <br />
               sudo apt --assume-yes purge nplan netplan.io<br />
+          <p>
+              <hr style="color: black">
+              <h2>Rimuovere Netplan</h2>
+          <p>
+              Riavvio del servizio networking;
+              <br />
+              sudo systemctl unmask networking
+              <br />
+              sudo systemctl enable networking
+              <br />
+              sudo systemctl restart networking
+              <br />
+              Riavviare l'HUB:
+              <br />
+              sudo reboot
           </p>
           <hr style="color: black">
       </div>
@@ -365,13 +368,15 @@
       <div class="container">
           <h2>Risoluzione dei nomi di domnio ( DNS )</h2>
           <p>
-              Cambiare temporaneamente il server dns di default:
+              Ubuntu Bionic Beaver (18.04) utilizza un proprio client resolver SYSTEMD-RESOLVED.SERVICE(8)
+              è necessario aggiungere l'indirizzo del server DNS al file /etc/systemd/resolved.conf
               <br />
-              sudo nano /etc/resolv.conf
-              <br />
-              Impostare il valore nameserver come segue:<br />
-              <br />
-              nameserver 8.8.8.8
+              sudo nano /etc/systemd/resolved.conf
+            </p>
+          <p style="background-color: gainsboro">
+              ....<br />
+              DNS=8.8.8.8 8.8.4.4<br />
+              ....
           </p>
           <p>
               Salvare il file CTRL+O:<br />
@@ -379,6 +384,10 @@
               Chiudere l'editor nano CTRL+X:<br />
           </p>
           <p>
+              Riavviare il servizio systemd-resolved:
+              <br />
+              sudo systemctl restart systemd-resolved
+              <br />
               Test risoluzione dei nomi:
               <br />
               nslookup www.google.com<br />
@@ -771,7 +780,7 @@
               <br />
               Premete CTRL+C per uscire dal log di stato.<br />
               <br />
-              Se entrambe i servizi sono attivi sarà proseguire, altrimenti sarà necessario rivedere i file di configurazione<br />
+              Se entrambe i servizi sono attivi è possibile proseguire, altrimenti sarà necessario rivedere i file di configurazione<br />
               controllare i log, riavviare i servizi fino a quando essi non saranno eseguiti senza errori.
           </p>
           <hr style="color: black">

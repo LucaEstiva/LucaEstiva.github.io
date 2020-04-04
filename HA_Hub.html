@@ -124,20 +124,26 @@
           <hr style="color: black">
       </div>
       <div class="container">
-          <h2>Installazione ed avvio del Server Ubuntu</h2>
+          <h2>Installazione ed avvio del Server Ubuntu - Configurazione testata e funzionante su Ubuntu Server V18.04.4</h2>
           <p>
               Installare Ubuntu Server scaricando l'immagine ISO da qui:<br />
-              https://ubuntu.com/download/server
+              https://ubuntu.com/download/server<br />
               VERSIONE PER PROCESSORI CON ARCHITETTURA AMD64 ( non ARM ) 64Bit<br />
               <a class="btn btn-outline-success" target="_blank" href="https://ubuntu.com/download/server/thank-you?version=18.04.4&architecture=amd64" role="Link">Scarica</a><br />
               Creare un supporto di avvio ( chiavetta USB ) utilizzando BALENAETCHER:<br />
               <a class="btn btn-outline-success" target="_blank" href="https://www.balena.io/etcher/" role="Link">Scarica</a><br />
               Durante l'installazione di Ubuntu abilitare il SERVER SSH.<br />
+              <br />
               Una volta insallato il software server e dopo aver riavviato il PC avrete a dispozione il terminale.<br />
+              <br />
               Accedere al server effettuando il login<br />
+              <br />
               Aggiornare la lista dei pacchetti:<br />
+              <br />
               sudo apt update<br />
+              <br />
               Aggiornare il software:<br />
+              <br />
               sudo apt upgrade<br />
           </p>
           <hr style="color: black">
@@ -148,10 +154,28 @@
               Il servizio Modem Manager potrebbe influire negativamente con il server Home Assistant<br />
               inoltre ne impedisce l'installazione.<br />
               <br />
-              Verificare se il servizio ModemManager è installato:<br />
+              Verificare se il pacchetto ModemManager è installato:<br />
               <br />
-              dpkg -l modemmanager<br />
               apt list modemmanager<br />
+              <br />
+              Installato:<br />
+              <br />
+              Listing... Done
+              <br />
+              modemmanager/bionic-updates 1.10.0-1~ubuntu18.04.2 amd64  [installed]<br />
+              N: There is 1 additional version. Please use the '-a' switch to see it<br />
+              <br />
+              Non Installato:<br />
+              <br />
+              Listing... Done<br />
+              modemmanager/bionic-updates 1.10.0-1~ubuntu18.04.2 amd64<br />
+              N: There is 1 additional version. Please use the '-a' switch to see it<br />
+              <br />
+              <span style="color:chocolate">Se modem manager è installato:</span>
+              <br />
+              Verificare se il sevzio Modem Manager è attivo:<br />
+              <br />
+              sudo systemctl status ModemManager<br />
               <br />
               Arrestare il servizio Modem Manager:<br />
               <br />
@@ -298,28 +322,30 @@
           <p>
               Le interfacce di rete saranno gestite manualmente...<br />
               <br />
-              Verificare se il servizio Network Manager è in funzione<br />
+              Verificare se il servizio Network Manager è in funzione:<br />
               <br />
               sudo systemctl status NetworkManager.service<br />
               <br />
-              Arrestare il servizio Network Manager<br />
+              Arrestare il servizio Network Manage:r<br />
               <br />
               sudo systemctl stop NetworkManager.service<br />
               <br />
-              Disabilitare il servizio Network Manager<br />
+              Disabilitare il servizio Network Manager:<br />
               <br />
               sudo systemctl disable NetworkManager.service<br />
               <br />
-              UTILITA': Verificare se il pacchetto network-manager è installato:<br />
+              UTILITA' - Verificare se il pacchetto network-manager è installato:<br />
               <br />
               apt list network-manager<br />
               <br />
               Installato:<br />
+              <br />
               Listing... Done<br />
               network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64    [installed]<br />
               N: There are 2 additional versions. Please use the '-a' switch to see them.<br />
               <br />
               Non installato:<br />
+              <br />
               Listing... Done<br />
               network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64<br />
               N: There are 2 additional versions. Please use the '-a' switch to see them.<br />

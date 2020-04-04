@@ -79,7 +79,7 @@
               Si velocizza la comunicazione tra il server Home Assistant e i dispositivi, soprattuto se il router è già impegnato...<br />
           </p>
           <hr style="color: black">
-          <h2>Pinaificare gli le reti</h2>
+          <h2>Pinaificare le reti</h2>
           <p>
               Scegliere la sottorete ( quindi gli IP disponibili ) da utilizzare per l'HUB:<br />
               https://it.wikipedia.org/wiki/Sottorete<br />
@@ -95,18 +95,26 @@
               ( Gateway ) con indirizzo IP 192.168.1.1 . All'interfaccia enp1s0 verrà assegnato un indirizzo ip facente parte della stessa<br />
               sottorete ovvero 192.168.1.2. Tutti i valori utilizzati per impostare i parametri di configurazione dell'interfaccia enp1s0,<br />
               sono basati sull'indirizzo IP del router ( ovvera la sottorete LAN attualmente in uso ).
+              <br />
+              La connessione SSH è disponibile all'indirizzo 192.168.1.2
           </p>
           <hr style="color: black">
           <h2>Indirizzi di rete IP - Nuova rete LAN/WiFi</h2>
           <p>
-              In questo caso sarà possibile collegarsi alla porta LAN ( LAN 2 interfaccia enp2s0 ) ed accedere alla rete<br />
-              dell'HUB alla quale è stato assegnato l'indirizzo ip statico 192.168.2.2, e all'AP rete WiFi ( interfaccia wlp3s0 )<br />
-              ed accedere alla rete dell'HUB alla quale è stato assegnato l'indirizzo ip statico 192.168.2.192<br />
+              In questo caso sarà possibile collegarsi alla porta LAN ( LAN 2 interfaccia enp2s0 ) alla quale è stato assegnato l'indirizzo
+              IP STATICO 192.168.2.2 ed accedere all'HUB utilizzando lo stesso indirizzo.
+              <br />
+              La connessione SSH è disponibile all'indirizzo 192.168.2.2<br />
+              <br />
+              E all'AP rete WiFi ( interfaccia wlp3s0 )alla quale è stato assegnato l'indirizzo IP STATICO 192.168.2.192<br />
+              ed accedere all'HUB utilizzando lo stesso indirizzo.<br />
+              <br />
+              La connessione SSH è disponibile all'indirizzo 192.168.2.192<br />
               <br />
               NB: All'interfaccia dell'AP wlp3s0 è stato assegnato l'indirizzo ip 192.168.2.192 solo per esigenze dell'autore.<br />
               L'indirzzo poteva essere, ad esempio 192.168.2.3.<br />
               <br />
-              L'indirizzo IP 192.168.2.1 è assegnato al Bridge e non è possibile assgnarlo a nessuna altra interfaccia.<br />
+              L'indirizzo IP 192.168.2.1 è assegnato al Bridge e non è possibile assegnarlo a nessuna altra interfaccia.<br />
               Al bridge dovrà sempre essere assegnato il "primo indirizzo" IP ovvero 192.168.2.1 o 192.168.3.1 o 192.168.4.1<br />
               ecc.<br />
           </p>

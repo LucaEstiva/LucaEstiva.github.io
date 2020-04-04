@@ -416,12 +416,12 @@
       <div class="container">
           <h2>Abilitare IP FORWARDING - IPV4</h2>
           <p>
-              Modificare il file sudo nano /etc/sysctl.conf:<br />
+              Modificare il file /etc/sysctl.conf:<br />
               <br />
               NB: Le righe che iniziano con il carattere # sono commenti e non vengono
               considerate come istruzioni dal software<br />
               <br />
-              sudo nano sudo nano /etc/sysctl.conf
+              sudo nano /etc/sysctl.conf
               <br />
               Elimiare il carattere # commento alla riga come mostrato di seguito e verificare che il valore<br />
               dopo il simbolo = sia 1<br />
@@ -488,7 +488,7 @@
               bridge=br0<br />
               # Codice della nazione ( BO = Bolivia, IT = Italy, US = United States of America )<br />
               country_code=BO<br />
-              # Nome del nuovo Access Point
+              # Nome del nuovo Access Point<br />
               ssid=Home_Assistant<br />
               # "g" Modalità rete g frequenza 2.4GHz<br />
               hw_mode=g<br />
@@ -505,7 +505,7 @@
               auth_algs=1<br />
               # WPA2 Wi-Fi Protected Access II (WPA2)<br />
               wpa=2<br />
-              # Specificare la password per accedere all'AP
+              # Specificare la password per accedere all'AP<br />
               wpa_passphrase=PASSWORD<br />
               # WPA-PSK WPA-EAP WPA-PSK-SHA256 WPA-EAP-SHA256<br />
               wpa_key_mgmt=WPA-PSK<br />

@@ -121,6 +121,11 @@
               il tool qui sotto:
           </p>
           <a class="btn btn-outline-success" target="_blank" href="\netmask.html" role="Link">Calcolatore Subnet Mask</a>
+          <p>
+              Collegarsi al server utilizzando putty<br/>
+              E' possibile utilizzare il terminale per copiare ed incollare il contenuto dei files ed i comandi !<br/>
+              Il tatso destro del mouse, se premuto all'interno della finestra del terminale incolla il testo copaito.
+          </p>
           <hr style="color: black">
       </div>
       <div class="container">
@@ -447,7 +452,7 @@
           </p>
           <h2>Test IP FORWARDING</h2>
           <p>
-              Per verificare che l'IP FORWADING sia abilitato sarà necessario riavviare il PC:<br />
+              Per verificare che l'IP FORWADING sia abilitato sarà necessario riavviare il server:<br />
               <br />
               sudo reboot<br />
               <br />
@@ -664,13 +669,13 @@
               subnet 192.168.2.0 netmask 255.255.255.0 {<br />
               range 192.168.2.2 192.168.2.250; # Il range di IP che verrà assegnato ai dispositivi da 192.168.2.2 a 192.168.2.250<br />
               option domain-name-servers 8.8.8.8; # L'indirizzo del server DNS ( google in questo caso )<br />
-              option domain-name "domotica.org" # Il nome del dominio;<br />
+              option domain-name "domotica.org"; # Il nome del dominio<br />
               option subnet-mask 255.255.255.0;<br />
               option routers 192.168.2.1; # Utilizzare l'indirizzo assegnato alla subnet ma con 1 finale<br />
               option broadcast-address 192.168.2.255; # Utilizzare l'indirizzo assegnato alla subnet ma con 255 finale<br />
               # option domain-name-servers 192.168.1.1;<br />
               # option ntp-servers 10.152.187.1;<br />
-              option netbios-name-servers 192.168.2.1 # Utilizzare l'indirizzo assegnato alla subnet ma con 255 finale;<br />
+              option netbios-name-servers 192.168.2.1; # Utilizzare l'indirizzo assegnato alla subnet ma con 255 finale<br />
               option netbios-node-type 2;<br />
               default-lease-time -1; # Nessun tempo di lease l'indirizzo IP assegnato non ha un tempo di scadenza<br />
               max-lease-time -1; # Nessun tempo di lease l'indirizzo IP assegnato non ha un tempo di scadenza<br />
@@ -801,21 +806,28 @@
           </p>
           <h2>IP TABLES</h2>
           <p>
+              La nuova route però deve essere salvata altrimenti ad ogni riavvio dovrà essere reinserita:
+              <br />
               Installare il pacchetto iptables-persistent<br />
               <br />
               sudo apt install iptables-persistent<br />
               <br />
-              La nuova route però deve essere salvata altrimenti ad ogni riavvio dovrà essere reinserita:<br />
+              Durante l'installazion di iptables-persistent vi verrà richiesto il permesso di salvare le regole<br />
+              attive, rispondere SI alle richieste.
+              <br/>
+              RIAVVIARE L'HUB
+              <br />
+              ( OPZIONALE ) Salvataggio manuale delle regole:<br />
               <br />
               sudo netfilter-persistent save<br />
               <br />
               Vedere le regole iptables in uso:<br />
               <br />
-              sudo iptables -S
+              netstat -rn
               <br />
-              e/o<br />
+              route -n
               <br />
-              sudo iptables -L
+              ip route
           </p>
           <hr style="color: black">
       </div>

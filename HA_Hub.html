@@ -117,7 +117,7 @@
               L'indirizzo IP 192.168.2.1 è assegnato al Bridge e non è possibile assegnarlo a nessuna altra interfaccia.<br />
               Al bridge dovrà sempre essere assegnato il "primo indirizzo" IP ovvero 192.168.2.1 o 192.168.3.1 o 192.168.4.1<br />
               ecc.<br />
-              Per scegliere i valori network, broadcast e stabilire il range di IP assegnabili dal server DHCP è possibile utilizzare<br/>
+              Per scegliere i valori network, broadcast e stabilire il range di IP assegnabili dal server DHCP è possibile utilizzare<br />
               il tool qui sotto:
           </p>
           <a class="btn btn-outline-success" target="_blank" href="\netmask.html" role="Link">Calcolatore Subnet Mask</a>
@@ -150,8 +150,8 @@
               <br />
               Verificare se il servizio ModemManager è installato:<br />
               <br />
-              dpkg -l network-manager<br />
-              apt list network-manager<br />
+              dpkg -l modemmanager<br />
+              apt list modemmanager<br />
               <br />
               Arrestare il servizio Modem Manager:<br />
               <br />
@@ -181,10 +181,6 @@
               sudo apt install ifupdown<br />
               <br />
               sudo apt install bridge-utils<br />
-
-
-
-
           </p>
           <hr style="color: black">
           <h2>Configurare le interfacce di rete</h2>
@@ -279,20 +275,20 @@
           <p>
               Netplan è il nuovo servizio per la gestione delle interfacce di rete e sostituisce il servizio
               Network Manager.<br />
+              <br />
               Arrestare il servizio Netplan:<br />
               <br />
-
               Rimuovere il servizio Netplan:<br />
               <br />
-              sudo apt purge --auto-remove netplan.io
-
-              sudo systemctl stop systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
-
-              sudo systemctl disable systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
-
-              sudo systemctl mask systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
-
-              sudo apt --assume-yes purge nplan netplan.io
+              sudo apt purge --auto-remove netplan.io<br />
+              <br />
+              sudo systemctl stop systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online<br />
+              <br />
+              sudo systemctl disable systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online<br />
+              <br />
+              sudo systemctl mask systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online<br />
+              <br />
+              sudo apt --assume-yes purge nplan netplan.io<br />
           </p>
           <hr style="color: black">
       </div>
@@ -370,9 +366,9 @@
               Chiudere l'editor nano CTRL+X:<br />
           </p>
           <p>
-            Abilitare il nuovo server:
-            <br />
-            sudo resolvconf -u<br />
+              Abilitare il nuovo server:
+              <br />
+              sudo resolvconf -u<br />
           </p>
           <p>
               Salvare il file CTRL+O:<br />
@@ -433,7 +429,7 @@
               <br />
               sudo nano /etc/hostapd/hostapd.conf<br />
               <br />
-              Specificare il nome del nuovo Access Point:
+              Specificare il nome del nuovo Access Point:<br />
               ssid=Home_Assistant, o vostra scelta<br />
               Specificare la password:<br />
               wpa_passphrase=PASSWORD<br />
@@ -531,7 +527,6 @@
               Verificare che il servizio hostapd sia in funzione:<br />
               <br />
               sudo systemctl status hostapd<br />
-
               <br />
               Da questo momento in poi il nuovo AP verrà creato automaticamente all'avvio dell'HUB.
           </p>
@@ -709,7 +704,7 @@
               <br />
               Premete CTRL+C per uscire dal log di stato.<br />
               <br />
-              Se entrambe i servizi sono attivi sarà proseguire, altrimenti sarà necessario rivedere i file di configurazione
+              Se entrambe i servizi sono attivi sarà proseguire, altrimenti sarà necessario rivedere i file di configurazione<br />
               controllare i log, riavviare i servizi fino a quando essi non saranno eseguiti senza errori.
           </p>
           <hr style="color: black">
@@ -733,7 +728,6 @@
               La nuova route però deve essere salvata altrimenti ad ogni riavvio dovrà essere reinserita:<br />
               <br />
               sudo netfilter-persistent save<br />
-
               <br />
               Vedere le regole iptables in uso:
               <br />
@@ -745,7 +739,14 @@
           </p>
           <hr style="color: black">
       </div>
-
+      <div class="container">
+          <h2>Test del route</h2>
+          <p style="font-size=14px">
+              Prima di installare Docker-ce e Home Assistant testate il solo router.<br/>
+              Collegandovi al nuovo Access Point sarà possibile navigare normalmente.
+          </p>
+          <hr style="color: black">
+      </div>
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -1,4 +1,4 @@
-ï»¿<!doctype html>
+<!doctype html>
 <html lang="it">
 <head>
     <!-- python -m http.server --directory /tmp/ -->
@@ -52,37 +52,32 @@ Se README.MD non basta
         </div>
     </div>
     <div class="container">
-        <h2>Installare Docker CE dal repositry ufficiale</h2>
-        <p>
-            Aggiornare il database dei pacchetti:<br />
-            sudo apt update<br />
-            <br /><br />
-            Per accedere al repository di Docker CE attraverso una connnessione HTTPS ï¿½ necessatio installare i seguenti pacchetti:<br />
-            sudo apt-get install apt-transport-https ca-certificates curl software-properties-common<br />
-            <br />
-            Cosa verrï¿½ installato:<br />
-            apt-transport-https: Abilita il package manager al traferimento di files utilizzando il protocollo https<br />
-            ca-certificates: Abilita la averifica dei certificati di sicurezza<br />
-            curl: E' il tool per il trasferimento dei dati<br />
-            software-properties-common: Aggiunge script per la gestione dei software ( https://packages.debian.org/it/sid/software-properties-common )<br />
-            <br />
-            Aggiungere una chiave Dockerï¿½s GPG<br />
-            La chiave GPG ï¿½ una funzionalitï¿½ per la sicurezza per la verifica dell'autenticitï¿½ del sofware che<br />
-            verrï¿½ installato.<br />
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add<br />
-            <br />
-            Aggiungere il repository per Docker CE alla lista dei repository giï¿½ presente nel sistema.<br />
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"<br />
-            <br />
-            Aggiornare nuovamente il database dei pacchetti:<br />
-            sudo apt update<br />
-            <br />
-            Installare l'ultima vesrione di Docker CE:<br />
-            sudo apt-get install docker-ce<br />
+        <h2>Docker DNS - Domain Name System</h2>
+		<p>
+			Docker isola i propri container, o programmi, dall'hardware di rete reale.<br />
+			Crea una rete virtuale ed i container che necessitano di utilizzare la rete sono<br />
+			obbligati ad utilizzare la rete fornita da Docker.<br />
+			Solo Docker può utilizzare la rete dell'HUB.<br />
+			Cosi accade anche per le macchine virtuali in VirtualBox ad esempio.<br />
 
-            ATTENZIONE: L'installazion di DOCKER-CE MODIFICA IL FILE /etc/resolv.conf
-        </p>
-        <h3>FINE</h3>
+			https://forums.docker.com/t/dns-resolution-not-working-in-containers/36246
+
+			Verificare che Docker sia in grado di risolvere i nomi di dominio:
+			docker run busybox ping -c 1 8.8.8.8
+			Se la risposta è simile a:
+
+			--- 8.8.8.8 ping statistics ---
+			1 packets transmitted, 1 packets received, 0% packet loss
+			round-trip min/avg/max = 8.932/8.932/8.932 ms
+
+			Significa che Docker è in grado di risolver correttamente i nomi di dominio.
+
+
+
+
+
+
+		</p>
         <hr style="color: black">
     </div>
 

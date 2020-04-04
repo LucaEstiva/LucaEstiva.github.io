@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="it">
 <head>
     <!-- python -m http.server --directory /tmp/ -->
@@ -51,40 +51,34 @@ Se README.MD non basta
             </div>
         </div>
     </div>
-    <div class="container">
-        <h2>Installare Docker CE dal repositry ufficiale</h2>
-        <p>
-            Aggiornare il database dei pacchetti:<br />
-            sudo apt update<br />
-            <br /><br />
-            Per accedere al repository di Docker CE attraverso una connnessione HTTPS � necessatio installare i seguenti pacchetti:<br />
-            sudo apt-get install apt-transport-https ca-certificates curl software-properties-common<br />
-            <br />
-            Cosa verr� installato:<br />
-            apt-transport-https: Abilita il package manager al traferimento di files utilizzando il protocollo https<br />
-            ca-certificates: Abilita la averifica dei certificati di sicurezza<br />
-            curl: E' il tool per il trasferimento dei dati<br />
-            software-properties-common: Aggiunge script per la gestione dei software ( https://packages.debian.org/it/sid/software-properties-common )<br />
-            <br />
-            Aggiungere una chiave Docker�s GPG<br />
-            La chiave GPG � una funzionalit� per la sicurezza per la verifica dell'autenticit� del sofware che<br />
-            verr� installato.<br />
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add<br />
-            <br />
-            Aggiungere il repository per Docker CE alla lista dei repository gi� presente nel sistema.<br />
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"<br />
-            <br />
-            Aggiornare nuovamente il database dei pacchetti:<br />
-            sudo apt update<br />
-            <br />
-            Installare l'ultima vesrione di Docker CE:<br />
-            sudo apt-get install docker-ce<br />
-
-            ATTENZIONE: L'installazion di DOCKER-CE MODIFICA IL FILE /etc/resolv.conf
-        </p>
-        <h3>FINE</h3>
-        <hr style="color: black">
-    </div>
+	<div class="container">
+		<h2>HUB DNS - Domain Name System</h2>
+		<p>
+			Verificare la risoluzione dei nomi di dominio ( da nomedomino a ip ):<br />
+			<br />
+			nslookup www.google.it<br />
+			<br />
+			Se l'HUB non riesce a risolvere il nomedomnio:<br />
+			<br />
+			sudo nano /etc/resolv.conf<br />
+			<br />
+			Moficarene il contenuto in modo che sia simile a quanto segue:
+		</p>
+		<p style="background-color: gainsboro">
+			nameserver 8.8.8.8
+			nameserver 8.8.4.4
+			options edns0
+		</p>
+			<hr style="color: black">
+		<p>
+			Salvate il file CTRL+O:<br />
+			Confermate di voler salvare il file INVIO:<br />
+			Chiudete l'editor nano CTRL+X:<br />
+			<br />
+			Verificare nuovamente la risoluzione dei nomi di dominio.
+		</p>
+		<hr style="color: black">
+	</div>
 
 
     <!-- Optional JavaScript -->

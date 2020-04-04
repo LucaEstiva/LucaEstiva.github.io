@@ -27,8 +27,9 @@
       <div id="parallax-image">
           <div class="row h-100">
               <div class="col-md-12 align-self-center">
-                  <h1 class="text-center">Automazioni</h1>
-                  <h2 class="text-center">La tua casa SMART con Home Assistant</h2>
+                  <h1 class="text-center">Home Assistant HUB</h1>
+                  <h2 class="text-center">Router/AP</h2>
+                  <h2 class="text-center">Aggiornato: 04/04/2020</h2>
               </div>
           </div>
       </div>
@@ -78,6 +79,39 @@
               Si velocizza la comunicazione tra il server Home Assistant e i dispositivi, soprattuto se il router è già impegnato...<br />
           </p>
           <hr style="color: black">
+          <h2>Pinaificare gli le reti</h2>
+          <p>
+              Scegliere la sottorete ( quindi gli IP disponibili ) da utilizzare per l'HUB:<br />
+              https://it.wikipedia.org/wiki/Sottorete<br />
+              https://it.wikipedia.org/wiki/Subnet_mask<br />
+              https://it.wikipedia.org/wiki/Classi_di_indirizzi_IP<br />
+              https://it.wikipedia.org/wiki/Indirizzo_IP_privato<br />
+              https://en.wikipedia.org/wiki/Subnetwork<br />
+          </p>
+          <hr style="color: black">
+          <h2>Indirizzi di rete IP - Collegamento alla LAN esistente</h2>
+          <p>
+              In questo caso l'HUB verra collegato attraverso una porta di rete LAN ( LAN 1 interfaccia enp1s0 ) ad un Modem Router<br />
+              ( Gateway ) con indirizzo IP 192.168.1.1 . All'interfaccia enp1s0 verrà assegnato un indirizzo ip facente parte della stessa<br />
+              sottorete ovvero 192.168.1.2. Tutti i valori utilizzati per impostare i parametri di configurazione dell'interfaccia enp1s0,<br />
+              sono basati sull'indirizzo IP del router ( ovvera la sottorete LAN attualmente in uso ).
+          </p>
+          <hr style="color: black">
+          <h2>Indirizzi di rete IP - Nuova rete LAN/WiFi</h2>
+          <p>
+              In questo caso sarà possibile collegarsi alla porta LAN ( LAN 2 interfaccia enp2s0 ) ed accedere alla rete<br />
+              dell'HUB alla quale è stato assegnato l'indirizzo ip statico 192.168.2.2, e all'AP rete WiFi ( interfaccia wlp3s0 )<br />
+              ed accedere alla rete dell'HUB alla quale è stato assegnato l'indirizzo ip statico 192.168.2.192<br />
+              <br />
+              NB: All'interfaccia dell'AP wlp3s0 è stato assegnato l'indirizzo ip 192.168.2.192 solo per esigenze dell'autore.<br />
+              L'indirzzo poteva essere, ad esempio 192.168.2.3.<br />
+              <br />
+              L'indirizzo IP 192.168.2.1 è assegnato al Bridge e non è possibile assgnarlo a nessuna altra interfaccia.<br />
+              Al bridge dovrà sempre essere assegnato il "primo indirizzo" IP ovvero 192.168.2.1 o 192.168.3.1 o 192.168.4.1<br />
+              ecc.<br />
+          </p>
+          <a class="btn btn-outline-success" target="_blank" href="\netmask.html" role="Link">Calcolatore Subnet Mask</a>
+          <hr style="color: black">
       </div>
       <div class="container">
           <h2>Installazione ed avvio del Server Ubuntu</h2>
@@ -90,80 +124,59 @@
               <a class="btn btn-outline-success" target="_blank" href="https://www.balena.io/etcher/" role="Link">Scarica</a><br />
               Durante l'installazione di Ubuntu abilitare il SERVER SSH.<br />
               Una volta insallato il software server e dopo aver riavviato il PC avrete a dispozione il terminale.<br />
-              Accedere al sever facendo il login<br />
+              Accedere al server effettuando il login<br />
               Aggiornare la lista dei pacchetti:<br />
               sudo apt update<br />
               Aggiornare il software:<br />
               sudo apt upgrade<br />
-              Installare i pacchetti necessari:<br />
-
-              sudo apt install bridge-utils<br />
-              sudo apt install wireless-tools<br />
-              sudo apt install isc-dhcp-server<br />
-              sudo apt install hostapd<br />
-              sudo apt install iptables-persistent<br />
           </p>
           <hr style="color: black">
       </div>
       <div class="container">
-          <h2>RIMUOVERE MODEM MANAGER</h2>
+          <h2>Rimuovere Modem Manager e tutte le dipendenze</h2>
           <p>
-              Il servizio Modem Manager potrebbe influire negativamente con il server Home Assistant
+              Il servizio Modem Manager potrebbe influire negativamente con il server Home Assistant<br />
               inoltre ne impedisce l'installazione.<br />
-              Rimuovere il servizio Modem Manager:<br />
               <br />
-              sudo systemctl stop ModemManager<br />
-              sudo systemctl disable ModemManager<br />
-          </p>
-          <hr style="color: black">
-      </div>
-      <div class="container">
-          <h2>RIMUOVERE NETPLAN</h2>
-          <p>
-              Netplan è il nuovo servizio per la gestione delle interfacce di rete e sostituisce il servizio
-              Network Manager.<br />
-              Rimuovere il servizio Netplan:<br />
+              Verificare se il servizio ModemManager è installato:<br />
               <br />
-              sudo systemctl stop ModemManager<br />
-              sudo systemctl disable ModemManager<br />
-          </p>
-          <hr style="color: black">
-      </div>
-      <div class="container">
-          <h2>Disabilitare la gestione delle interfacce di rete da parte di Network Manager</h2>
-          <p>
-              Le interfacce di rete saranno gestite manualmente...<br />
-              <br />
-              Verificare se il servizio Network Manager è in funzione<br />
-              sudo systemctl status NetworkManager.service<br />
-              <br />
-              Arrestare il servizio Network Manager<br />
-              sudo systemctl stop NetworkManager.service<br />
-              <br />
-              Disabilitare il servizio Network Manager<br />
-              sudo systemctl disable NetworkManager.service<br />
-              <br />
-              UTILITA': Verificare se il pacchetto network-manager è installato:<br />
-              <br />
+              dpkg -l network-manager<br />
               apt list network-manager<br />
               <br />
-              Installato:<br />
-              Listing... Done<br />
-              network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64    [installed]<br />
-              N: There are 2 additional versions. Please use the '-a' switch to see them.<br />
+              Arrestare il servizio Modem Manager:<br />
               <br />
-              Non installato:<br />
-              Listing... Done<br />
-              network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64<br />
-              N: There are 2 additional versions. Please use the '-a' switch to see them.<br />
+              sudo systemctl stop ModemManager<br />
               <br />
-              Rimuovere il pacchetto Network Manager e i relativi file di configurazione:<br />
+              Disabilitare il servizio Modem Manager:<br />
               <br />
-              sudo apt purge network-manager
+              sudo systemctl disable ModemManager<br />
+              <br />
+              Rimuovere il servizio Modem Manager e tutte le sue dipendenze:<br />
+              <br />
+              sudo apt purge --auto-remove modemmanager<br />
+              <br />
+              Opzionale - Verifica disintallazione:<br />
+              <br />
+              systemctl list-dependencies multi-user.target | grep Modem
           </p>
           <hr style="color: black">
       </div>
+
+
       <div class="container">
+          <h2>Preparazione gestione interfacce di rete con ifupdown</h2>
+          <p>
+              Installare i pacchetti ifupdown e bridge-utils<br />
+              <br />
+              sudo apt install ifupdown<br />
+              <br />
+              sudo apt install bridge-utils<br />
+
+
+
+
+          </p>
+          <hr style="color: black">
           <h2>Configurare le interfacce di rete</h2>
           <p>
               Manuale Ubuntu:<br />
@@ -195,10 +208,8 @@
               address 192.168.1.2 # Assegnare un IP statico all'interfaccia che dipende dalla vostra rete<br />
               netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )<br />
               network 192.168.1.0
-              # broadcast 192.168.1.255 # Modificare utilizzando come riferimento l'IP del vostro modem-router ( gateway ) ovvero 192.168.1.1 potrebbe essere 192.168.0.1. Deve essere 255 finale !<br />
               gateway 192.168.1.1 # Usare l'indirizzo IP del vostro modem-router ( gateway )<br />
-              # Only relevant if you make use of RESOLVCONF(8) or similar...<br />
-              dns-nameservers 8.8.8.8 8.8.4.4 # Specificare i server DNS ( google o altri )<br />
+
               <br />
               # Definizione dell'interfaccia di rete lan enp2s0 ( opzionale ). L'interfaccia può essere utilizzata, ad esempio per il collegamento
               # di videocamere IP. Se necessario usare uno switch:<br />
@@ -213,9 +224,7 @@
               address 192.168.2.2 #  Assegnare un indirizzo statico IP all'interfaccia vedi Scegliere una sottorete<br />
               netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )<br />
               network 192.168.2.0 # Moficare utilizzando come riferimento l'IP assegnato all'interfaccia con 0 finale<br />
-              # broadcast 192.168.2.255<br />
-              # gateway 192.168.2.1<br />
-              # dns-nameservers 192.168.2.1<br />
+
               <br />
               # L'interfaccia di rete WiFi wlp3s0 servirà a realizzare l'Access Point WiFi
               <br />
@@ -223,13 +232,16 @@
               iface wlp3s0 inet static<br />
               address 192.168.2.192 # Assegnare un indirizzo statico IP all'interfaccia vedi Scegliere una sottorete<br />
               netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )<br />
+              network 192.168.2.0 # Moficare utilizzando come riferimento l'IP assegnato all'interfaccia con 0 finale<br />
+
               <br />
               # Definizione del BRIDGE - br0 setup with static wan IPv4 with ISP router as gateway<br />
               auto br0<br />
               iface br0 inet static<br />
               address 192.168.2.1 # Assegnare un indirizzo statico IP all'interfaccia vedi Scegliere una sottorete<br />
-              network 192.168.2.0 # Moficare utilizzando come riferimento l'IP assegnato all'interfaccia con 0 finale<br />
               netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )<br />
+
+              network 192.168.2.0 # Moficare utilizzando come riferimento l'IP assegnato all'interfaccia con 0 finale<br />
               broadcast 192.168.2.255 # Moficare utilizzando come riferimento l'IP assegnato all'interfaccia con 255 finale<br />
               bridge_ports enp2s0 wlp3s0 # Specificare le interfacce assegnate al bridge<br />
               bridge_stp off<br />
@@ -241,11 +253,121 @@
               Salvate il file CTRL+O:<br />
               Confermate di voler salvare il file INVIO:<br />
               Chiudete l'editor nano CTRL+X:<br />
+          </p>
+          <p>
+              Riavvio del servizio networking;<br />
               <br />
-              sudo hostapd /etc/hostapd/hostapd.conf<br />
+              sudo /etc/init.d/networking restart
               <br />
-              Se tutto funziona correttamente il nuovo Access Point verrà creato e<br />
-              per terminarlo, almeno tempoarenamente dovrete premere CRTL+C<br />
+          </p>
+          <hr style="color: black">
+      </div>
+
+
+      <div class="container">
+          <h2>Rimuovere Netplan</h2>
+          <p>
+              Netplan è il nuovo servizio per la gestione delle interfacce di rete e sostituisce il servizio
+              Network Manager.<br />
+              Arrestare il servizio Netplan:<br />
+              <br />
+
+              Rimuovere il servizio Netplan:<br />
+              <br />
+              sudo apt purge --auto-remove netplan.io
+
+              sudo systemctl stop systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
+
+              sudo systemctl disable systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
+
+              sudo systemctl mask systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online
+
+              sudo apt --assume-yes purge nplan netplan.io
+          </p>
+          <hr style="color: black">
+      </div>
+
+      <div class="container">
+          <h2>Disabilitare e rimuovere Network Manager ( se presente )</h2>
+          <p>
+              Le interfacce di rete saranno gestite manualmente...<br />
+              <br />
+              Verificare se il servizio Network Manager è in funzione<br />
+              <br />
+              sudo systemctl status NetworkManager.service<br />
+              <br />
+              Arrestare il servizio Network Manager<br />
+              <br />
+              sudo systemctl stop NetworkManager.service<br />
+              <br />
+              Disabilitare il servizio Network Manager<br />
+              <br />
+              sudo systemctl disable NetworkManager.service<br />
+              <br />
+              UTILITA': Verificare se il pacchetto network-manager è installato:<br />
+              <br />
+              apt list network-manager<br />
+              <br />
+              Installato:<br />
+              Listing... Done<br />
+              network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64    [installed]<br />
+              N: There are 2 additional versions. Please use the '-a' switch to see them.<br />
+              <br />
+              Non installato:<br />
+              Listing... Done<br />
+              network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64<br />
+              N: There are 2 additional versions. Please use the '-a' switch to see them.<br />
+              <br />
+              Rimuovere il pacchetto Network Manager e i relativi file di configurazione:<br />
+              <br />
+              sudo apt purge network-manager
+          </p>
+          <hr style="color: black">
+      </div>
+
+      <div class="container">
+          <h2>Risoluzione dei nomi di domnio ( </h2>
+          <p>
+              Cambiare temporaneamente il server dns di default:
+              <br />
+              sudo nano /etc/resolv.conf
+              <br />
+              Impostare il valore nameserver come segue:<br />
+              <br />
+              nameserver 8.8.8.8
+          </p>
+          <p>
+              Salvare il file CTRL+O:<br />
+              Confermare di voler salvare il file INVIO:<br />
+              Chiudere l'editor nano CTRL+X:<br />
+          </p>
+          <p>
+              Installare il pacchetto resolvconf:<br />
+              <br />
+              sudo apt install resolvconf
+              <br />
+              Aggiungere alla coda della lista dei sever DNS l'indirizzo del nuovo server:<br />
+              <br />
+              sudo nano /etc/resolvconf/resolv.conf.d/tail<br />
+              <br />
+              Aggiungere:<br />
+              <br />
+              nameserver 8.8.8.8<br />
+          </p>
+          <p>
+              Salvare il file CTRL+O:<br />
+              Confermare di voler salvare il file INVIO:<br />
+              Chiudere l'editor nano CTRL+X:<br />
+          </p>
+          <p>
+            Abilitare il nuovo server:
+            <br />
+            sudo resolvconf -u<br />
+          </p>
+          <p>
+              Salvare il file CTRL+O:<br />
+              Confermare di voler salvare il file INVIO:<br />
+              Chiudere l'editor nano CTRL+X:<br />
           </p>
           <hr style="color: black">
       </div>
@@ -268,9 +390,9 @@
           </p>
           <hr style="color: black">
           <p>
-              Salvate il file CTRL+O:<br />
-              Confermate di voler salvare il file INVIO:<br />
-              Chiudete l'editor nano CTRL+X:<br />
+              Salvare il file CTRL+O:<br />
+              Confermare di voler salvare il file INVIO:<br />
+              Chiudere l'editor nano CTRL+X:<br />
               <br />
           </p>
           <h2>Test IP FORWARDING</h2>
@@ -292,6 +414,7 @@
           <h2>Hostapd</h2>
           <p>
               Hostapd creera' il nuovo Access Point AP<br />
+              https://help.ubuntu.com/community/WifiDocs/WirelessAccessPoint<br />
               <br />
               Modificare il file /etc/hostapd/hostapd.conf<br />
               <br />
@@ -301,52 +424,42 @@
               sudo nano /etc/hostapd/hostapd.conf<br />
               <br />
               Specificare il nome del nuovo Access Point:
-              ssid=Home_Assistant<br />
+              ssid=Home_Assistant, o vostra scelta<br />
               Specificare la password:<br />
               wpa_passphrase=PASSWORD<br />
               <br />
               La potenza del segnale radio ed i canali disponibili sono gestiti dalle<br />
-              diverse nazioni. Impostate la vostra nazione utilizzando i codici riportati<br />
-              in questa lista:<br />
-              https://www.cisco.com/c/en/us/td/docs/wireless/wcs/3-2/configuration/guide/wcscfg32/wcscod.html
+              diverse nazioni. Impostate la vostra nazione utilizzando i codici Country code (ISO/IEC 3166-1)<br />
+              riportati in questa lista:<br />
+              https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
               <br />
               country_code=IT
           </p>
           <!-- CODE -->
           <p style="background-color: gainsboro">
-              # Wireless interface<br />
-              # the interface used by the AP<br />
               interface=wlp3s0<br />
-              #<br />
               driver=nl80211<br />
-              #<br />
               bridge=br0<br />
-              # the country code ( BO = Bolivia, IT = Italy, US = United States of America )<br />
+              # Codice della nazione ( BO = Bolivia, IT = Italy, US = United States of America )<br />
               country_code=BO<br />
-              # Wireless environment<br />
+              # Nome del nuovo Access Point
               ssid=Home_Assistant<br />
-              # "g" simply means 2.4GHz band<br />
+              # "g" Modalità rete g frequenza 2.4GHz<br />
               hw_mode=g<br />
-              # the channel to use<br />
+              # Specificare il canale<br />
               channel=10<br />
               #<br />
               logger_syslog=-1<br />
-              # QoS support<br />
+              # Supporto QoS<br />
               wmm_enabled=1<br />
-              #
-              ieee80211n=1<br />
-              #
-              ieee80211ac=0<br />
               <br />
-              # Authentication and encryption<br />
+              # Autenticazione e crittografia<br />
               macaddr_acl=0<br />
-              # 1=wpa, 2=wep, 3=both<br />
+              # Algoritmo di autenticazione 1=wpa, 2=wep, 3=both<br />
               auth_algs=1<br />
-              #<br />
-              # ignore_broadcast_ssid=1<br />
-              <br />
-              # WPA2 only<br />
+              # WPA2 Wi-Fi Protected Access II (WPA2)<br />
               wpa=2<br />
+              # Specificare la password per accedere all'AP
               wpa_passphrase=PASSWORD<br />
               # WPA-PSK WPA-EAP WPA-PSK-SHA256 WPA-EAP-SHA256<br />
               wpa_key_mgmt=WPA-PSK<br />
@@ -355,14 +468,16 @@
           </p>
           <hr style="color: black">
           <p>
-              Salvate il file CTRL+O:<br />
-              Confermate di voler salvare il file INVIO:<br />
-              Chiudete l'editor nano CTRL+X:<br />
+              Salvare il file CTRL+O:<br />
+              Confermare di voler salvare il file INVIO:<br />
+              Chiudere l'editor nano CTRL+X:<br />
           </p>
           <h2>Test Hostapd</h2>
           <p>
               A questo punto potrebbe essera utile eseguire un test di Hostapd:<br />
               https://manpages.debian.org/testing/hostapd/hostapd.8.en.html<br />
+              <br />
+              sudo hostapd /etc/hostapd/hostapd.conf<br />
               <br />
               sudo hostapd -d /etc/hostapd/hostapd.conf<br />
               <br />
@@ -376,9 +491,37 @@
           <h2>Abilitare definitivamente Hostapd</h2>
           <p>
               Per fare in modo che l'Access Point venga creato automaticamente all'avvio dell'HUB<br />
-              dare i comandi:<br />
+              midificare il file /etc/default/hostapd:<br />
+              <br />
+              sudo nano /etc/default/hostapd<br />
+              <br />
+              Trovare la riga DAEMON_CONF. Se è presente il simbolo di commento # all'inizio<br />
+              della riga rimuoverlo e modificare il valore impostandolo come segue:<br />
+              <br />
+              DAEMON_CONF="/etc/hostapd/hostapd.conf"<br />
+          </p>
+          <p>
+              Salvare il file CTRL+O:<br />
+              Confermare di voler salvare il file INVIO:<br />
+              Chiudere l'editor nano CTRL+X:<br />
+          </p>
+          <p>
+              Abilitare hostapd ad essere utilizzato come sevizio:<br />
+              <br />
               sudo systemctl unmask hostapd<br />
+              <br />
+              Abilitare il servizio hostapd:<br />
+              <br />
               sudo systemctl enable hostapd<br />
+              <br />
+              Avviare il servizio hostapd:<br />
+              <br />
+              sudo systemctl start hostapd<br />
+              <br />
+              Verificare che il servizio hostapd sia in funzione:<br />
+              <br />
+              sudo systemctl status hostapd<br />
+
               <br />
               Da questo momento in poi il nuovo AP verrà creato automaticamente all'avvio dell'HUB.
           </p>
@@ -420,7 +563,7 @@
               <br />
               NB: Le righe che iniziano con il carattere # sono commenti e non vengono
               considerate come istruzioni dal software<br />
-              <br/>
+              <br />
               E' possibile cancellarne completamente il contenuto e sostituirlo con la configurazione<br />
               riportata di seguito, oppure modificare solo le righe seguenti:<br />
               <br />
@@ -484,16 +627,14 @@
           </p>
           <hr style="color: black">
           <p>
-              Salvate il file CTRL+O:<br />
-              Confermate di voler salvare il file INVIO:<br />
-              Chiudete l'editor nano CTRL+X:<br />
+              Salvare il file CTRL+O:<br />
+              Confermare di voler salvare il file INVIO:<br />
+              Chiudere l'editor nano CTRL+X:<br />
           </p>
           <h2>Test server DHCP</h2>
           <p>
-              A questo punto potrebbe essera utile eseguire un test di Hostapd:<br />
-              https://manpages.debian.org/testing/hostapd/hostapd.8.en.html<br />
-              <br />
               Avviare il server DHCP:<br />
+              <br />
               sudo systemctl start isc-dhcp-server<br />
               <br />
               Se non viene visualizzato nessun messaggio di errore è possibile installare il servizio<br />
@@ -502,9 +643,13 @@
               sudo systemctl enable isc-dhcp-server<br />
               <br />
               Controllare lo stato del server:<br />
+              <br />
               sudo systemctl status isc-dhcp-server<br />
+              <br />
               Vedere il log degli errori:<br />
+              <br />
               journalctl -xe<br />
+              <br />
               Riavviare il server se vengono apportate modifiche al file di configurazione:<br />
               sudo systemctl restart isc-dhcp-server<br />
               <br />
@@ -520,11 +665,12 @@
               Riavviate l'HUB<br />
               <br />
               sudo reboot<br />
-              Verificate che il servizio Hostapd sia in funzione:<br />
+              <br />
+              Verificare che il servizio Hostapd sia in funzione:<br />
               <br />
               sudo systemctl status hostapd.service<br />
               <br />
-              Se il servizio è attivo vedrete:<br />
+              Se il servizio è attivo l'output sarà simile a:<br />
               <br />
               ● hostapd.service - Advanced IEEE 802.11 AP and IEEE 802.1X/WPA/WPA2/EAP Authenticator<br />
               Loaded: loaded (/lib/systemd/system/hostapd.service; enabled; vendor preset: enabled)<br />
@@ -537,11 +683,11 @@
               <br />
               Premete CTRL+C per uscire dal log di stato.<br />
               <br />
-              Verificate che il servizio isc-dhcp-server ( server DHCP ) sia in funzione:<br />
+              Verificare che il servizio isc-dhcp-server ( server DHCP ) sia in funzione:<br />
               <br />
               sudo systemctl status isc-dhcp-server<br />
               <br />
-              Se il servizio è attivo vedrete:<br />
+              Se il servizio è attivo l'output sarà simile a:<br />
               ● isc-dhcp-server.service - ISC DHCP IPv4 server<br />
               Loaded: loaded (/lib/systemd/system/isc-dhcp-server.service; enabled; vendor preset: enabled)<br />
               Active: active (running) since Thu 2020-04-02 07:37:07 UTC; 5h 28min ago<br />
@@ -553,8 +699,8 @@
               <br />
               Premete CTRL+C per uscire dal log di stato.<br />
               <br />
-              Se entrambe i servizi sono attivi potrete proseguire, altrimenti verificate i file di configurazione
-              controllate i log, riavviate i servizi fino a quando essi non saranno eseguiti senza errori.
+              Se entrambe i servizi sono attivi sarà proseguire, altrimenti sarà necessario rivedere i file di configurazione
+              controllare i log, riavviare i servizi fino a quando essi non saranno eseguiti senza errori.
           </p>
           <hr style="color: black">
       </div>
@@ -563,22 +709,21 @@
           <p>
               I pacchetti destinati alla rete WAN ( internet ) non possono ancora essere instradati<br />
               verso di essa.<br />
-              Per poter essere instradati sarà necessario specificare una nuoca ROUTE con NAT.<br />
+              Per poter essere instradati sarà necessario specificare una nuova ROUTE con NAT.<br />
           </p>
           <p style="background-color: gainsboro">
               sudo iptables -t nat -A POSTROUTING -o enp1s0 -j MASQUERADE
           </p>
           <hr style="color: black">
           <p>
-            Ora se vi collegherete all'HUB ( Access Point dell'HUB ) potrete accedere ad Internet.
+              Ora collegandosi all'HUB ( Access Point dell'HUB ) sarà possibile accedere ad Internet.
           </p>
           <h2>IP TABLES</h2>
           <p>
               La nuova route però deve essere salvata altrimenti ad ogni riavvio dovrà essere reinserita:<br />
               <br />
-              sudo /etc/init.d/iptables-persistent save<br />
-              <br />
-              sudo /etc/init.d/iptables-persistent reload<br />
+              sudo netfilter-persistent save<br />
+
               <br />
               Vedere le regole iptables in uso:
               <br />

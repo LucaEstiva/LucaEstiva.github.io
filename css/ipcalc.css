@@ -1,0 +1,21 @@
+*[onclick] { cursor: pointer; }
+table.ipTable { margin: 10px auto 10px 10px; }
+table.ipTable tr { vertical-align: top; }
+table.ipTable td { padding: 2px; }
+table.ipTable td.label { padding: 10px; text-align: right; }
+table.details { margin: 10px auto 10px 10px; }
+table.details tr { vertical-align: middle; }
+table.details td { font-family: monospace; font-size: 14px; line-height: 16px; margin: 0px; padding: 1px; }
+table.details td.label { color: #666666; font-family: Verdana, Helvetica, Arial, sans-serif; font-size: 13px; font-style: italic; text-align: right; }
+div.ipform { border: groove 2px white; padding: 5px 10px; text-align: center; width: 600px; }
+div.byteform { display: table-cell; text-align: center; width: 150px; }
+div.byteedit { display: block; margin: 0px 2px 5px 2px; }
+input.byte { text-align: right; }
+div.bytebits { display: block; margin: 5px 1px 0px 1px; }
+div.bit { background-color: white; border: solid 1px #dddddd; display: inline; font-family: Verdana, Helvetica, Arial, sans-serif; font-size: 10px; margin: 0px 0px 0px 0px; padding: 0px 1px 0px 1px; }
+div#copyright { bottom: 5px; font-family: Verdana, Helvetica, Arial, sans-serif; font-size: 10px; position: absolute; right: 5px; text-align: right; }
+table#otherinfo { display: none; margin: 0px 10px; }
+table#otherinfo tr { vertical-align: top; }
+table#otherinfo td { font-family: monospace; font-size: 14px; line-height: 16px; margin: 0px; padding: 3px; }
+table#otherinfo td.info { font-family: Verdana, Helvetica, Arial, sans-serif; font-size: 12px; font-style: italic; line-height: 16px; margin: 0px; padding: 3px 5px; }
+h3 { font-family: Verdana, Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-weight: bold; margin: 0px; padding: 10px; }

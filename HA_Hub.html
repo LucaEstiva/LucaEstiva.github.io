@@ -171,7 +171,7 @@
               modemmanager/bionic-updates 1.10.0-1~ubuntu18.04.2 amd64<br />
               N: There is 1 additional version. Please use the '-a' switch to see it<br />
               <br />
-              <span style="color:chocolate">Se modem manager è installato:</span>
+              <span style="color:chocolate">Se modem manager non è installato passare alla sezione: Preparazione gestione interfacce di rete con ifupdown</span>
               <br />
               Verificare se il sevzio Modem Manager è attivo:<br />
               <br />
@@ -320,7 +320,13 @@
       <div class="container">
           <h2>Disabilitare e rimuovere Network Manager ( se presente )</h2>
           <p>
-              Le interfacce di rete saranno gestite manualmente...<br />
+              Le interfacce di rete saranno gestite da ifupdown...<br />
+              <br />
+              Verificare se il pacchetto network-manager è installato:<br />
+              <br />
+              apt list network-manager<br />
+              <br />
+              <span style="color:chocolate">Se Network Manager non è installato passare alla sezione: Risoluzione dei nomi di domnio ( DNS )</span>
               <br />
               Verificare se il servizio Network Manager è in funzione:<br />
               <br />
@@ -358,7 +364,7 @@
       </div>
 
       <div class="container">
-          <h2>Risoluzione dei nomi di domnio ( </h2>
+          <h2>Risoluzione dei nomi di domnio ( DNS )</h2>
           <p>
               Cambiare temporaneamente il server dns di default:
               <br />
@@ -791,7 +797,9 @@
           <h2>Test del route</h2>
           <p style="font-size=14px">
               Prima di installare Docker-ce e Home Assistant testate il solo router.<br/>
-              Collegandovi al nuovo Access Point sarà possibile navigare normalmente.
+              Collegandovi al nuovo Access Point sarà possibile navigare normalmente.<br/>
+              Inoltre d'ora in poi potrete utilizzare il terminale per copiare ed incollare gli<br />
+              ulteriori comandi necessari.<br />
           </p>
           <hr style="color: black">
       </div>

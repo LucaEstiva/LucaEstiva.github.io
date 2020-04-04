@@ -55,32 +55,34 @@ Se README.MD non basta
         <h2>Installare Docker CE dal repositry ufficiale</h2>
         <p>
             Aggiornare il database dei pacchetti:<br />
+            <br />
             sudo apt update<br />
-            <br /><br />
-            Per accedere al repository di Docker CE attraverso una connnessione HTTPS � necessatio installare i seguenti pacchetti:<br />
+            <br />
+            Per accedere al repository di Docker CE attraverso una connnessione HTTPS è necessatio installare i seguenti pacchetti:<br />
             sudo apt-get install apt-transport-https ca-certificates curl software-properties-common<br />
             <br />
-            Cosa verr� installato:<br />
+            Cosa verrà installato:<br />
             apt-transport-https: Abilita il package manager al traferimento di files utilizzando il protocollo https<br />
             ca-certificates: Abilita la averifica dei certificati di sicurezza<br />
             curl: E' il tool per il trasferimento dei dati<br />
             software-properties-common: Aggiunge script per la gestione dei software ( https://packages.debian.org/it/sid/software-properties-common )<br />
             <br />
-            Aggiungere una chiave Docker�s GPG<br />
-            La chiave GPG � una funzionalit� per la sicurezza per la verifica dell'autenticit� del sofware che<br />
-            verr� installato.<br />
-            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add<br />
+            Aggiungere una chiave Docker GPG<br />
+            La chiave GPG è una funzionalità per la sicurezza per la verifica dell'autenticità del sofware che<br />
+            verrà installato.<br />
             <br />
-            Aggiungere il repository per Docker CE alla lista dei repository gi� presente nel sistema.<br />
-            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"<br />
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -<br />
+            <br />
+            Aggiungere il repository per Docker-CE alla lista dei repository gi� presente nel sistema.<br />
+            sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"<br />
             <br />
             Aggiornare nuovamente il database dei pacchetti:<br />
+            <br />
             sudo apt update<br />
             <br />
             Installare l'ultima vesrione di Docker CE:<br />
+            <br />
             sudo apt-get install docker-ce<br />
-
-            ATTENZIONE: L'installazion di DOCKER-CE MODIFICA IL FILE /etc/resolv.conf
         </p>
         <h3>FINE</h3>
         <hr style="color: black">

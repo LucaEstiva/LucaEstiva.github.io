@@ -568,7 +568,9 @@
               <br />
               sudo systemctl status hostapd<br />
               <br />
-              Da questo momento in poi il nuovo AP verrà creato automaticamente all'avvio dell'HUB.
+              Da questo momento in poi il nuovo AP verrà creato automaticamente all'avvio dell'HUB<br/>
+              e vi sarà possibile individuare il nuovo AP controllando l'elenco delle reti WiFi disponibili<br/>
+              da PC, da Smartphone o da altri dispositivi.
           </p>
           <hr style="color: black">
       </div>
@@ -694,18 +696,34 @@
               Se non viene visualizzato nessun messaggio di errore è possibile installare il servizio<br />
               DHCP server, questo fa si che al prossimo avvio del PC il server venga avviato automaticamente:<br />
               <br />
-              sudo systemctl enable isc-dhcp-server<br />
+              sudo systemctl start isc-dhcp-server<br />
               <br />
               Controllare lo stato del server:<br />
               <br />
               sudo systemctl status isc-dhcp-server<br />
+              <br />
+              Se sono presenti errori sarà necessario eseguire il debug e/o verificare le configurazioni.<br />
+              <span style="color:orangered">Vedi DEBUG di seguito.</span>
+              <br />
+              <span style="color:forestgreen">Se non sono presenti errori abilater il servizio server DNS</span>
+              <br />
+              sudo systemctl enable isc-dhcp-server<br />
+              <br />
+              <span style="color:orangered">DEBUG</span>
               <br />
               Vedere il log degli errori:<br />
               <br />
               journalctl -xe<br />
               <br />
               Riavviare il server se vengono apportate modifiche al file di configurazione:<br />
+              <br />
               sudo systemctl restart isc-dhcp-server<br />
+              <br />
+              se il servizio server DHCP è stato avviato con sudo systemctl enable isc-dhcp-server
+              <br />
+              oppure con:
+              <br/>
+              sudo systemctl start isc-dhcp-server
               <br />
               Se tutto è andato bene il server DHCP è in funzione ed assegenera un nuovo IP ad<br />
               ogni dispositivo che si collegherà all'HUB, a meno che, non sia impostato un IP<br />

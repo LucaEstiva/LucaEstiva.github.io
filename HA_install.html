@@ -51,32 +51,35 @@ Se README.MD non basta
               </div>
           </div>
       </div>
-	  <div class="container">
+      <div class="container">
 
           <p>
               Installare i pacchetti:<br />
+              <br/>
+              <span style="color:red; font-size:12px">Non installare il pacchetto network-manager.</span>
               <br />
-              sudo apt install jq<br />
-              <br />
-              sudo apt install avahi-daemon<br />
-              <br />
-              sudo apt install apparmor-utils<br />
+              sudo apt -y avahi-daemon install jq apparmor-utils<br />
               <br />
               Eseguire come utente root:<br />
               <br />
-
               <span style="color:chocolate">Digitare sudo su:</span><br />
               <br />
-
+              Se si desidera installare Home Assistant su un PC x86 - amd64:<br />
+              <br />
+              curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s -- -m qemux86-64
+              <br />
+              La procedura di installazione funziona anche in modo automatico:
+              <br />
               curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s<br />
           </p>
-	  	<p>
-	  		Vedere comunque la guida originale per l'installazione su diverse architetture di sistema.
-	  	</p>
-	  	<a class="btn btn-outline-success" target="_blank" href="https://github.com/home-assistant/supervised-installer#command-line-arguments" role="Link">Guida originale</a>
+          <p>
+              Vedere comunque la guida originale per l'installazione su diverse architetture di sistema.
+          </p>
+          <a class="btn btn-outline-success" target="_blank" href="https://github.com/home-assistant/supervised-installer#command-line-arguments" role="Link">Guida originale GitHub</a>
+          <a class="btn btn-outline-success" target="_blank" href="https://www.home-assistant.io/hassio/installation/" role="Link">Guida Installing Home Assistant </a>
 
-	  	<hr style="color: black">
-	  </div>
+          <hr style="color: black">
+      </div>
 
 
       <!-- Optional JavaScript -->

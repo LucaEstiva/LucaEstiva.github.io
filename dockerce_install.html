@@ -86,11 +86,53 @@ Se README.MD non basta
             <br />
             sudo apt-get install docker-ce<br />
         </p>
-        <h3>FINE</h3>
+        <h3>Docker installato.</h3>
         <hr style="color: black">
     </div>
-
-
+    <div class="container">
+        <h2>Utilita linux</h2>
+        <p>
+            Verificare se il servizio Docker è in funzione:<br />
+            <br />
+            sudo systemctl status docker<br />
+            <br />
+            sudo docker info
+            <br />
+            Avviare il servizio Docker (systemd):<br />
+            <br />
+            sudo systemctl start Docker (systemd):<br />
+            <br />
+            Riavviare il servizio Docker (systemd):<br />
+            <br />
+            sudo systemctl restart docker
+        </p>
+        <hr style="color: black">
+    </div>
+    <div class="container">
+        <h2>Test Docker</h2>
+        <p>
+            Verificare se Docker è in grado di dialogare con la rete:<br />
+            <br />
+            docker run busybox ping -c 1 8.8.8.8<br />
+            <br />
+            Verifica DNS:<br />
+            <br />
+            sudo docker run busybox nslookup google.com
+            <br />
+            Lista container:<br />
+            <br />
+            docker container ls -a<br />
+            <br />
+            Versione di Docker:<br />
+            <br />
+            docker -v
+            <br />
+            Docker Log:<br />
+            <br />
+            journalctl -u docker.service
+        </p>
+        <hr style="color: black">
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

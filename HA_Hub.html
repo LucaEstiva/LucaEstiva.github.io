@@ -657,8 +657,7 @@
               option subnet-mask 255.255.255.0;<br />
               option routers 192.168.2.1; # Utilizzare l'indirizzo assegnato alla subnet ma con 1 finale<br />
               option broadcast-address 192.168.2.255; # Utilizzare l'indirizzo assegnato alla subnet ma con 255 finale<br />
-              # option domain-name-servers 192.168.1.1;<br />
-              # option ntp-servers 10.152.187.1;<br />
+              option ntp-servers 192.168.2.1;<br />
               option netbios-name-servers 192.168.2.1; # Utilizzare l'indirizzo assegnato alla subnet ma con 255 finale<br />
               option netbios-node-type 2;<br />
               default-lease-time -1; # Nessun tempo di lease l'indirizzo IP assegnato non ha un tempo di scadenza<br />
@@ -682,11 +681,11 @@
               # Il parametro hardware ethernet si riferisce all'indirizzo mac dell'interfaccia alla quale si desidera assegnare
               # un ip statico. Per ottenere tale indirizzo usare ifconfig o ifconfig -a
               <br />
-              host LAN_Conncetion {<br />
+              host LAN_Connection {<br />
               hardware ethernet 00:00:00:00:00:00;<br />
               fixed-address 129.168.2.2;<br />
               }<br />
-              host AP_Conncetion {<br />
+              host AP_Connection {<br />
               hardware ethernet 00:00:00:00:00:00;<br />
               fixed-address 192.168.2.3;<br />
               }<br />

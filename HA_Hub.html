@@ -263,7 +263,7 @@
               # L'interfaccia di rete WiFi wlp3s0 servirà a realizzare l'Access Point WiFi<br />
               <br />
               auto wlp3s0<br />
-              iface wlp3s0 inet manual # La comunicazione verrà gestita dal bridge br0
+              iface wlp3s0 inet manual # La comunicazione verrà gestita dal bridge br0<br />
               <br />
               # Definizione del BRIDGE - br0 setup with static wan IPv4 with ISP router as gateway<br />
               <br />
@@ -326,24 +326,6 @@
               <br />
               apt list network-manager<br />
               <br />
-              <span style="color:chocolate">Se Network Manager non è installato passare alla sezione: Risoluzione dei nomi di domnio ( DNS )</span>
-              <br />
-              Verificare se il servizio Network Manager è in funzione:<br />
-              <br />
-              sudo systemctl status NetworkManager.service<br />
-              <br />
-              Arrestare il servizio Network Manage:r<br />
-              <br />
-              sudo systemctl stop NetworkManager.service<br />
-              <br />
-              Disabilitare il servizio Network Manager:<br />
-              <br />
-              sudo systemctl disable NetworkManager.service<br />
-              <br />
-              UTILITA' - Verificare se il pacchetto network-manager è installato:<br />
-              <br />
-              apt list network-manager<br />
-              <br />
               Installato:<br />
               <br />
               Listing... Done<br />
@@ -355,6 +337,20 @@
               Listing... Done<br />
               network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64<br />
               N: There are 2 additional versions. Please use the '-a' switch to see them.<br />
+              <br />
+              <span style="color:chocolate">Se Network Manager non è installato passare alla sezione: Risoluzione dei nomi di domnio ( DNS )</span>
+              <br />
+              Verificare se il servizio Network Manager è in funzione:<br />
+              <br />
+              sudo systemctl status NetworkManager.service<br />
+              <br />
+              Arrestare il servizio Network Manager:<br />
+              <br />
+              sudo systemctl stop NetworkManager.service<br />
+              <br />
+              Disabilitare il servizio Network Manager:<br />
+              <br />
+              sudo systemctl disable NetworkManager.service<br />
               <br />
               Rimuovere il pacchetto Network Manager e i relativi file di configurazione:<br />
               <br />
@@ -681,6 +677,18 @@
               host Yeelight_ceiling_camera {<br />
               hardware ethernet 00:00:00:00:00:00;<br />
               fixed-address 192.168.2.131;<br />
+              }<br />
+              <br />
+              # Il parametro hardware ethernet si riferisce all'indirizzo mac dell'interfaccia alla quale si desidera assegnare
+              # un ip statico. Per ottenere tale indirizzo usare ifconfig o ifconfig -a
+              <br />
+              host LAN_Conncetion {<br />
+              hardware ethernet 00:00:00:00:00:00;<br />
+              fixed-address 129.168.2.2;<br />
+              }<br />
+              host AP_Conncetion {<br />
+              hardware ethernet 00:00:00:00:00:00;<br />
+              fixed-address 192.168.2.3;<br />
               }<br />
           </p>
           <hr style="color: black">

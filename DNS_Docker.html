@@ -1,4 +1,4 @@
-<!doctype html>
+ï»¿<!doctype html>
 <html lang="it">
 <head>
     <!-- python -m http.server --directory /tmp/ -->
@@ -33,51 +33,32 @@
         </div>
     </div>
     <div class="container">
-        <h3>Supporto ai progetti GitHub</h3>
-        <!-- CODE -->
-        <pre style="background-color: gainsboro">
-Se README.MD non basta
-		</pre>
-
-        <hr style="color: black">
-    </div>
-
-    <!---->
-    <div id="parallax-image1">
-        <div class="row h-100">
-            <div class="col-md-12 align-self-center">
-                <h1 class="text-center">Home Assistant HUB</h1>
-                <h2 class="text-center">HUB totalmente indipendente per la casa SMART</h2>
-            </div>
-        </div>
-    </div>
-    <div class="container">
         <h2>Docker DNS - Domain Name System</h2>
-		<p>
-			Docker isola i propri container, o programmi, dall'hardware di rete reale.<br />
-			Crea una rete virtuale ed i container che necessitano di utilizzare la rete sono<br />
-			obbligati ad utilizzare la rete fornita da Docker.<br />
-			Solo Docker può utilizzare la rete dell'HUB.<br />
-			Cosi accade anche per le macchine virtuali in VirtualBox ad esempio.<br />
+        <p>
+            Docker isola i propri container, o programmi, dall'hardware di rete reale.<br />
+            Crea una rete virtuale ed i container che necessitano di utilizzare la rete sono<br />
+            obbligati ad utilizzare la rete fornita da Docker.<br />
+            Solo Docker puÃ² utilizzare la rete dell'HUB.<br />
+            Cosi accade anche per le macchine virtuali in VirtualBox ad esempio.<br />
+            </p>
+        <p>
+            Se Docker non fosse in grado di risolvere i nomi di dominio
+        </p>
+        <p style="background-color: gainsboro">
+            nameserver 8.8.8.8
+            nameserver 8.8.4.4
+            options edns0
+        </p>
+        <hr style="color: black">
+        <p>
+            Salvate il file CTRL+O:<br />
+            Confermate di voler salvare il file INVIO:<br />
+            Chiudete l'editor nano CTRL+X:<br />
+            <br />
+            Verificare nuovamente la risoluzione dei nomi di dominio.
+        </p>
 
-			https://forums.docker.com/t/dns-resolution-not-working-in-containers/36246
-
-			Verificare che Docker sia in grado di risolvere i nomi di dominio:
-			docker run busybox ping -c 1 8.8.8.8
-			Se la risposta è simile a:
-
-			--- 8.8.8.8 ping statistics ---
-			1 packets transmitted, 1 packets received, 0% packet loss
-			round-trip min/avg/max = 8.932/8.932/8.932 ms
-
-			Significa che Docker è in grado di risolver correttamente i nomi di dominio.
-
-
-
-
-
-
-		</p>
+        </p>
         <hr style="color: black">
     </div>
 

@@ -119,6 +119,28 @@ Se README.MD non basta
             <br />
             sudo docker run busybox nslookup google.com
             <br />
+            RISPOTA:
+            <br />
+            Server:         8.8.8.8<br />
+            Address:        8.8.8.8:53<br />
+            <br />
+            Non-authoritative answer:<br />
+            Name:   google.com<br />
+            Address: 216.58.208.174<br />
+            <br />
+            *** Can't find google.com: No answer<br />
+            <br />
+            sudo docker run --rm busybox nslookup -type=aaaa google.com<br />
+            <br />
+            RISPOSTA:<br />
+            <br />
+            Server:         8.8.8.8<br />
+            Address:        8.8.8.8:53<br />
+            <br />
+            Non-authoritative answer:<br />
+            Name:   google.com<br />
+            Address: 2a00:1450:4002:807::200e<br />
+            <br />
             Lista container:<br />
             <br />
             docker container ls -a<br />

@@ -651,7 +651,7 @@
               <br />
               # A slightly different configuration for an internal subnet.<br />
               subnet 192.168.2.0 netmask 255.255.255.0 {<br />
-              range 192.168.2.2 192.168.2.250; # Il range di IP che verrà assegnato ai dispositivi da 192.168.2.2 a 192.168.2.250<br />
+              range 192.168.2.4 192.168.2.254; # Il range di IP che verrà assegnato ai dispositivi da 192.168.2.2 a 192.168.2.250<br />
               option domain-name-servers 8.8.8.8; # L'indirizzo del server DNS ( google in questo caso )<br />
               option domain-name "domotica.org"; # Il nome del dominio<br />
               option subnet-mask 255.255.255.0;<br />
@@ -677,8 +677,7 @@
               }<br />
               <br />
               # Assegnare un indirizzo IP statico ai disposiviti utilizzando il MAC Address.<br />
-              # Nella nuova rete sono disponibili gli # indirizzi IP da 192.168.2.2 a 192.168.2.254<br />
-              <br />
+              # Nella nuova rete sono disponibili gli # indirizzi IP da 192.168.2.4 a 192.168.2.254<br />
               <br />
               # Assegnare un IP statico alla lampada Yeelight cucina<br />
               host Yeelight_ceiling_cucina {<br />

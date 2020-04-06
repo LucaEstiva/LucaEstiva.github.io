@@ -6,13 +6,6 @@ theMask.setTextValue('255.255.255.0');
 
 var testIP = new IpAddress();
 
-window.onload=function() {
- getObj('ipMainForm').innerHTML = theIP;
- getObj('maskMainForm').innerHTML = theMask;
- getObj('copyright').innerHTML += '<a href="mailto:'+'balestra'+'@cesmail.net">'+'Marco Balestra</a>';
- updateInfos();
-}
-
 function updateInfos() {
  var i,by,bit,netclass;
  var sml = theMask.getMaskLength();

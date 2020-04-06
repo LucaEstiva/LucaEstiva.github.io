@@ -124,7 +124,7 @@
           <p>
               Collegarsi al server utilizzando putty<br />
               https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
-              <br/>
+              <br />
               E' possibile utilizzare il terminale per copiare ed incollare il contenuto dei files ed i comandi !<br />
               Il tatso destro del mouse, se premuto all'interno della finestra del terminale incolla il testo copaito.
           </p>
@@ -257,18 +257,12 @@
               <br />
               # Abilta l'interfaccia di rete enp2s0<br />
               allow-hotplug enp2s0<br />
-              iface enp2s0 inet static<br />
-              address 192.168.2.2 #  Assegnare un indirizzo statico IP all'interfaccia vedi Scegliere una sottorete<br />
-              netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )<br />
-              network 192.168.2.0 # Moficare utilizzando come riferimento l'IP assegnato all'interfaccia con 0 finale<br />
+              iface enp2s0 inet manual # La comunicazione verrà gestita dal bridge br0
               <br />
               # L'interfaccia di rete WiFi wlp3s0 servirà a realizzare l'Access Point WiFi
               <br />
               auto wlp3s0<br />
-              iface wlp3s0 inet static<br />
-              address 192.168.2.192 # Assegnare un indirizzo statico IP all'interfaccia vedi Scegliere una sottorete<br />
-              netmask 255.255.255.0 # Lasciare invariata la maschera di sottorete ( Subnet Mask )<br />
-              network 192.168.2.0 # Moficare utilizzando come riferimento l'IP assegnato all'interfaccia con 0 finale<br />
+              iface wlp3s0 inet manual # La comunicazione verrà gestita dal bridge br0
               <br />
               # Definizione del BRIDGE - br0 setup with static wan IPv4 with ISP router as gateway<br />
               auto br0<br />
@@ -311,17 +305,13 @@
               <hr style="color: black">
               <h2>Abilitare ifupdown</h2>
           <p>
-              Riavvio del servizio networking;<br />
+              Avvio del servizio networking;<br />
               <br />
               sudo systemctl unmask networking<br />
               <br />
               sudo systemctl enable networking<br />
               <br />
               sudo systemctl restart networking<br />
-              <br />
-              Riavviare l'HUB:<br />
-              <br />
-              sudo reboot
           </p>
           <hr style="color: black">
       </div>
@@ -379,7 +369,7 @@
               è necessario aggiungere l'indirizzo del server DNS al file /etc/systemd/resolved.conf<br />
               <br />
               sudo nano /etc/systemd/resolved.conf
-            </p>
+          </p>
           <p style="background-color: gainsboro">
               ....<br />
               DNS=8.8.8.8 8.8.4.4<br />
@@ -446,9 +436,22 @@
       </div>
 
       <div class="container">
-          <h2>Hostapd</h2>
+          <h2>Disintallare il firewall Uncomplicated Firewall (UFW)</h2>
           <p>
-              Hostapd creera' il nuovo Access Point AP<br />
+              Arrestare il servzio Uncomplicated Firewall:<br />
+              <br />
+              sudo systemctl disable ufw<br />
+              <br />
+              Disinstallare il Firewall:<br/>
+              <br />
+              sudpo apt -y purge ufw<br />
+          </p>
+      </div>
+
+              <div class="container">
+                  <h2>Hostapd</h2>
+          <p>
+              Hostapd creerà il nuovo Access Point AP<br />
               https://help.ubuntu.com/community/WifiDocs/WirelessAccessPoint<br />
               Installare i pacchetti:<br />
               <br />
@@ -517,7 +520,11 @@
               A questo punto potrebbe essera utile eseguire un test di Hostapd:<br />
               https://manpages.debian.org/testing/hostapd/hostapd.8.en.html<br />
               <br />
+              Senza informazioni di debug ( avviare prima senza debug ):<br />
+              <br />
               sudo hostapd /etc/hostapd/hostapd.conf<br />
+              <br />
+              Con informazioni di debug, se necessario:<br />
               <br />
               sudo hostapd -d /etc/hostapd/hostapd.conf<br />
               <br />
@@ -562,8 +569,8 @@
               <br />
               sudo systemctl status hostapd<br />
               <br />
-              Da questo momento in poi il nuovo AP verrà creato automaticamente all'avvio dell'HUB<br/>
-              e vi sarà possibile individuare il nuovo AP controllando l'elenco delle reti WiFi disponibili<br/>
+              Da questo momento in poi il nuovo AP verrà creato automaticamente all'avvio dell'HUB<br />
+              e vi sarà possibile individuare il nuovo AP controllando l'elenco delle reti WiFi disponibili<br />
               da PC, da Smartphone o da altri dispositivi.
           </p>
           <hr style="color: black">
@@ -696,6 +703,19 @@
               <br />
               sudo systemctl status isc-dhcp-server<br />
               <br />
+              Se il servizio è attivo l'output sarà simile a:<br />
+              <br />
+              ● isc-dhcp-server.service - ISC DHCP IPv4 server<br />
+              Loaded: loaded (/lib/systemd/system/isc-dhcp-server.service; enabled; vendor preset: enabled)<br />
+              Active: active (running) since Thu 2020-04-02 07:37:07 UTC; 5h 28min ago<br />
+              Docs: man:dhcpd(8)<br />
+              Main PID: 1266 (dhcpd)<br />
+              Tasks: 1 (limit: 4915)<br />
+              CGroup: /system.slice/isc-dhcp-server.service<br />
+              └─1266 dhcpd -user dhcpd -group dhcpd -f -4 -pf /run/dhcp-server/dhcpd.pid -cf /etc/dhcp/dhcpd.conf<br />
+              <br />
+              Premete CTRL+C per uscire dal log di stato.<br />
+              <br />
               Se sono presenti errori sarà necessario eseguire il debug e/o verificare le configurazioni.<br />
               <span style="color:orangered">Vedi DEBUG di seguito.</span>
               <br />
@@ -716,7 +736,7 @@
               se il servizio server DHCP è stato avviato con sudo systemctl enable isc-dhcp-server
               <br />
               oppure con:
-              <br/>
+              <br />
               sudo systemctl start isc-dhcp-server
               <br />
               Se tutto è andato bene il server DHCP è in funzione ed assegenera un nuovo IP ad<br />
@@ -794,8 +814,6 @@
               <br />
               Durante l'installazion di iptables-persistent vi verrà richiesto il permesso di salvare le regole<br />
               attive, rispondere SI alle richieste.
-              <br/>
-              RIAVVIARE L'HUB
               <br />
               ( OPZIONALE ) Salvataggio manuale delle regole:<br />
               <br />
@@ -812,10 +830,18 @@
           <hr style="color: black">
       </div>
       <div class="container">
+          <h2>Fine procedura creazione HUB</h2>
+          <p style="font-size=14px">
+              Riavviate l'HUB:<br />
+              <br />
+              sudo reboot
+              <br />
+              Il vostro server Ubuntu è dotato di funzionalità di routing ed è un vero Access Point.
+          </p>
           <h2>Test del router ( HUB )</h2>
           <p style="font-size=14px">
-              Prima di installare Docker-ce e Home Assistant testate il solo router.<br/>
-              Collegandovi al nuovo Access Point sarà possibile navigare normalmente.<br/>
+              Prima di installare Docker-ce e Home Assistant testate il solo router.<br />
+              Collegandovi al nuovo Access Point sarà possibile navigare normalmente.<br />
           </p>
           <hr style="color: black">
       </div>

@@ -644,7 +644,7 @@
               # SPECIFICATO IN CONFIGURARE LE INTERFACCE DI RETE<br />
               # Scegliere una sottorete ed utilizzarla per configurare le interfacce, attualemente la sottorete potrebbe essere<br />
               # 192.168.2.0, 192.168.3.0, 192.168.4.0 altrimenti sarà necessario modificare la maschera di sottorete subnet mask<br />
-              # Utilizzeremo la sottorete 192.168.2.0<br />
+              # Verrà utilizzata la sottorete 192.168.2.0<br />
               <br />
               # subnet utilizzare la sottorete 192.168.2.0<br />
               # range il range di IP che verrà assegnato ai dispositivi da 192.168.2.2 a 192.168.2.250<br />
@@ -663,8 +663,8 @@
               default-lease-time -1; # Nessun tempo di lease l'indirizzo IP assegnato non ha un tempo di scadenza<br />
               max-lease-time -1; # Nessun tempo di lease l'indirizzo IP assegnato non ha un tempo di scadenza<br />
               <br />
-              # Il parametro hardware ethernet si riferisce all'indirizzo mac dell'interfaccia alla quale si desidera assegnare
-              # un ip statico. Per ottenere tale indirizzo usare ifconfig o ifconfig -a
+              # Il parametro hardware ethernet si riferisce all'indirizzo mac dell'interfaccia alla quale si desidera assegnare<br />
+              # un ip statico. Per ottenere tale indirizzo usare ifconfig o ifconfig -a<br />
               <br />
               host LAN_Connection {<br />
               hardware ethernet 00:00:00:00:00:00;<br />
@@ -677,7 +677,7 @@
               }<br />
               <br />
               # Assegnare un indirizzo IP statico ai disposiviti utilizzando il MAC Address.<br />
-              # Nella nostra rete abbiamo a disposizione gli # indirizzi IP da 192.168.2.2 a 192.168.2.254<br />
+              # Nella nuova rete sono disponibili gli # indirizzi IP da 192.168.2.2 a 192.168.2.254<br />
               <br />
               <br />
               # Assegnare un IP statico alla lampada Yeelight cucina<br />

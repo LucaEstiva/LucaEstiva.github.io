@@ -445,8 +445,8 @@
           </p>
       </div>
 
-              <div class="container">
-                  <h2>Hostapd</h2>
+        <div class="container">
+            <h2>Hostapd</h2>
           <p>
               Hostapd creerà il nuovo Access Point AP<br />
               https://help.ubuntu.com/community/WifiDocs/WirelessAccessPoint<br />
@@ -633,22 +633,22 @@
               # behavior of the version 2 packages ('none', since DHCP v2 didn't<br />
               # have support for DDNS.)<br />
               ddns-update-style none;<br />
-
+              <br />
               # If this DHCP server is the official DHCP server for the local<br />
               # network, the authoritative directive should be uncommented.<br />
               authoritative;<br />
-
-              # Utilizzare come riferimento quanto specificato nella definizione delle interfacce di rete. Il server DHCP
-              # rispondera alle richieste nella sottorete definita in precedenza e sarà in grado di assegnare un determinato
-              # range di IP solo in questa sottorete.
-              # SPECIFICATO IN CONFIGURARE LE INTERFACCE DI RETE
-              # Scegliere una sottorete ed utilizzarla per configurare le interfacce, attualemente la sottorete potrebbe essere
-              # 192.168.2.0, 192.168.3.0, 192.168.4.0 altrimenti sarà necessario modificare la maschera di sottorete subnet mask
-              # Utilizzeremo la sottorete 192.168.2.0
-
-              # subnet utilizzare la sottorete 192.168.2.0
-              # range il range di IP che verrà assegnato ai dispositivi da 192.168.2.2 a 192.168.2.250
-
+              <br />
+              # Utilizzare come riferimento quanto specificato nella definizione delle interfacce di rete. Il server DHCP<br />
+              # rispondera alle richieste nella sottorete definita in precedenza e sarà in grado di assegnare un determinato<br />
+              # range di IP solo in questa sottorete.<br />
+              # SPECIFICATO IN CONFIGURARE LE INTERFACCE DI RETE<br />
+              # Scegliere una sottorete ed utilizzarla per configurare le interfacce, attualemente la sottorete potrebbe essere<br />
+              # 192.168.2.0, 192.168.3.0, 192.168.4.0 altrimenti sarà necessario modificare la maschera di sottorete subnet mask<br />
+              # Utilizzeremo la sottorete 192.168.2.0<br />
+              <br />
+              # subnet utilizzare la sottorete 192.168.2.0<br />
+              # range il range di IP che verrà assegnato ai dispositivi da 192.168.2.2 a 192.168.2.250<br />
+              <br />
               # A slightly different configuration for an internal subnet.<br />
               subnet 192.168.2.0 netmask 255.255.255.0 {<br />
               range 192.168.2.2 192.168.2.250; # Il range di IP che verrà assegnato ai dispositivi da 192.168.2.2 a 192.168.2.250<br />
@@ -662,21 +662,6 @@
               option netbios-node-type 2;<br />
               default-lease-time -1; # Nessun tempo di lease l'indirizzo IP assegnato non ha un tempo di scadenza<br />
               max-lease-time -1; # Nessun tempo di lease l'indirizzo IP assegnato non ha un tempo di scadenza<br />
-
-              # Assegnare un indirizzo IP statico ai disposiviti utilizzando il MAC Address.<br />
-              # Nella nostra rete abbiamo a disposizione gli # indirizzi IP da 192.168.2.2 a 192.168.2.254<br />
-
-              # Assegnare un IP statico alla lampada Yeelight cucina<br />
-              host Yeelight_ceiling_cucina {<br />
-              hardware ethernet 00:00:00:00:00:00;<br />
-              fixed-address 192.168.2.130;<br />
-              }<br />
-
-              # Assegnare un IP statico alla lampada Yeelight camera<br />
-              host Yeelight_ceiling_camera {<br />
-              hardware ethernet 00:00:00:00:00:00;<br />
-              fixed-address 192.168.2.131;<br />
-              }<br />
               <br />
               # Il parametro hardware ethernet si riferisce all'indirizzo mac dell'interfaccia alla quale si desidera assegnare
               # un ip statico. Per ottenere tale indirizzo usare ifconfig o ifconfig -a
@@ -685,10 +670,30 @@
               hardware ethernet 00:00:00:00:00:00;<br />
               fixed-address 129.168.2.2;<br />
               }<br />
+              <br />
               host AP_Connection {<br />
               hardware ethernet 00:00:00:00:00:00;<br />
               fixed-address 192.168.2.3;<br />
               }<br />
+              <br />
+              # Assegnare un indirizzo IP statico ai disposiviti utilizzando il MAC Address.<br />
+              # Nella nostra rete abbiamo a disposizione gli # indirizzi IP da 192.168.2.2 a 192.168.2.254<br />
+              <br />
+              <br />
+              # Assegnare un IP statico alla lampada Yeelight cucina<br />
+              host Yeelight_ceiling_cucina {<br />
+              hardware ethernet 00:00:00:00:00:00;<br />
+              fixed-address 192.168.2.130;<br />
+              }<br />
+              <br />
+              # Assegnare un IP statico alla lampada Yeelight camera<br />
+              host Yeelight_ceiling_camera {<br />
+              hardware ethernet 00:00:00:00:00:00;<br />
+              fixed-address 192.168.2.131;<br />
+              }<br />
+              }
+              <br />
+
           </p>
           <hr style="color: black">
           <p>

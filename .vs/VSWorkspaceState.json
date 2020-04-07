@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\images",
+    "\\images\\hardware",
+    "\\images\\WiFi_Network_Adapter"
   ],
-  "SelectedNode": "\\HA_Hub.html",
+  "SelectedNode": "\\images\\hardware",
   "PreviewInSolutionExplorer": false
 }

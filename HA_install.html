@@ -66,14 +66,27 @@ Se README.MD non basta
               <br />
               Se si desidera installare Home Assistant su un PC x86 - amd64:<br />
               <br />
-              curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s -- -m qemux86-64
+              curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s -- -m qemux86-64<br />
               <br />
-              La procedura di installazione funziona anche in modo automatico:
+              La procedura di installazione funziona anche in modo automatico:<br />
               <br />
               curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s<br />
+              <br/>
+              Premere CTRL+D per uscire dalla shell root.
           </p>
           <p>
-              Vedere comunque la guida originale per l'installazione su diverse architetture di sistema.
+              Vedere comunque la guida originale per l'installazione su diverse architetture di sistema.<br />
+              <br />
+              Home Assistant è installato e funzionante.<br />
+              <br />
+              Per visualizzare la pagina di registrazione utilizzare l'indirizzo "http://192.168.2.1:8123"<br />
+              <br />
+              Nel caso in cui sia stato salvato uno snapshot della configurazione di Home Assistant, Hass.io Google Drive Backup è<br/>
+              un'ottimo Add-On, è possibile scaricare lo snapshot da Google Drive, installare Samba, copiare il file snapshot nella<br/>
+              cartella backup di Home Assistant, fare click sul riquadro dello snapshot e selezionare "WIPE AND RESTORE". Al termine<br/>
+              della procedura di ripristino, Home Assistant tornerà a presentarsi uguale al momento in cui è stato salvato lo snapshot<br/>
+              NB: Se non è visibile il riquadro dello sanpshot da utilizzare per il ripristino, fare click sull'icona "refresh" nell'angolo<br />
+              in alto a destra.<br />
           </p>
           <a class="btn btn-outline-success" target="_blank" href="https://github.com/home-assistant/supervised-installer#command-line-arguments" role="Link">Guida originale GitHub</a>
           <a class="btn btn-outline-success" target="_blank" href="https://www.home-assistant.io/hassio/installation/" role="Link">Guida Installing Home Assistant </a>

@@ -61,6 +61,50 @@
             dhcp-lease-list
         </p>
     </div>
+    <div class="container">
+        <h2>Utilità sistema linux</h2>
+        <p>
+            <br />
+            Monitorare l'HUB con Darkstat:<br />
+            Statistiche con http server:<br />
+            <br />
+            sudo apt-get install darkstat<br />
+            <br />
+            Modificare il file di configurazione /etc/darkstat/init.cfg:<br />
+            <br />
+            sudo nano /etc/darkstat/init.cfg<br />
+            <br />
+            # Turn this to yes when you have configured the options below.<br />
+            START_DARKSTAT=yes
+            <br />
+            # You must set this option, else darkstat may not listen to<br />
+            # the interface you want<br />
+            INTERFACE="-i eth1"<br />
+            <br />
+            PORT="-p 8888"<br />
+            #BINDIP="-b 127.0.0.1"<br />
+            #LOCAL="-l 10.1.1.0/24"<br />
+            #FIP="-f 127.0.0.1"<br />
+            #DNS="-n"<br />
+            #SPY="--spy eth1"<br />
+            <br />
+            Aprire il browser e inserire l'url:<br />
+            <br />
+            http://IP_HUB:8888<br />
+            <br />
+
+            SAIDAR:<br />
+            Monitorare l'HUB con saidar<br />
+            <br />
+            Saidar mostra l'utilizzo delle sisorse dell'HUB:<br />
+            <br />
+            sudo apt install saidar<br />
+            <br />
+            Avviare saidar:<br />
+            <br />
+            saidar
+        </p>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

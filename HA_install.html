@@ -1,110 +1,115 @@
 ﻿<!doctype html>
 <html lang="it">
-  <head>
-	<!-- python -m http.server --directory /tmp/ -->
+<head>
+    <!-- python -m http.server --directory /tmp/ -->
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	
-	<!-- NO CACHE -->
-	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-	<meta http-equiv="Pragma" content="no-cache" />
-	<meta http-equiv="Expires" content="0" />
 
-	<!-- STYLE -->
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
-	
+    <!-- NO CACHE -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <!-- STYLE -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
     <title>HomeAssistant</title>
-
-  </head>
-  <body>
-
-      <!---->
-      <div id="parallax-image">
-          <div class="row h-100">
-              <div class="col-md-12 align-self-center">
-                  <h1 class="text-center">Automazioni</h1>
-                  <h2 class="text-center">La tua casa SMART con Home Assistant</h2>
-              </div>
-          </div>
-      </div>
-      <div class="container">
-          <h3>Supporto ai progetti GitHub</h3>
-          <!-- CODE -->
-          <pre style="background-color: gainsboro">
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'it' }, 'google_translate_element');
+        }
+    </script>
+</head>
+<body>
+    <div id="google_translate_element"></div>
+    <!---->
+    <div id="parallax-image">
+        <div class="row h-100">
+            <div class="col-md-12 align-self-center">
+                <h1 class="text-center">Automazioni</h1>
+                <h2 class="text-center">La tua casa SMART con Home Assistant</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h3>Supporto ai progetti GitHub</h3>
+        <!-- CODE -->
+        <pre style="background-color: gainsboro">
 Se README.MD non basta
 		</pre>
 
-          <hr style="color: black">
-      </div>
+        <hr style="color: black">
+    </div>
 
-      <!---->
-      <div id="parallax-image1">
-          <div class="row h-100">
-              <div class="col-md-12 align-self-center">
-                  <h1 class="text-center">Home Assistant HUB</h1>
-                  <h2 class="text-center">HUB totalmente indipendente per la casa SMART</h2>
-              </div>
-          </div>
-      </div>
-      <div class="container">
+    <!---->
+    <div id="parallax-image1">
+        <div class="row h-100">
+            <div class="col-md-12 align-self-center">
+                <h1 class="text-center">Home Assistant HUB</h1>
+                <h2 class="text-center">HUB totalmente indipendente per la casa SMART</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
 
-          <p>
-              Installare i pacchetti:<br />
-              <br/>
-              <span style="color:red; font-size:12px">Non installare il pacchetto network-manager.</span>
-              <br />
-              sudo apt install -y avahi-daemon jq apparmor-utils<br />
-              <br />
-              Eseguire come utente root:<br />
-              <br />
-              <span style="color:chocolate">Digitare sudo su:</span><br />
-              <br />
-              Se si desidera installare Home Assistant su un PC x86 - amd64:<br />
-              <br />
-              curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s -- -m qemux86-64<br />
-              <br />
-              La procedura di installazione funziona anche in modo automatico:<br />
-              <br />
-              curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s<br />
-              <br/>
-              Premere CTRL+D per uscire dalla shell root.
-          </p>
-          <p>
-              Vedere comunque la guida originale per l'installazione su diverse architetture di sistema.<br />
-              <br />
-              Home Assistant è installato e funzionante.<br />
-              <br />
-              Per visualizzare la pagina di registrazione utilizzare l'indirizzo "http://192.168.2.1:8123"<br />
-              <br />
-              Se avete salvato uno snapshot di una installazione precedente di Home Assistant installare Samba, copiare il file snapshot<br />
-              nella cartella backup di Home Assistant, fare click sul riquadro dello snapshot e selezionare "WIPE AND RESTORE".<br />
-              <br />
+        <p>
+            Installare i pacchetti:<br />
+            <br />
+            <span style="color:red; font-size:12px">Non installare il pacchetto network-manager.</span>
+            <br />
+            sudo apt install -y avahi-daemon jq apparmor-utils<br />
+            <br />
+            Eseguire come utente root:<br />
+            <br />
+            <span style="color:chocolate">Digitare sudo su:</span><br />
+            <br />
+            Se si desidera installare Home Assistant su un PC x86 - amd64:<br />
+            <br />
+            curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s -- -m qemux86-64<br />
+            <br />
+            La procedura di installazione funziona anche in modo automatico:<br />
+            <br />
+            curl -sL https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh | bash -s<br />
+            <br />
+            Premere CTRL+D per uscire dalla shell root.
+        </p>
+        <p>
+            Vedere comunque la guida originale per l'installazione su diverse architetture di sistema.<br />
+            <br />
+            Home Assistant è installato e funzionante.<br />
+            <br />
+            Per visualizzare la pagina di registrazione utilizzare l'indirizzo "http://192.168.2.1:8123"<br />
+            <br />
+            Se avete salvato uno snapshot di una installazione precedente di Home Assistant installare Samba, copiare il file snapshot<br />
+            nella cartella backup di Home Assistant, fare click sul riquadro dello snapshot e selezionare "WIPE AND RESTORE".<br />
+            <br />
 
-              In alternativa, nel caso in cui sia stato salvato uno snapshot della configurazione di Home Assistant, (Hass.io Google Drive Backup è<br />
-              un'ottimo Add-On) in una cartella Google Driver, è possibile scaricare lo snapshot da Google Drive, installare Samba, copiare<br />
-              il file snapshot nella cartella backup di Home Assistant, fare click sul riquadro dello snapshot e selezionare "WIPE AND RESTORE".
-              <br />
-              Al termine della procedura di ripristino, Home Assistant tornerà a ad essere uguale al momento in cui è stato salvato lo snapshot<br />
-              <br />
-              NB: Se non è visibile il riquadro dello sanpshot da utilizzare per il ripristino, fare click sull'icona "refresh" nell'angolo<br />
-              in alto a destra.<br />
-          </p>
-          <a class="btn btn-outline-success" target="_blank" href="https://github.com/home-assistant/supervised-installer#command-line-arguments" role="Link">Guida originale GitHub</a>
-          <a class="btn btn-outline-success" target="_blank" href="https://www.home-assistant.io/hassio/installation/" role="Link">Guida Installing Home Assistant </a>
+            In alternativa, nel caso in cui sia stato salvato uno snapshot della configurazione di Home Assistant, (Hass.io Google Drive Backup è<br />
+            un'ottimo Add-On) in una cartella Google Driver, è possibile scaricare lo snapshot da Google Drive, installare Samba, copiare<br />
+            il file snapshot nella cartella backup di Home Assistant, fare click sul riquadro dello snapshot e selezionare "WIPE AND RESTORE".
+            <br />
+            Al termine della procedura di ripristino, Home Assistant tornerà a ad essere uguale al momento in cui è stato salvato lo snapshot<br />
+            <br />
+            NB: Se non è visibile il riquadro dello sanpshot da utilizzare per il ripristino, fare click sull'icona "refresh" nell'angolo<br />
+            in alto a destra.<br />
+        </p>
+        <a class="btn btn-outline-success" target="_blank" href="https://github.com/home-assistant/supervised-installer#command-line-arguments" role="Link">Guida originale GitHub</a>
+        <a class="btn btn-outline-success" target="_blank" href="https://www.home-assistant.io/hassio/installation/" role="Link">Guida Installing Home Assistant </a>
 
-          <hr style="color: black">
-      </div>
+        <hr style="color: black">
+    </div>
 
 
-      <!-- Optional JavaScript -->
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
 </html>

@@ -26,6 +26,26 @@
         }
     </script>
 
+    <script type="text/javascript">
+        function Copia_Codice(ID) {
+            var range = document.createRange();
+            var element = document.getElementById(ID);
+            range.selectNode(element);
+            window.getSelection().removeAllRanges(); // clear current selection
+            window.getSelection().addRange(range); // to select text
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();// to deselect
+        }
+
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+    </script>
+
     <script>
         function clip(id) {
             var txt = document.getElementById(id)
@@ -51,14 +71,14 @@
         <h3>Scegliere/Verificare l'hardware</h3>
         <!-- CODE -->
         <p style="background-color: gainsboro">
-            Per realizzare l'HUB è necessario un PC due interfacce di rete LAN ed una WiFi.<br />
-            Di seguito verrà descritta la procedura per la creazione di un HUB con due porte LAN ed una interfaccia WiFi.<br />
+            Per realizzare l'HUB è necessario un PC con una o due interfacce di rete LAN ed una WiFi.<br />
             Avere due interfacce di rete LAN potrebbe essere utile nel caso in cui, ad esempio, si decidesse<br />
             di installare videocamere di sorveglianza via cavo ( utilizzando uno switch se necessario ).<br />
+            Di seguito verrà descritta la procedura per la creazione di un HUB con due porte LAN ed una interfaccia WiFi.<br />
             Sarà necessario verificare che la scheda di rete WiFi che intendete utilizzare supporti la modalità MASTER o AP-Mode.<br />
             Se per realizzare l'HUB avete scelto di utilizzare un PC Intel NUC verificate che la scheda di rete supporti la modalità<br />
             Master o AP-Mode.<br />
-            Se la modalità non è supportata dalla vostra scheda dovrete sostituirla o aggiungerne una che supporti tale funzionalità.<br />
+            Se la modalità non è supportata dalla vostra scheda dovrete sostituirla o aggiungerne una.<br />
         </p>
         <a class="btn btn-outline-success" target="_blank" href="\ap_mode.html" role="Link">Guida Ubuntu WiFiDocs/MasterMode</a>
         <hr style="color: black">
@@ -72,11 +92,90 @@
         <hr style="color: black">
         <img src="/images/WiFi_Network_Adapter/Mini_PCI-E_WiFi.jpg" alt="#" height="273" width="244" />
     </div>
-
+    <!---->
+    <div id="parallax-image1">
+        <div class="row h-100">
+            <div class="col-md-12 align-self-center">
+                <h1 class="text-center">Home Assistant HUB</h1>
+                <h2 class="text-center">HUB totalmente indipendente per la casa SMART</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <p>
+            Il progetto consente di creare un Router, ed un Access Point con server DHCP ( che chiameremo HUB ) in grado di fornire
+            indirizzi IP a tutti i dispostivi domotici ad esso connessi e gestirne la comunicazione con il server Home Assistant,
+            anch'esso installato nello stesso PC.
+        </p>
+        <h2>Benefici</h2>
+        <p>
+            Il router non sarà più necessario ( tranne per le comunicazioni via Internet )<br />
+            In caso di guasto del router, la rete domotica sarà ugualmente in grado di funzionare<br />
+            Si velocizza la comunicazione tra il server Home Assistant e i dispositivi, soprattuto se il router è già impegnato...<br />
+            <br />
+            Se avete già una installazione di Home Assistant funzionante, vi sarà possibile "ripristinare" la nuova installazione semplicemente,<br />
+            salvando uno snapshot della configurazione attuale dal pannello SUPERVISOR -> SNAPSHOT. Usando Samba copiare il file snapshot dalla<br />
+            cartella Backup di Home Assistan in una a vostra scelta e successivamente riportare lo snapshot nella cartella Backup ed effettuare<br />
+            il ripristino.
+        </p>
+        <hr style="color: black">
+        <h2>Pinaificare le reti</h2>
+        <p>
+            Scegliere la sottorete o segmento di rete ( quindi gli IP disponibili ) da utilizzare per l'HUB:<br />
+            https://it.wikipedia.org/wiki/Sottorete<br />
+            https://it.wikipedia.org/wiki/Subnet_mask<br />
+            https://it.wikipedia.org/wiki/Classi_di_indirizzi_IP<br />
+            https://it.wikipedia.org/wiki/Indirizzo_IP_privato<br />
+            https://en.wikipedia.org/wiki/Subnetwork<br />
+        </p>
+        <hr style="color: black">
+        <h2>Indirizzi di rete IP - Collegamento alla LAN esistente</h2>
+        <p>
+            In questo caso l'HUB verra collegato attraverso una porta di rete LAN ( LAN 1 interfaccia enp1s0 ) ad un Modem Router<br />
+            ( Gateway ) con indirizzo IP 192.168.1.1 . All'interfaccia enp1s0 verrà assegnato un indirizzo ip facente parte della stessa<br />
+            sottorete ovvero 192.168.1.2. Tutti i valori utilizzati per impostare i parametri di configurazione dell'interfaccia enp1s0,<br />
+            sono basati sull'indirizzo IP del router ( ovvera la sottorete LAN attualmente in uso ).
+            <br />
+            La connessione SSH è disponibile all'indirizzo 192.168.1.2
+        </p>
+        <hr style="color: black">
+        <h2>Indirizzi di rete IP - Nuova rete LAN/WiFi</h2>
+        <p>
+            In questo caso sarà possibile collegarsi alla porta LAN ( LAN 2 interfaccia enp2s0 ) alla quale è stato assegnato l'indirizzo
+            IP STATICO 192.168.2.2 ed accedere all'HUB utilizzando lo stesso indirizzo.
+            <br />
+            La connessione SSH è disponibile all'indirizzo 192.168.2.2<br />
+            <br />
+            E all'AP rete WiFi ( interfaccia wlp3s0 ) alla quale è stato assegnato l'indirizzo IP STATICO 192.168.2.192<br />
+            ed accedere all'HUB utilizzando lo stesso indirizzo.<br />
+            <br />
+            La connessione SSH è disponibile all'indirizzo 192.168.2.192<br />
+            <br />
+            NB: All'interfaccia dell'AP wlp3s0 è stato assegnato l'indirizzo ip 192.168.2.192 solo per esigenze dell'autore.<br />
+            L'indirzzo poteva essere, ad esempio 192.168.2.3.<br />
+            <br />
+            L'indirizzo IP 192.168.2.1 è assegnato al Bridge e non è possibile assegnarlo a nessuna altra interfaccia.<br />
+            Al bridge dovrà sempre essere assegnato il "primo indirizzo" IP ovvero 192.168.2.1 o 192.168.3.1 o 192.168.4.1<br />
+            ecc.<br />
+            Per scegliere i valori network, broadcast e stabilire il range di IP assegnabili dal server DHCP è possibile utilizzare<br />
+            il tool qui sotto:
+        </p>
+        <a class="btn btn-outline-success" target="_blank" href="\netmask.html" role="Link">Calcolatore Subnet Mask</a>
+        <p>
+            Collegarsi al server utilizzando putty<br />
+            https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+            <br />
+            E' possibile utilizzare il terminale per copiare ed incollare il contenuto dei files ed i comandi !<br />
+            Il tatso destro del mouse, se premuto all'interno della finestra del terminale incolla il testo copiato.
+        </p>
+        <hr style="color: black">
+    </div>
     <div class="container">
         <h2>Installazione ed avvio del Server Ubuntu - Configurazione testata e funzionante su Ubuntu Server V18.04.4</h2>
         <p>
-            Installare Ubuntu Server scaricando l'immagine ISO per PC AMD64 ( non ARM ) da qui:<br />
+            Installare Ubuntu Server scaricando l'immagine ISO da qui:<br />
+            https://ubuntu.com/download/server<br />
+            VERSIONE PER PROCESSORI CON ARCHITETTURA AMD64 ( non ARM ) 64Bit<br />
             <a class="btn btn-outline-success" target="_blank" href="https://ubuntu.com/download/server/thank-you?version=18.04.4&architecture=amd64" role="Link">Scarica</a><br />
             Creare un supporto di avvio ( chiavetta USB ) utilizzando BALENAETCHER:<br />
             <a class="btn btn-outline-success" target="_blank" href="https://www.balena.io/etcher/" role="Link">Scarica</a>
@@ -161,7 +260,7 @@
             Manuale Ubuntu:<br />
             http://manpages.ubuntu.com/manpages/bionic/man5/interfaces.5.html<br />
             <br />
-            Modificare il file /etc/network/interfaces. Copiare la configurazione ed incollarla nel file.<br />
+            Modificare il file /etc/network/interfaces. Copiare la configurazione ed incollaral nel file.<br />
             <br />
             NB: Le righe che iniziano con il carattere # sono commenti e non vengono
             considerate come istruzioni dal software<br />
@@ -249,18 +348,17 @@ bridge_maxwait 0
             apt list network-manager<br />
             <br />
             Installato:<br />
-            <pre style="background-color: gainsboro"><code>
-Listing... Done
-network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64    [installed]
-N: There are 2 additional versions. Please use the '-a' switch to see them.
-            </code></pre>
+            <br />
+            Listing... Done<br />
+            network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64    [installed]<br />
+            N: There are 2 additional versions. Please use the '-a' switch to see them.<br />
             <br />
             Non installato:<br />
-            <pre style="background-color: gainsboro"><code>
-Listing... Done
-network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64
-N: There are 2 additional versions. Please use the '-a' switch to see them.
-            </code></pre>
+            <br />
+            Listing... Done<br />
+            network-manager/bionic-updates 1.10.6-2ubuntu1.4 amd64<br />
+            N: There are 2 additional versions. Please use the '-a' switch to see them.<br />
+            <br />
             <span style="color:chocolate">Se Network Manager non è installato passare alla sezione: Risoluzione dei nomi di domnio ( DNS )</span>
             <br />
             Verificare se il servizio Network Manager è in funzione:<br />
@@ -291,8 +389,12 @@ N: There are 2 additional versions. Please use the '-a' switch to see them.
             sudo nano /etc/systemd/resolved.conf
         </p>
         <pre style="background-color: gainsboro"><code>
-DNS=8.8.8.8 8.8.4.4
-        </code></pre>
+    ....<br />
+
+    DNS=8.8.8.8 8.8.4.4<br />
+
+    ....
+</code></pre>
         <p>
             Salvare il file CTRL+O:<br />
             Confermare di voler salvare il file INVIO:<br />
@@ -348,7 +450,7 @@ DNS=8.8.8.8 8.8.4.4
             <br />
             La risposta dovrà essere:<br />
             <br />
-            <span style="color:darkgreen">net.ipv4.ip_forward = 1</span>
+            net.ipv4.ip_forward = 1
         </p>
         <hr style="color: black">
     </div>
@@ -394,7 +496,7 @@ DNS=8.8.8.8 8.8.4.4
             riportati in questa lista:<br />
             https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
             <br />
-            country_code=IT o country_code=US o country_code=FR ecc
+            country_code=IT
         </p>
         <!-- CODE -->
         <div class="form-group" style="height:400px; border:thin; display:block">
@@ -414,7 +516,8 @@ wpa=2
 wpa_passphrase=PASSWORD
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
-rsn_pairwise=CCMP</textarea>
+rsn_pairwise=CCMP
+            </textarea>
         </div>
         <button class="btn btn-primary" onclick="clip('Hostapd')" style="margin-top:10px; margin-bottom:10px;">Copy</button>
 
@@ -454,10 +557,7 @@ rsn_pairwise=CCMP</textarea>
             Trovare la riga DAEMON_CONF. Se è presente il simbolo di commento # all'inizio<br />
             della riga rimuoverlo e modificare il valore impostandolo come segue:<br />
             <br />
-            <pre style="background-color: gainsboro"><code>
-DAEMON_CONF="/etc/hostapd/hostapd.conf"
-            </code></pre>
-
+            DAEMON_CONF="/etc/hostapd/hostapd.conf"<br />
         </p>
         <p>
             Salvare il file CTRL+O:<br />
@@ -495,39 +595,51 @@ DAEMON_CONF="/etc/hostapd/hostapd.conf"
             <br />
             sudo apt install isc-dhcp-server
             <br />
-            Modificare il file /etc/default/isc-dhcp-server :<br />
+            Modificare il file /etc/default/isc-dhcp-server:<br />
             <br />
-
             NB: Le righe che iniziano con il carattere # sono commenti e non vengono
             considerate come istruzioni dal software<br />
             <br />
             sudo nano /etc/default/isc-dhcp-server
-            <br />
-            Modifcare il valore di INTERFACESv4 specficando br0
         </p>
-        <pre style="background-color: gainsboro"><code>
-INTERFACESv4="br0"
-            </code></pre>
+        <p style="background-color: gainsboro">
+            # Defaults for isc-dhcp-server (sourced by /etc/init.d/isc-dhcp-server)<br />
+            <br />
+            # Path to dhcpd's config file (default: /etc/dhcp/dhcpd.conf).<br />
+            #DHCPDv4_CONF=/etc/dhcp/dhcpd.conf<br />
+            #DHCPDv6_CONF=/etc/dhcp/dhcpd6.conf<br />
+            <br />
+            # Path to dhcpd's PID file (default: /var/run/dhcpd.pid).<br />
+            #DHCPDv4_PID=/var/run/dhcpd.pid<br />
+            #DHCPDv6_PID=/var/run/dhcpd6.pid<br />
+            <br />
+            # Additional options to start dhcpd with.<br />
+            #       Don't use options -cf or -pf here; use DHCPD_CONF/ DHCPD_PID instead<br />
+            #OPTIONS=""<br />
+
+            # On what interfaces should the DHCP server (dhcpd) serve DHCP requests?<br />
+            #       Separate multiple interfaces with spaces, e.g. "eth0 eth1".<br />
+            INTERFACESv4="br0"<br />
+            INTERFACESv6=""<br />
+        </p>
         <p>
             Salvare il file CTRL+O:<br />
             Confermare di voler salvare il file INVIO:<br />
             Chiudere l'editor nano CTRL+X:<br />
         </p>
-        <hr style="color: black">
         <p>
             Modificare il file /etc/dhcp/dhcpd.conf:<br />
             <br />
             NB: Le righe che iniziano con il carattere # sono commenti e non vengono
             considerate come istruzioni dal software<br />
             <br />
-            E' possibile cancellare completamente il contenuto e sostituirlo con la configurazione<br />
-            riportata di seguito, modificare solo le righe seguenti, aggiungere il simbolo di commento #<br />
-            alle righe esistenti ed aggiungere la configurazione riportata di seguito:<br />
+            E' possibile cancellarne completamente il contenuto e sostituirlo con la configurazione<br />
+            riportata di seguito, oppure modificare solo le righe seguenti:<br />
             <br />
             sudo nano /etc/dhcp/dhcpd.conf
         </p>
         <!-- CODE -->
-        <div class="form-group" style="height:450px; border:thin; display:block">
+        <div class="form-group" style="height:400px; border:thin; display:block">
             <textarea class="form-control" id="dhcpconf" style="resize:initial; overflow:hidden; background-color: gainsboro; height:100%; width:100%;" readonly>
 option domain-name "domotica.org";
 option domain-name-servers 8.8.8.8, 8.8.4.4;
@@ -538,17 +650,27 @@ subnet 192.168.2.0 netmask 255.255.255.0 {
 range 192.168.2.2 192.168.2.254;
 option domain-name-servers 8.8.8.8;
 option domain-name "domotica.org";
-option subnet-mask 255.255.255.0;
+option subnet-mask 255.255.255.0;<br />
+
 option routers 192.168.2.1;
 option broadcast-address 192.168.2.255;
-option ntp-servers 192.168.2.1;
+option ntp-servers 192.168.2.1;<br />
+
 option netbios-name-servers 192.168.2.1;
 option netbios-node-type 2;
 default-lease-time -1;
 max-lease-time -1;
-}</textarea>
+}
+            </textarea>
         </div>
         <button class="btn btn-primary" onclick="clip('dhcpconf')" style="margin-top:10px; margin-bottom:10px;">Copy</button>
+
+        <p style="background-color: gainsboro">
+
+            <br />
+
+        </p>
+        <hr style="color: black">
         <p>
             Salvare il file CTRL+O:<br />
             Confermare di voler salvare il file INVIO:<br />
@@ -561,8 +683,7 @@ max-lease-time -1;
             sudo systemctl start isc-dhcp-server<br />
             <br />
             Se non viene visualizzato nessun messaggio di errore è possibile installare il servizio<br />
-            DHCP server. Una volta installato il servizio il server DHCP verrà avviato automaticamente<br />
-            all'avvio dell'HUB:<br/>
+            DHCP server, questo fa si che al prossimo avvio del PC il server venga avviato automaticamente:<br />
             <br />
             sudo systemctl start isc-dhcp-server<br />
             <br />
@@ -571,16 +692,17 @@ max-lease-time -1;
             sudo systemctl status isc-dhcp-server --no-pager<br />
             <br />
             Se il servizio è attivo l'output sarà simile a:<br />
-            <pre style="background-color: gainsboro"><code>
-● isc-dhcp-server.service - ISC DHCP IPv4 server
-Loaded: loaded (/lib/systemd/system/isc-dhcp-server.service; enabled; vendor preset: enabled)
-Active: active (running) since Thu 2020-04-02 07:37:07 UTC; 5h 28min ago
-Docs: man:dhcpd(8)
-Main PID: 1266 (dhcpd)
-Tasks: 1 (limit: 4915)
-CGroup: /system.slice/isc-dhcp-server.service
-└─1266 dhcpd -user dhcpd -group dhcpd -f -4 -pf /run/dhcp-server/dhcpd.pid -cf /etc/dhcp/dhcpd.conf
-            </code></pre>
+            <br />
+            ● isc-dhcp-server.service - ISC DHCP IPv4 server<br />
+            Loaded: loaded (/lib/systemd/system/isc-dhcp-server.service; enabled; vendor preset: enabled)<br />
+            Active: active (running) since Thu 2020-04-02 07:37:07 UTC; 5h 28min ago<br />
+            Docs: man:dhcpd(8)<br />
+            Main PID: 1266 (dhcpd)<br />
+            Tasks: 1 (limit: 4915)<br />
+            CGroup: /system.slice/isc-dhcp-server.service<br />
+            └─1266 dhcpd -user dhcpd -group dhcpd -f -4 -pf /run/dhcp-server/dhcpd.pid -cf /etc/dhcp/dhcpd.conf<br />
+            <br />
+            Premete CTRL+C per uscire dal log di stato.<br />
             <br />
             Se sono presenti errori sarà necessario eseguire il debug e/o verificare le configurazioni.<br />
             <span style="color:orangered">Vedi DEBUG di seguito.</span>
@@ -601,9 +723,9 @@ CGroup: /system.slice/isc-dhcp-server.service
             <br />
             se il servizio server DHCP è stato avviato con sudo systemctl enable isc-dhcp-server
             <br />
-            oppure con:<br />
+            oppure con:
             <br />
-            sudo systemctl start isc-dhcp-server<br />
+            sudo systemctl start isc-dhcp-server
             <br />
             Se tutto è andato bene il server DHCP è in funzione ed assegenera un nuovo IP ad<br />
             ogni dispositivo che si collegherà all'HUB, a meno che, non sia impostato un IP<br />
@@ -623,31 +745,33 @@ CGroup: /system.slice/isc-dhcp-server.service
             sudo systemctl status hostapd.service --no-pager<br />
             <br />
             Se il servizio è attivo l'output sarà simile a:<br />
-<pre style="background-color: gainsboro"><code>
-● hostapd.service - Advanced IEEE 802.11 AP and IEEE 802.1X/WPA/WPA2/EAP Authenticator
-Loaded: loaded (/lib/systemd/system/hostapd.service; enabled; vendor preset: enabled)
-Active: active (running) since Thu 2020-04-02 07:37:07 UTC; 5h 23min ago
-Process: 1287 ExecStart=/usr/sbin/hostapd -P /run/hostapd.pid -B $DAEMON_OPTS ${DAEMON_CONF} (code=exited, status=0/SUCCESS)
-Main PID: 1375 (hostapd)
-Tasks: 1 (limit: 4915)
-CGroup: /system.slice/hostapd.service
-└─1375 /usr/sbin/hostapd -P /run/hostapd.pid -B /etc/hostapd/hostapd.conf
-</code></pre>
+            <br />
+            ● hostapd.service - Advanced IEEE 802.11 AP and IEEE 802.1X/WPA/WPA2/EAP Authenticator<br />
+            Loaded: loaded (/lib/systemd/system/hostapd.service; enabled; vendor preset: enabled)<br />
+            Active: active (running) since Thu 2020-04-02 07:37:07 UTC; 5h 23min ago<br />
+            Process: 1287 ExecStart=/usr/sbin/hostapd -P /run/hostapd.pid -B $DAEMON_OPTS ${DAEMON_CONF} (code=exited, status=0/SUCCESS)<br />
+            Main PID: 1375 (hostapd)<br />
+            Tasks: 1 (limit: 4915)<br />
+            CGroup: /system.slice/hostapd.service<br />
+            └─1375 /usr/sbin/hostapd -P /run/hostapd.pid -B /etc/hostapd/hostapd.conf<br />
+            <br />
+            Premete CTRL+C per uscire dal log di stato.<br />
             <br />
             Verificare che il servizio isc-dhcp-server ( server DHCP ) sia in funzione:<br />
             <br />
             sudo systemctl status isc-dhcp-server --no-pager<br />
-<pre style="background-color: gainsboro"><code>
-Se il servizio è attivo l'output sarà simile a:
-● isc-dhcp-server.service - ISC DHCP IPv4 server
-Loaded: loaded (/lib/systemd/system/isc-dhcp-server.service; enabled; vendor preset: enabled)
-Active: active (running) since Thu 2020-04-02 07:37:07 UTC; 5h 28min ago
-Docs: man:dhcpd(8)
-Main PID: 1266 (dhcpd)
-Tasks: 1 (limit: 4915)
-CGroup: /system.slice/isc-dhcp-server.service
-└─1266 dhcpd -user dhcpd -group dhcpd -f -4 -pf /run/dhcp-server/dhcpd.pid -cf /etc/dhcp/dhcpd.conf
-</code></pre>
+            <br />
+            Se il servizio è attivo l'output sarà simile a:<br />
+            ● isc-dhcp-server.service - ISC DHCP IPv4 server<br />
+            Loaded: loaded (/lib/systemd/system/isc-dhcp-server.service; enabled; vendor preset: enabled)<br />
+            Active: active (running) since Thu 2020-04-02 07:37:07 UTC; 5h 28min ago<br />
+            Docs: man:dhcpd(8)<br />
+            Main PID: 1266 (dhcpd)<br />
+            Tasks: 1 (limit: 4915)<br />
+            CGroup: /system.slice/isc-dhcp-server.service<br />
+            └─1266 dhcpd -user dhcpd -group dhcpd -f -4 -pf /run/dhcp-server/dhcpd.pid -cf /etc/dhcp/dhcpd.conf<br />
+            <br />
+            Premete CTRL+C per uscire dal log di stato.<br />
             <br />
             Se entrambe i servizi sono attivi è possibile proseguire, altrimenti sarà necessario rivedere i file di configurazione<br />
             controllare i log, riavviare i servizi fino a quando essi non saranno eseguiti senza errori.
@@ -696,9 +820,9 @@ CGroup: /system.slice/isc-dhcp-server.service
     <div class="container">
         <h2>Fine procedura creazione HUB</h2>
         <p style="font-size=14px">
-            Riavviate l'HUB con:<br />
+            Riavviate l'HUB:<br />
             <br />
-            sudo reboot<br />
+            sudo reboot
             <br />
             Il vostro server Ubuntu è dotato di funzionalità di routing ed è un vero Access Point.
         </p>

@@ -68,6 +68,7 @@ Se README.MD non basta
             sudo apt install apt-transport-https ca-certificates curl software-properties-common<br />
             <br />
             Cosa verrà installato:<br />
+            <br />
             apt-transport-https: Abilita il package manager al traferimento di files utilizzando il protocollo https<br />
             ca-certificates: Abilita la averifica dei certificati di sicurezza<br />
             curl: E' il tool per il trasferimento dei dati<br />
@@ -79,7 +80,7 @@ Se README.MD non basta
             <br />
             curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -<br />
             <br />
-            Aggiungere il repository per Docker-CE alla lista dei repository gi� presente nel sistema.<br />
+            Aggiungere il repository per Docker-CE alla lista dei repository già presente nel sistema.<br />
             <br />
             sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"<br />
             <br />
@@ -101,9 +102,9 @@ Se README.MD non basta
         <p>
             Verificare se il servizio Docker è in funzione:<br />
             <br />
-            sudo systemctl status docker<br />
+            sudo systemctl status docker --no-pager<br />
             <br />
-            sudo docker info
+            sudo docker info<br />
             <br />
             Avviare il servizio Docker (systemd):<br />
             <br />
@@ -120,34 +121,34 @@ Se README.MD non basta
         <p>
             Verificare se Docker è in grado di dialogare con la rete:<br />
             <br />
-            docker run busybox ping -c 1 8.8.8.8<br />
+            sudo docker run busybox ping -c 1 8.8.8.8<br />
             <br />
             Verifica DNS:<br />
             <br />
-            sudo docker run busybox nslookup google.com
+            sudo docker run busybox nslookup google.com<br />
             <br />
             RISPOTA:
-            <br />
-            Server:         8.8.8.8<br />
-            Address:        8.8.8.8:53<br />
-            <br />
-            Non-authoritative answer:<br />
-            Name:   google.com<br />
-            Address: 216.58.208.174<br />
-            <br />
-            *** Can't find google.com: No answer<br />
-            <br />
+<pre style="background-color: gainsboro"><code>
+Server:         8.8.8.8
+Address:        8.8.8.8:53
+
+Non-authoritative answer:
+Name:   google.com
+Address: 216.58.208.174
+
+*** Can't find google.com: No answer
+</code></pre>
             sudo docker run --rm busybox nslookup -type=aaaa google.com<br />
             <br />
-            RISPOSTA:<br />
-            <br />
-            Server:         8.8.8.8<br />
-            Address:        8.8.8.8:53<br />
-            <br />
-            Non-authoritative answer:<br />
-            Name:   google.com<br />
-            Address: 2a00:1450:4002:807::200e<br />
-            <br />
+            RISPOSTA:
+<pre style="background-color: gainsboro"><code>
+Server:         8.8.8.8
+Address:        8.8.8.8:53
+
+Non-authoritative answer:
+Name:   google.com
+Address: 2a00:1450:4002:807::200e
+</code></pre>
             Lista container:<br />
             <br />
             docker container ls -a<br />
@@ -158,7 +159,7 @@ Se README.MD non basta
             <br />
             Versione di Docker:<br />
             <br />
-            docker -v
+            docker -v<br />
             <br />
             Docker Log:<br />
             <br />

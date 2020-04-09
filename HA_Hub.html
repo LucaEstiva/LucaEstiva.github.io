@@ -76,7 +76,7 @@
     <div class="container">
         <h2>Installazione ed avvio del Server Ubuntu - Configurazione testata e funzionante su Ubuntu Server V18.04.4</h2>
         <p>
-            Installare Ubuntu Server scaricando l'immagine ISO per PC AMD64 ( non ARM ) da qui:<br />
+            Installare Ubuntu Server scaricando l'immagine ISO per PC AMD64 ( non ARM )<br />
             <a class="btn btn-outline-success" target="_blank" href="https://ubuntu.com/download/server/thank-you?version=18.04.4&architecture=amd64" role="Link">Scarica</a><br />
             Creare un supporto di avvio ( chiavetta USB ) utilizzando BALENAETCHER:<br />
             <a class="btn btn-outline-success" target="_blank" href="https://www.balena.io/etcher/" role="Link">Scarica</a>
@@ -84,19 +84,19 @@
             Scaricare il client SSH putty:<br/>
             <a class="btn btn-outline-success" target="_blank" href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" role="Link">Scarica</a>
             <br/>
-            <span style="color:coral">Durante l'installazione di Ubuntu abilitare il SERVER SSH.</span><br/>
-            <br />
+            <span style="color:coral; font-size:30px; margin-top:30px; margin-bottom:20px">Durante l'installazione di Ubuntu abilitare il SERVER SSH.</span>
+            <br/>
             Una volta installato il software server e dopo aver riavviato il PC avrete a dispozione il terminale.<br />
             <br />
             Accedere al server effettuando il login<br />
             <br />
             Aggiornare la lista dei pacchetti:<br />
             <br />
-            sudo apt update<br />
+            <span style="color:dodgerblue">sudo apt update</span><br />
             <br />
             Aggiornare il software:<br />
             <br />
-            sudo apt upgrade<br />
+            <span style="color:dodgerblue">sudo apt upgrade</span><br />
         </p>
         <hr style="color: black">
     </div>
@@ -108,20 +108,21 @@
             <br />
             Verificare se il pacchetto ModemManager è installato:<br />
             <br />
-            apt list modemmanager<br />
+            <span style="color:dodgerblue">apt list modemmanager</span><br />
             <br />
             Installato:<br />
-            <br />
-            Listing... Done
-            <br />
-            modemmanager/bionic-updates 1.10.0-1~ubuntu18.04.2 amd64  [installed]<br />
-            N: There is 1 additional version. Please use the '-a' switch to see it<br />
+<pre style="background-color: gainsboro"><code>
+Listing... Done
+modemmanager/bionic-updates 1.10.0-1~ubuntu18.04.2 amd64  [installed]
+N: There is 1 additional version. Please use the '-a' switch to see it
+</code></pre>
             <br />
             Non Installato:<br />
-            <br />
-            Listing... Done<br />
-            modemmanager/bionic-updates 1.10.0-1~ubuntu18.04.2 amd64<br />
-            N: There is 1 additional version. Please use the '-a' switch to see it<br />
+<pre style="background-color: gainsboro"><code>
+Listing... Done
+modemmanager/bionic-updates 1.10.0-1~ubuntu18.04.2 amd64
+N: There is 1 additional version. Please use the '-a' switch to see it
+</code></pre>
             <br />
             <span style="color:chocolate">Se modem manager non è installato passare alla sezione: Preparazione gestione interfacce di rete con ifupdown</span>
             <br />
@@ -197,13 +198,10 @@ broadcast 192.168.2.255
 bridge_ports enp2s0 wlp3s0
 bridge_stp off
 bridge_fd 0
-bridge_maxwait 0
-            </textarea>
+bridge_maxwait 0</textarea>
         </div>
         <button class="btn btn-primary" onclick="clip('NManager')" style="margin-top:10px; margin-bottom:10px;">Copy</button>
-
         <hr style="color: black">
-
         <p>
             Salvare il file CTRL+O:<br />
             Confermare di voler salvare il file INVIO:<br />
@@ -228,8 +226,8 @@ bridge_maxwait 0
             <br />
             sudo apt --assume-yes purge nplan netplan.io<br />
         <p>
-            <hr style="color: black">
-            <h2>Abilitare ifupdown</h2>
+        <hr style="color: black">
+        <h2>Abilitare ifupdown</h2>
         <p>
             Avvio del servizio networking;<br />
             <br />
@@ -266,6 +264,7 @@ N: There are 2 additional versions. Please use the '-a' switch to see them.
             </code></pre>
             <span style="color:chocolate">Se Network Manager non è installato passare alla sezione: Risoluzione dei nomi di domnio ( DNS )</span>
             <br />
+            <br/>
             Verificare se il servizio Network Manager è in funzione:<br />
             <br />
             sudo systemctl status NetworkManager.service --no-pager<br />
@@ -326,7 +325,7 @@ DNS=8.8.8.8 8.8.4.4
             NB: Le righe che iniziano con il carattere # sono commenti e non vengono
             considerate come istruzioni dal software<br />
             <br />
-            sudo nano /etc/sysctl.conf
+            sudo nano /etc/sysctl.conf<br />
             <br />
             Elimiare il carattere # commento alla riga come mostrato di seguito e verificare che il valore<br />
             dopo il simbolo = sia 1<br />
@@ -367,6 +366,7 @@ DNS=8.8.8.8 8.8.4.4
             <br />
             sudo apt -y purge ufw<br />
         </p>
+        <hr style="color: black">
     </div>
 
     <div class="container">
@@ -460,7 +460,6 @@ rsn_pairwise=CCMP</textarea>
             <pre style="background-color: gainsboro"><code>
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
             </code></pre>
-
         </p>
         <p>
             Salvare il file CTRL+O:<br />
@@ -496,11 +495,10 @@ DAEMON_CONF="/etc/hostapd/hostapd.conf"
         <p>
             Installare il server DHCP isc-dhcp-server:<br />
             <br />
-            sudo apt install isc-dhcp-server
+            sudo apt install isc-dhcp-server -y<br />
             <br />
             Modificare il file /etc/default/isc-dhcp-server :<br />
             <br />
-
             NB: Le righe che iniziano con il carattere # sono commenti e non vengono
             considerate come istruzioni dal software<br />
             <br />
@@ -510,7 +508,7 @@ DAEMON_CONF="/etc/hostapd/hostapd.conf"
         </p>
         <pre style="background-color: gainsboro"><code>
 INTERFACESv4="br0"
-            </code></pre>
+        </code></pre>
         <p>
             Salvare il file CTRL+O:<br />
             Confermare di voler salvare il file INVIO:<br />
@@ -559,15 +557,9 @@ max-lease-time -1;
         </p>
         <h2>Test server DHCP</h2>
         <p>
-            Avviare il server DHCP:<br />
+            Riavviare il server DHCP:<br />
             <br />
-            sudo systemctl start isc-dhcp-server<br />
-            <br />
-            Se non viene visualizzato nessun messaggio di errore è possibile installare il servizio<br />
-            DHCP server. Una volta installato il servizio il server DHCP verrà avviato automaticamente<br />
-            all'avvio dell'HUB:<br/>
-            <br />
-            sudo systemctl start isc-dhcp-server<br />
+            sudo systemctl restart isc-dhcp-server<br />
             <br />
             Controllare lo stato del server:<br />
             <br />
@@ -586,27 +578,12 @@ CGroup: /system.slice/isc-dhcp-server.service
             </code></pre>
             <br />
             Se sono presenti errori sarà necessario eseguire il debug e/o verificare le configurazioni.<br />
-            <span style="color:orangered">Vedi DEBUG di seguito.</span>
-            <br />
-            <span style="color:forestgreen">Se non sono presenti errori abilater il servizio server DNS</span>
-            <br />
-            sudo systemctl enable isc-dhcp-server<br />
-            <br />
-            <span style="color:orangered">DEBUG</span>
-            <br />
-            Vedere il log degli errori:<br />
             <br />
             journalctl -xe<br />
             <br />
             Riavviare il server se vengono apportate modifiche al file di configurazione:<br />
             <br />
             sudo systemctl restart isc-dhcp-server<br />
-            <br />
-            se il servizio server DHCP è stato avviato con sudo systemctl enable isc-dhcp-server
-            <br />
-            oppure con:<br />
-            <br />
-            sudo systemctl start isc-dhcp-server<br />
             <br />
             Se tutto è andato bene il server DHCP è in funzione ed assegenera un nuovo IP ad<br />
             ogni dispositivo che si collegherà all'HUB, a meno che, non sia impostato un IP<br />
@@ -621,7 +598,7 @@ CGroup: /system.slice/isc-dhcp-server.service
             <br />
             sudo reboot<br />
             <br />
-            Verificare che il servizio Hostapd sia in funzione:<br />
+            Verificare che il servizio Hostapd è in funzione:<br />
             <br />
             sudo systemctl status hostapd.service --no-pager<br />
             <br />
@@ -637,7 +614,7 @@ CGroup: /system.slice/hostapd.service
 └─1375 /usr/sbin/hostapd -P /run/hostapd.pid -B /etc/hostapd/hostapd.conf
 </code></pre>
             <br />
-            Verificare che il servizio isc-dhcp-server ( server DHCP ) sia in funzione:<br />
+            Verificare che il servizio isc-dhcp-server ( server DHCP ) è in funzione:<br />
             <br />
             sudo systemctl status isc-dhcp-server --no-pager<br />
 <pre style="background-color: gainsboro"><code>

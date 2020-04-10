@@ -59,42 +59,235 @@ Se README.MD non basta
     <div class="container">
         <h2>Verificare/Abilitare il Bluetooth</h2>
         <p>
-            Verificare che l'interfaccia Bluetooth sia presente ed operativa:<br />
+            Installare i pacchetti:<br />
+            <br />
+            sudo apt install bluetooth bluez bluez-tools rfkill rfcomm -y<br />
+            <br />
+            Verifica stato interfaccia bluetooth:<br />
             <br />
             hcitool dev<br />
             <br />
             Se la risposta è simile a:<br />
+<pre style="background-color: gainsboro"><code>
+Devices:
+hci0    55:44:33:22:11:00
+</code></pre>
+            allora l'interfaccia bluetooth è perfettamente funzionante e il valore<br />
+            dopo hci0 corrisponde all'indirizzo MAC dell'interfaccia bluetooth.<br />
             <br />
-            Devices:<br />
-            hci0    55:44:33:22:11:00<br />
+            Scansione periferiche bluetooth nelle vicinanze, le periferiche associate non vengono mostrate.
+            Per ogni periferifca viene mostrato l'indirizzo MAC:<br />
             <br />
-            allora l'interfaccia Bluetooth è perfettamente funzionante e il valore<br />
-            dopo hci0 corrisponde all'indirizzo MAC della periferica.<br />
+            sudo hcitool -i hci0 scan
+            <pre style="background-color: gainsboro"><code>
+Scanning ...
+00:00:00:00:5A:AD    MI4
+                </code></pre>
+            Scansione periferiche bluetooth LE ( bluetooth Low Energy ) nelle vicinanze, le periferiche associate non vengono mostrate.
+            Per ogni periferifca viene mostrato l'indirizzo MAC:<br />
             <br />
-            Scansione periferiche Bluetooth per il pairing:<br />
+            sudo hcitool -i hci0 lescan
+            <pre style="background-color: gainsboro"><code>
+LE Scan ...
+EA:29:15:15:E8:A1 Keyboard K375s
+EA:29:15:15:E8:A1 (unknown)
+..................
+                </code></pre>
             <br />
-            hcitool scan<br />
+            Sevizi disponibili dispositivo bluetooth:<br />
+            <br />
+            sdptool browse 00:1D:A5:02:7F:4B<br />
+            <br />
+            Ping dispositivo bluetooth, sostituire MAC con l'indirizzo del dispositivo con il quale si vuole effettuare il ping es: 00:1D:A5:02:7F:4B
+            <br />
+            sudo l2ping MAC
             <br />
             Maggiori dettagli qui:<br />
+            <br />
             <a class="btn btn-outline-success" target="_blank" href="https://wiki.ubuntu-it.org/Hardware/DispositiviSenzaFili/Bluetooth" role="Link">Wiki Ubuntu</a>
         </p>
-        <h2>BlueZ</h2>
+
+        <h2>bluetoothctl</h2>
         <p>
-            Verificare che l'interfaccia Bluetooth sia presente ed operativa:<br />
-            <br />
-            apt list --installed bluez<br />
-            <br />
             Per avviare l'utility bluetooth:<br />
             <br />
-            sudo bluetoothctl
+            sudo bluetoothctl<br />
             <br />
-            Per uscire dall'utility digitare quit: <br />
+            Per terminare l'utility bluetooth:<br />
             <br />
-            Maggiori dettagli qui:<br />
-            <a class="btn btn-outline-success" target="_blank" href="https://docs.ubuntu.com/core/en/stacks/bluetooth/bluez/docs/reference/pairing/outbound" role="Link">Bluetooth documentation</a>
+            quit<br />
+            <br />
+            Avviare scansione dispositivi bluetooth, i dispositivi accopiati non vengono mostrati:<br />
+            <br />
+            scan on
+            <br />
+            Lista dei comandi bluetoothctl:<br />
+            <br />
+
+            <table class="renderedtable" cellspacing="0" cellpadding="2">
+                <tbody>
+                    <tr>
+                        <th valign="top">
+<p>Command</p>
+        </th><th valign="top">
+            <p>Description</p>
+        </th>
+        </tr>
+
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>1. list</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Generates a list of available controllers. You can pair a controller and a device while working from another controller, but on a home system you may have only one controller. However, you need the controller's MAC address to run other commands. If it is no longer visible on screen, run list again. You might be able to simplify the process by turning off all controllers except the one to pair.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>2. show</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Gathers information about available controllers, including their names and current state. This information can be useful for distinguishing one controller from the other.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>3. select &lt;CONTROLLER-MAC-ADDRESS&gt;</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Selects the controller to pair. Once you select the controller, all controller-related commands will apply to it for three minutes or until you select a new controller.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>4. power on</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Enables the selected controller. If you are pairing the controller on which bluetoothctl is running, this step is unnecessary.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>5. agent on</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Turns on Bluetooth support. If you use a USB adapter, it is on as long as it is plugged in.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>6. default agent</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Sets the current agent to the default.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>7. discoverable on</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Makes the controller visible to other devices. As a security precaution, run discoverable off after pairing.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>8. scan on</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Receives a list of detected devices (<a class="figure" href="#article_f3" target="_self">Figure 3</a>). If a device you expect is not visible, check that it is turned on, ready to pair, and within range. Already paired devices will not be listed.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>9. pairable on</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Readies the controller for pairing. Remember that you have three minutes after running this command to pair.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>10. devices</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Lists available devices. You want the MAC address, not the name, to use with other commands.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>11. info &lt;DEVICE-MAC-ADDRESS&gt;</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Displays information about a particular device (<a class="figure" href="#article_f4" target="_self">Figure 4</a>). This command is most often useful in identifying the correct device.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>12. connect &lt;DEVICE-MAC-ADDRESS&gt;</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Readies the device for pairing.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>13. pair &lt;DEVICE-MAC-ADDRESS&gt;</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Pairs the device with the default controller.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>14. trust &lt;DEVICE-MAC-ADDRESS&gt;</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Sets the device to re-pair automatically when it is turned on, which eliminates the need to pair all over again.</p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="vertical-align: top">
+                <p>15. discoverable off</p>
+            </td>
+            <td valign="top" style="vertical-align: top">
+                <p>Hides the controller from other Bluetooth devices. Otherwise, any device that can detect it has access to it, leaving a major security hole. In this respect, running bluetoothctl resembles logging in as root: you want to spend as little time running it as possible.</p>
+            </td>
+        </tr>
+        </tbody></table>        </p>
+
+        <hr style="color: black">
+
+
+
+        <h2>Problemi</h2>
+        <p>
+            In caso di problemi ad accedere all'interfaccia bluetooth:<br />
+            Verificare che l'interfaccia non sia bloccata<br />
+            <br />
+            sudo rfkill list<br />
+            Se l'interfaccia bluetooh è bloccata (soft o hard blocked), sbloccarla con il comando:<br />
+            sudo rfkill unblock bluetooth<br />
+            <br />
+            sudo systemctl start bluetooth.service<br />
+            <br />
+            sudo systemctl enable bluetooth.service<br />
+            <br />
+            Attivare l'interfaccia bluetooth:<br />
+            sudo hciconfig hci0 up<br />
+            <br />
+            Installare firmware atheros:<br />
+            sudo apt-get install bluez-firmware firmware-atheros
+            nstallare firmware realtek:<br />
+            sudo apt-get install bluez-firmware firmware-realtek
         </p>
         <hr style="color: black">
     </div>
+
+
+
+
+
 
 
     <!-- Optional JavaScript -->

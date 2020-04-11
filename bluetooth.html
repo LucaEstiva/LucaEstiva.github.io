@@ -260,10 +260,13 @@ EA:29:15:15:E8:A1 (unknown)
         <h2>Problemi</h2>
         <p>
             In caso di problemi ad accedere all'interfaccia bluetooth:<br />
+            <br />
             Verificare che l'interfaccia non sia bloccata<br />
             <br />
             sudo rfkill list<br />
+            <br />
             Se l'interfaccia bluetooh è bloccata (soft o hard blocked), sbloccarla con il comando:<br />
+            <br />
             sudo rfkill unblock bluetooth<br />
             <br />
             sudo systemctl start bluetooth.service<br />
@@ -271,11 +274,13 @@ EA:29:15:15:E8:A1 (unknown)
             sudo systemctl enable bluetooth.service<br />
             <br />
             Attivare l'interfaccia bluetooth:<br />
+            <br />
             sudo hciconfig hci0 up<br />
             <br />
             Installare firmware atheros:<br />
-            sudo apt-get install bluez-firmware firmware-atheros
-            nstallare firmware realtek:<br />
+            sudo apt-get install bluez-firmware firmware-atheros<br />
+            <br />
+            Installare firmware realtek:<br />
             sudo apt-get install bluez-firmware firmware-realtek
         </p>
         <hr style="color: black">

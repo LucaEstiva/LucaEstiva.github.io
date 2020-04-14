@@ -54,6 +54,14 @@
             Per realizzare l'HUB è necessario un Raspberry ( testato e stabile raspberry PI 3 b+ ).<br />
             Le caratteristiche del chip WiFi per il modello b e b+ non sono uguali.<br />
             Mentre sarebbe comunque possibile realizzare l'HUB, non sarebbe possibile ottenere le stesse prestazioni WiFi<br />
+<pre style="background-color: gainsboro"><code>
+b:802.11b/g/n
+b+:Dual-Band 802.11ac
+
+The WiFi chipset is the Cypress CYW43455 with a 1×1:1 configuration; the 3B model has the Broadcom BCM43438
+chipset which is also 1×1:1 (but only has 802.11n at 2.4GHz).
+In summary, the 3B+ model brings the WiFi aspect of the RPi to the 802.11ac standard
+</code></pre>
         </p>
         <a class="btn btn-outline-success" target="_blank" href="\ap_mode.html" role="Link">Guida Ubuntu WiFiDocs/MasterMode</a>
         <hr style="color: black">
@@ -141,8 +149,6 @@ N: There is 1 additional version. Please use the '-a' switch to see it
             Installare i pacchetti ifupdown e bridge-utils<br />
             <br />
             <span style="color:dodgerblue">sudo apt install ifupdown</span><br />
-            <br />
-            <span style="color:dodgerblue">sudo apt install bridge-utils</span><br />
 </p>
         <hr style="color: black">
         <h2>Configurare le interfacce di rete</h2>
@@ -171,11 +177,7 @@ iface eth0 inet dhcp
 auto wlan0
 iface wlan0 inet static
 address 192.168.2.1
-netmask 255.255.255.0
-
-
-
-</textarea>
+netmask 255.255.255.0</textarea>
         </div>
         <button class="btn btn-primary" onclick="clip('NManager')" style="margin-top:10px; margin-bottom:10px;">Copy</button>
         <hr style="color: black">
@@ -185,7 +187,6 @@ netmask 255.255.255.0
             Chiudere l'editor nano CTRL+X:<br />
         </p>
     </div>
-
 
     <div class="container">
         <h2>Rimuovere Netplan</h2>
@@ -395,8 +396,7 @@ wpa=2
 wpa_passphrase=XorEaxEax
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
-rsn_pairwise=CCMP
-</textarea>
+rsn_pairwise=CCMP</textarea>
         </div>
         <button class="btn btn-primary" onclick="clip('Hostapd')" style="margin-top:10px; margin-bottom:10px;">Copy</button>
 

@@ -76,19 +76,18 @@
     <div class="container">
         <h2>Installazione ed avvio del Server Ubuntu - Configurazione testata e funzionante su Ubuntu Server V18.04.4</h2>
         <p>
-            Installare Ubuntu Server scaricando l'immagine ISO per PC AMD64 ( non ARM )<br />
+            Installare Ubuntu Server scaricando l'immagine ISO per Rapsberry<br />
             <a class="btn btn-outline-success" target="_blank" href="https://ubuntu.com/download/server/thank-you?version=18.04.4&architecture=amd64" role="Link">Scarica</a><br />
-            Creare un supporto di avvio ( chiavetta USB ) utilizzando BALENAETCHER:<br />
+            Copiare la iso sulla schda SD utilizzando BALENAETCHER:<br />
             <a class="btn btn-outline-success" target="_blank" href="https://www.balena.io/etcher/" role="Link">Scarica</a>
             <br />
             Scaricare il client SSH putty:<br/>
             <a class="btn btn-outline-success" target="_blank" href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html" role="Link">Scarica</a>
             <br/>
-            <span style="color:coral; font-size:30px; margin-top:30px; margin-bottom:20px">Durante l'installazione di Ubuntu abilitare il SERVER SSH.</span>
-            <br/>
-            Una volta installato il software server e dopo aver riavviato il PC avrete a dispozione il terminale.<br />
+            Una volta avviato il rapsberry sarà gia disponibile una connessione SSH<br />
+			Collegars al rapsberry utilizzando putty<br/>
             <br />
-            Accedere al server effettuando il login<br />
+            Accedere al server effettuando il login ( username: ubuntu, password: ubuntu):<br />
             <br />
             Aggiornare la lista dei pacchetti:<br />
             <br />
@@ -175,30 +174,22 @@ N: There is 1 additional version. Please use the '-a' switch to see it
         </p>
         <!-- CODE -->
         <div class="form-group" style="height:600px; border:thin; display:block">
-            <textarea class="form-control" id="NManager" style="resize:initial; overflow:hidden; background-color: gainsboro; height:100%; width:100%;" readonly>
+			<textarea class="form-control" id="NManager" style="resize:initial; overflow:hidden; background-color: gainsboro; height:100%; width:100%;" readonly>
 auto lo
 iface lo inet loopback
 
-auto en1s0
-allow-hotplug enp1s0
-iface enp1s0 inet dhcp
+auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp
 
-allow-hotplug enp2s0
-iface enp2s0 inet manual
-
-auto wlp3s0
-iface wlp3s0 inet manual
-
-auto br0
-iface br0 inet static
+auto wlan0
+iface wlan0 inet static
 address 192.168.2.1
 netmask 255.255.255.0
-network 192.168.2.0
-broadcast 192.168.2.255
-bridge_ports enp2s0 wlp3s0
-bridge_stp off
-bridge_fd 0
-bridge_maxwait 0</textarea>
+
+
+
+</textarea>
         </div>
         <button class="btn btn-primary" onclick="clip('NManager')" style="margin-top:10px; margin-bottom:10px;">Copy</button>
         <hr style="color: black">
@@ -371,53 +362,55 @@ DNS=8.8.8.8 8.8.4.4
 
     <div class="container">
         <h2>Hostapd</h2>
-        <p>
-            Hostapd creerà il nuovo Access Point AP<br />
-            <a href="https://help.ubuntu.com/community/WifiDocs/WirelessAccessPoint" target="_blank">Wireless Access Point</a><br />
-            Installare i pacchetti:<br />
-            <br />
-            <span style="color:dodgerblue">sudo apt install wireless-tools</span><br />
-            <br />
-            <span style="color:dodgerblue">sudo apt install hostapd</span><br />
-            <br />
-            Modificare il file /etc/hostapd/hostapd.conf<br />
-            <br />
-            NB: Le righe che iniziano con il carattere # sono commenti e non vengono
-            considerate come istruzioni dal software<br />
-            <br />
-            <span style="color:dodgerblue">sudo nano /etc/hostapd/hostapd.conf</span><br />
-            <br />
-            Specificare il nome del nuovo Access Point:<br />
-            ssid=Home_Assistant, o vostra scelta<br />
-            Specificare la password:<br />
-            wpa_passphrase=PASSWORD<br />
-            <br />
-            La potenza del segnale radio ed i canali disponibili sono gestiti dalle<br />
-            diverse nazioni. Impostate la vostra nazione utilizzando i codici Country code (ISO/IEC 3166-1)<br />
-            riportati in questa lista:<br />
-            <a hrhref="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes" target="_blank">Codici nazioni - Country codes</a>
-            <br />
-            country_code=IT o country_code=US o country_code=FR ecc
-        </p>
+		<p>
+			Hostapd creerà il nuovo Access Point AP<br />
+			<a href="https://help.ubuntu.com/community/WifiDocs/WirelessAccessPoint" target="_blank">Wireless Access Point</a><br />
+			Installare i pacchetti:<br />
+			<br />
+			<span style="color:dodgerblue">sudo apt install wireless-tools</span><br />
+			<br />
+			<span style="color:dodgerblue">sudo apt install hostapd</span><br />
+			<br />
+			Modificare il file /etc/hostapd/hostapd.conf<br />
+			<br />
+			NB: Le righe che iniziano con il carattere # sono commenti e non vengono
+			considerate come istruzioni dal software<br />
+			<br />
+			<span style="color:dodgerblue">sudo nano /etc/hostapd/hostapd.conf</span><br />
+			<br />
+			Specificare il nome del nuovo Access Point:<br />
+			ssid=Home_Assistant, o vostra scelta<br />
+			Specificare la password:<br />
+			wpa_passphrase=PASSWORD<br />
+			<br />
+			La potenza del segnale radio ed i canali disponibili sono gestiti dalle<br />
+			diverse nazioni. Impostate la vostra nazione utilizzando i codici Country code (ISO/IEC 3166-1)<br />
+			riportati in questa lista:<br />
+			<a hrhref="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes" target="_blank">Codici nazioni - Country codes</a>
+			<br />
+			country_code=IT o country_code=US o country_code=FR ecc<br />
+			<br />
+			Modalità WiFi 802.11n, 5Ghz, canale 40
+		</p>
         <!-- CODE -->
         <div class="form-group" style="height:400px; border:thin; display:block">
-            <textarea class="form-control" id="Hostapd" style="resize:initial; overflow:hidden; background-color: gainsboro; height:100%; width:100%;" readonly>
-interface=wlp3s0
+			<textarea class="form-control" id="Hostapd" style="resize:initial; overflow:hidden; background-color: gainsboro; height:100%; width:100%;" readonly>
+interface=wlan0
 driver=nl80211
-bridge=br0
-country_code=BO
-ssid=Home_Assistant
-hw_mode=g
-channel=10
+country_code=US
+ssid=RasPI_5Ghz
+hw_mode=a channel=40 ieee80211n=1 require_ht=1
+ht_capab=[HT40-][SHORT-GI-20][SHORT-GI-40][DSSS_CCK-40][MAX-AMSDU-3839]
 logger_syslog=-1
-wmm_enabled=1
+wmm_enabled=0
 macaddr_acl=0
 auth_algs=1
 wpa=2
-wpa_passphrase=PASSWORD
+wpa_passphrase=XorEaxEax
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
-rsn_pairwise=CCMP</textarea>
+rsn_pairwise=CCMP
+</textarea>
         </div>
         <button class="btn btn-primary" onclick="clip('Hostapd')" style="margin-top:10px; margin-bottom:10px;">Copy</button>
 
@@ -492,23 +485,23 @@ DAEMON_CONF="/etc/hostapd/hostapd.conf"
 
     <div class="container">
         <h2>Server DHCP - isc-dhcp-server</h2>
-        <p>
-            Installare il server DHCP isc-dhcp-server:<br />
-            <br />
-            <span style="color:dodgerblue">sudo apt install isc-dhcp-server -y</span><br />
-            <br />
-            Modificare il file /etc/default/isc-dhcp-server :<br />
-            <br />
-            NB: Le righe che iniziano con il carattere # sono commenti e non vengono
-            considerate come istruzioni dal software<br />
-            <br />
-            <span style="color:dodgerblue">sudo nano /etc/default/isc-dhcp-server</span><br/>
-            <br />
-            Modifcare il valore di INTERFACESv4 specficando br0
-        </p>
+		<p>
+			Installare il server DHCP isc-dhcp-server:<br />
+			<br />
+			<span style="color:dodgerblue">sudo apt install isc-dhcp-server -y</span><br />
+			<br />
+			Modificare il file /etc/default/isc-dhcp-server :<br />
+			<br />
+			NB: Le righe che iniziano con il carattere # sono commenti e non vengono
+			considerate come istruzioni dal software<br />
+			<br />
+			<span style="color:dodgerblue">sudo nano /etc/default/isc-dhcp-server</span><br />
+			<br />
+			Modifcare il valore di INTERFACESv4 specficando wlan0
+		</p>
         <pre style="background-color: gainsboro"><code>
-INTERFACESv4="br0"
-        </code></pre>
+INTERFACESv4="wlan0"
+</code></pre>
         <p>
             Salvare il file CTRL+O:<br />
             Confermare di voler salvare il file INVIO:<br />

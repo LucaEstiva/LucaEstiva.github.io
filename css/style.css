@@ -28,6 +28,16 @@
     background-size: cover;
 }
 
+#parallax-image2 {
+    background-image: url("/images/Raspberry/raspberry-pi-3-model-b-1.jpg");
+    height: 500px;
+    margin-bottom: 20px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 h1{
 	font-family: 'Lato', sans-serif;
 	color: gray;

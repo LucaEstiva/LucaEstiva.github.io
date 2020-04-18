@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\css",
+    "\\images",
+    "\\images\\Raspberry"
   ],
-  "SelectedNode": "\\netmask.html",
+  "SelectedNode": "\\WiFi_Interfaces_AP.html",
   "PreviewInSolutionExplorer": false
 }

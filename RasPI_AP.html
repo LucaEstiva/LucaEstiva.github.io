@@ -349,39 +349,38 @@ DNS=8.8.8.8 8.8.4.4
 
     <div class="container">
         <h2>Hostapd</h2>
-		<p>
-			Hostapd creerà il nuovo Access Point AP<br />
-			<a href="https://help.ubuntu.com/community/WifiDocs/WirelessAccessPoint" target="_blank">Wireless Access Point</a><br />
-			Installare i pacchetti:<br />
-			<br />
-			<span style="color:dodgerblue">sudo apt install wireless-tools</span><br />
-			<br />
-			<span style="color:dodgerblue">sudo apt install hostapd</span><br />
-			<br />
-			Modificare il file /etc/hostapd/hostapd.conf<br />
-			<br />
-			NB: Le righe che iniziano con il carattere # sono commenti e non vengono
-			considerate come istruzioni dal software<br />
-			<br />
-			<span style="color:dodgerblue">sudo nano /etc/hostapd/hostapd.conf</span><br />
-			<br />
-			Specificare il nome del nuovo Access Point:<br />
-			ssid=Home_Assistant, o vostra scelta<br />
-			Specificare la password:<br />
-			wpa_passphrase=PASSWORD<br />
-			<br />
-			La potenza del segnale radio ed i canali disponibili sono gestiti dalle<br />
-			diverse nazioni. Impostate la vostra nazione utilizzando i codici Country code (ISO/IEC 3166-1)<br />
-			riportati in questa lista:<br />
-			<a hrhref="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes" target="_blank">Codici nazioni - Country codes</a>
-			<br />
-			country_code=IT o country_code=US o country_code=FR ecc<br />
-			<br />
-			Modalità WiFi 802.11n, 5Ghz, canale 40
-		</p>
+        <p>
+            Hostapd creerà il nuovo Access Point AP<br />
+            <a href="https://help.ubuntu.com/community/WifiDocs/WirelessAccessPoint" target="_blank">Wireless Access Point</a><br />
+            Installare i pacchetti:<br />
+            <br />
+            <span style="color:dodgerblue">sudo apt install wireless-tools</span><br />
+            <br />
+            <span style="color:dodgerblue">sudo apt install hostapd</span><br />
+            <br />
+            Modificare il file /etc/hostapd/hostapd.conf<br />
+            <br />
+            NB: Le righe che iniziano con il carattere # sono commenti e non vengono
+            considerate come istruzioni dal software<br />
+            <br />
+            <span style="color:dodgerblue">sudo nano /etc/hostapd/hostapd.conf</span><br />
+            <br />
+            Specificare il nome del nuovo Access Point:<br />
+            ssid=Home_Assistant, o vostra scelta<br />
+            Specificare la password:<br />
+            wpa_passphrase=PASSWORD<br />
+            <br />
+            La potenza del segnale radio ed i canali disponibili sono gestiti dalle<br />
+            diverse nazioni. Impostate la vostra nazione utilizzando i codici Country code (ISO/IEC 3166-1)<br />
+            riportati in questa lista:<br />
+            <a hrhref="https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes" target="_blank">Codici nazioni - Country codes</a>
+            <br />
+            country_code=IT o country_code=US o country_code=FR ecc<br />
+        </p>
+        <h2>Modalità WiFi 802.11n, 5Ghz, canale 40</h2>
         <!-- CODE -->
         <div class="form-group" style="height:400px; border:thin; display:block">
-			<textarea class="form-control" id="Hostapd" style="resize:initial; overflow:hidden; background-color: gainsboro; height:100%; width:100%;" readonly>
+            <textarea class="form-control" id="Hostapd" style="resize:initial; overflow:hidden; background-color: gainsboro; height:100%; width:100%;" readonly>
 interface=wlan0
 driver=nl80211
 country_code=US
@@ -393,13 +392,33 @@ wmm_enabled=0
 macaddr_acl=0
 auth_algs=1
 wpa=2
-wpa_passphrase=XorEaxEax
+wpa_passphrase=HomeAssistant
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP</textarea>
         </div>
         <button class="btn btn-primary" onclick="clip('Hostapd')" style="margin-top:10px; margin-bottom:10px;">Copy</button>
-
+        <h2>Modalità WiFi 802.11n, 5Ghz, canale 40</h2>
+        <!-- CODE -->
+        <div class="form-group" style="height:400px; border:thin; display:block">
+            <textarea class="form-control" id="Hostapd" style="resize:initial; overflow:hidden; background-color: gainsboro; height:100%; width:100%;" readonly>
+interface=wlan0
+driver=nl80211
+country_code=US
+ssid=RasPI_5Ghz
+hw_mode=a channel=40 ieee80211n=1 require_ht=1
+ht_capab=[HT40-][SHORT-GI-20][SHORT-GI-40][DSSS_CCK-40][MAX-AMSDU-3839]
+logger_syslog=-1
+wmm_enabled=0
+macaddr_acl=0
+auth_algs=1
+wpa=2
+wpa_passphrase=HomeAssistant
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP</textarea>
+        </div>
+        <button class="btn btn-primary" onclick="clip('Hostapd')" style="margin-top:10px; margin-bottom:10px;">Copy</button>
         <hr style="color: black">
         <p>
             Salvare il file CTRL+O:<br />

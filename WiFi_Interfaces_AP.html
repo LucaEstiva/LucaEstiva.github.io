@@ -420,17 +420,14 @@ Frequencies:
     * 5825 MHz [165] (20.0 dBm)
 </code></pre>
 
-            NO-IR means you can't initiate radiation, it doesn't mean they are
-            disabled. The NO-IR flag then means you cannot use modes of operation
-            that require you to initiate radiation first, there are two ways that
-            can happen:
-
-            * beconing -- AP, IBSS, Mesh, P2P master mode
-
-            That is just the point, right? The context is "Setup of wireless AP".
-
-
-            sudo iw list | grep -A4 "valid interface combinations:"
+            NO-IR means you can't initiate radiation, it doesn't mean they are disabled.<br />
+            The NO-IR flag then means you cannot use modes of operation that require you to initiate radiation first, there are two ways that<br />
+            can happen:<br />
+            <br />
+            * beconing -- AP, IBSS, Mesh, P2P master mode<br />
+            <br />
+            sudo iw list | grep -A4 "valid interface combinations:"<br />
+            <br />
             <pre style="background-color: gainsboro"><code>
                 RASPBERRY PI 3 B+
             software interface modes (can always be added):
@@ -451,7 +448,6 @@ Frequencies:
 
             <pre style="background-color: gainsboro"><code>
             INTEL
-            luca@home_assistant_hub:~$ sudo iw list | grep -A4 "valid interface combinations:"
             valid interface combinations:
             * #{ managed } <= 2048, #{ AP, mesh point } <= 8, #{ P2P-client, P2P-GO } <= 1,
             total <= 2048, #channels <= 1, STA/AP BI must match
@@ -461,7 +457,6 @@ Frequencies:
 
             <pre style="background-color: gainsboro"><code>
             ATHEROS
-            luca@home_assistant_hub:~$ sudo iw list | grep -A4 "valid interface combinations:"
             valid interface combinations:
             * #{ managed } <= 1, #{ AP, P2P-client, P2P-GO } <= 1, #{ P2P-device } <= 1,
             total <= 3, #channels <= 2
@@ -473,17 +468,6 @@ Frequencies:
         <hr style="color: black">
     </div>
 
-
-    <div class="container">
-        <h3>Home Assistant</h3>
-        <a class="btn btn-primary" target="_blank" href="https://help.ubuntu.com/community/WifiDocs/MasterMode" role="button">Guida Ubuntu ufficiale</a>
-        <h2>Test an adapter for "master mode"</h2>
-        <p>
-
-
-        </p>
-        <hr style="color: black">
-    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

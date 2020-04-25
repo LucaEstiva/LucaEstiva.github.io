@@ -55,12 +55,12 @@
             Le caratteristiche del chip WiFi per il modello b e b+ non sono uguali.<br />
             Mentre sarebbe comunque possibile realizzare l'HUB, non sarebbe possibile ottenere le stesse prestazioni WiFi<br />
 <pre style="background-color: gainsboro"><code>
-b:802.11b/g/n
-b+:Dual-Band 802.11ac
-
-The WiFi chipset is the Cypress CYW43455 with a 1×1:1 configuration; the 3B model has the Broadcom BCM43438
-chipset which is also 1×1:1 (but only has 802.11n at 2.4GHz).
-In summary, the 3B+ model brings the WiFi aspect of the RPi to the 802.11ac standard
+    b:802.11b/g/n<br />
+    b+:Dual-Band 802.11ac<br />
+    <br />
+    The WiFi chipset is the Cypress CYW43455 with a 1×1:1 configuration; the 3B model has the Broadcom BCM43438<br />
+    chipset which is also 1×1:1 (but only has 802.11n at 2.4GHz).<br />
+    In summary, the 3B+ model brings the WiFi aspect of the RPi to the 802.11ac standard<br />
 </code></pre>
         </p>
         <a class="btn btn-outline-success" target="_blank" href="\ap_mode.html" role="Link">Guida Ubuntu WiFiDocs/MasterMode</a>
@@ -166,18 +166,26 @@ N: There is 1 additional version. Please use the '-a' switch to see it
         </p>
         <!-- CODE -->
         <div class="form-group" style="height:600px; border:thin; display:block">
-			<textarea class="form-control" id="NManager" style="resize:initial; overflow:hidden; background-color: gainsboro; height:100%; width:100%;" readonly>
+            <textarea class="form-control" id="NManager" style="resize:initial; overflow:hidden; background-color: gainsboro; height:100%; width:100%;" readonly>
 auto lo
 iface lo inet loopback
 
 auto eth0
 allow-hotplug eth0
-iface eth0 inet dhcp
+iface $LanIF1 inet manual
 
 auto wlan0
 iface wlan0 inet static
 address 192.168.2.1
-netmask 255.255.255.0</textarea>
+netmask 255.255.255.0
+
+auto br0
+allow-hotplug br0
+iface br0 inet dhcp
+bridge_ports eth0
+bridge_stp off
+bridge_fd 0
+bridge_maxwait 0</textarea>
         </div>
         <button class="btn btn-primary" onclick="clip('NManager')" style="margin-top:10px; margin-bottom:10px;">Copy</button>
         <hr style="color: black">
@@ -647,7 +655,7 @@ CGroup: /system.slice/isc-dhcp-server.service
             Per poter essere instradati sarà necessario specificare una nuova ROUTE con NAT.<br />
         </p>
         <p style="background-color: gainsboro">
-            <span style="color:dodgerblue">sudo iptables -t nat -A POSTROUTING -o enp1s0 -j MASQUERADE</span>
+            <span style="color:dodgerblue">sudo iptables -t nat -A POSTROUTING -o br0 -j MASQUERADE</span>
 </p>
         <hr style="color: black">
         <p>
